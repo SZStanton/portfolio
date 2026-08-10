@@ -1,3 +1,5 @@
+import type { IconType } from 'react-icons'
+
 // The shape every entry in data/projects.ts has to match.
 
 // Drives the label on the card, and gives something to filter by later.
@@ -24,4 +26,19 @@ export type Project = {
 
   repoUrl: string
   knownIssue?: string // for being upfront about a limitation
+}
+
+// Left off means comfortable using it. A union rather than a boolean,
+// so something like 'exploring' can be added later.
+export type SkillStatus = 'learning'
+
+export type Skill = {
+  name: string
+  status?: SkillStatus
+  Icon?: IconType // only the ones with a real brand logo
+}
+
+export type SkillGroup = {
+  title: string
+  skills: Skill[]
 }
