@@ -4,7 +4,50 @@
    This is what lets the navbar button control the theme. */
 @custom-variant dark (&:where(.dark, .dark *));
 
-@theme {
+/* ---------------------------------------------------------------
+   THE PALETTE — every colour on the site is set here and nowhere else.
+   Change a value here and it updates everywhere it's used.
+
+   surface        page background
+   surface-raised things sitting on top of the page, like the navbar
+   line           borders and dividers
+   heading        headings and other strong text
+   body           normal paragraph text
+   hover          background behind a link or button when hovered
+   --------------------------------------------------------------- */
+
+:root {
+  /* Light: warm off-white, so it reads as paper rather than a lightbox. */
+  --surface: #f7f6f3;
+  --surface-raised: #fdfdfc;
+  --line: #e4e2dd;
+  --heading: #1c1b1a;
+  --body: #55534e;
+  --hover: #eceae5;
+}
+
+.dark {
+  /* Dark: near-black neutral greys, deliberately with no blue in them. */
+  --surface: #101011;
+  --surface-raised: #17171a;
+  --line: #2a2a2e;
+  --heading: #f4f4f5;
+  --body: #a8a8ad;
+  --hover: #222226;
+}
+
+/* Hands the palette to Tailwind as ordinary utility classes:
+   bg-surface, border-line, text-heading, and so on. Because they read from
+   the variables above, they swap themselves when dark mode turns on, so
+   there's no need to write dark: on every element. */
+@theme inline {
+  --color-surface: var(--surface);
+  --color-surface-raised: var(--surface-raised);
+  --color-line: var(--line);
+  --color-heading: var(--heading);
+  --color-body: var(--body);
+  --color-hover: var(--hover);
+
   --font-sans: system-ui, "Segoe UI", Roboto, sans-serif;
   --font-mono: ui-monospace, Consolas, monospace;
 }
@@ -15,7 +58,6 @@
   }
 
   body {
-    @apply bg-white text-slate-700 antialiased;
-    @apply dark:bg-slate-900 dark:text-slate-300;
+    @apply bg-surface text-body antialiased;
   }
 }
