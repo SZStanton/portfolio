@@ -1,38 +1,25 @@
-import { Footer } from './components/layout/Footer'
-import { Navbar } from './components/layout/Navbar'
-import { About } from './components/sections/About'
-import { Hero } from './components/sections/Hero'
-
-// Stand-ins until each real section is built. The ids are what the
-// navbar links scroll to.
-const placeholders = [
-  { id: 'skills', label: 'Skills' },
-  { id: 'projects', label: 'Projects' },
-  { id: 'contact', label: 'Contact' },
-]
+import { Route, Routes } from 'react-router'
+import { Layout } from './components/layout/Layout'
+import { Contact } from './pages/Contact'
+import { Home } from './pages/Home'
+import { NotFound } from './pages/NotFound'
+import { Projects } from './pages/Projects'
+import { Skills } from './pages/Skills'
 
 function App() {
   return (
-    <>
-      <Navbar />
-
-      <main className="mx-auto max-w-5xl px-6">
-        <Hero />
-        <About />
-
-        {placeholders.map((section) => (
-          <section
-            key={section.id}
-            id={section.id}
-            className="flex min-h-[60svh] items-center border-t border-line"
-          >
-            <h2 className="text-2xl font-semibold text-heading">{section.label}</h2>
-          </section>
-        ))}
-      </main>
-
-      <Footer />
-    </>
+    <Routes>
+      {/* Every route nested here renders inside Layout's Outlet,
+          so they all share the navbar and footer. */}
+      <Route element={<Layout />}>
+        <Route path="/" element={<Home />} />
+        <Route path="/skills" element={<Skills />} />
+        <Route path="/projects" element={<Projects />} />
+        <Route path="/contact" element={<Contact />} />
+        {/* The * catches anything that matched nothing above. */}
+        <Route path="*" element={<NotFound />} />
+      </Route>
+    </Routes>
   )
 }
 

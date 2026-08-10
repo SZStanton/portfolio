@@ -1,4 +1,5 @@
 import { LuArrowRight } from 'react-icons/lu'
+import { Link } from 'react-router'
 import {
   SiExpress,
   SiJavascript,
@@ -53,19 +54,19 @@ export function Hero() {
 
       <div className="mt-10 flex flex-wrap items-center gap-3">
         {/* group lets the arrow react to the whole button being hovered. */}
-        <a
-          href="#projects"
+        <Link
+          to="/projects"
           className="group inline-flex items-center gap-2 rounded-full bg-heading px-6 py-3 font-medium text-surface transition-opacity hover:opacity-85"
         >
           View my work
           <LuArrowRight className="size-4 transition-transform group-hover:translate-x-1" />
-        </a>
-        <a
-          href="#contact"
+        </Link>
+        <Link
+          to="/contact"
           className="inline-flex items-center rounded-full border border-line px-6 py-3 font-medium transition-colors hover:bg-hover hover:text-heading"
         >
           Get in touch
-        </a>
+        </Link>
       </div>
 
       {/* Faded until hovered, so it reads as texture rather than clutter. */}

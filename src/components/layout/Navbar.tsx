@@ -1,15 +1,8 @@
 import { useState } from 'react'
 import { LuMenu, LuMoon, LuSun, LuX } from 'react-icons/lu'
+import { NavLink } from 'react-router'
+import { pages } from '../../data/navigation'
 import { useTheme } from '../../hooks/useTheme'
-
-// Kept in an array so adding a section is one line, and both the desktop
-// bar and the mobile dropdown pick it up.
-const links = [
-  { href: '#about', label: 'About' },
-  { href: '#skills', label: 'Skills' },
-  { href: '#projects', label: 'Projects' },
-  { href: '#contact', label: 'Contact' },
-]
 
 export function Navbar() {
   const { theme, toggleTheme } = useTheme()
@@ -18,23 +11,29 @@ export function Navbar() {
   // Shared so the links and both buttons stay identical.
   const itemStyles = 'rounded-md transition-colors hover:bg-hover hover:text-heading'
 
+  // NavLink hands className a flag for whether this is the current page,
+  // which is what marks the active link in gold.
+  const linkClass = ({ isActive }: { isActive: boolean }) =>
+    `${itemStyles} px-3 py-2 text-sm ${isActive ? 'text-accent' : ''}`
+
   return (
     // The /80 and backdrop-blur let content show softly through as it scrolls under.
     <header className="sticky top-0 z-50 border-b border-line bg-surface-raised/80 backdrop-blur">
       {/* Same max width as <main>, so the bar and the content line up. */}
       <nav className="mx-auto flex max-w-5xl items-center justify-between px-6 py-4">
-        <a href="#home" className="font-semibold text-heading transition-colors hover:opacity-70">
+        <NavLink to="/" className="font-semibold text-heading transition-colors hover:opacity-70">
           Sebastian Stanton
-        </a>
+        </NavLink>
 
         <div className="flex items-center gap-1">
           {/* Swaps with the hamburger below: only one is ever visible. */}
           <ul className="hidden md:flex md:items-center md:gap-1">
-            {links.map((link) => (
-              <li key={link.href}>
-                <a href={link.href} className={`px-3 py-2 text-sm ${itemStyles}`}>
+            {pages.map((link) => (
+              <li key={link.to}>
+                {/* `end` stops "/" counting as active on every other page. */}
+                <NavLink to={link.to} end className={linkClass}>
                   {link.label}
-                </a>
+                </NavLink>
               </li>
             ))}
           </ul>
@@ -62,18 +61,21 @@ export function Navbar() {
         </div>
       </nav>
 
-      {/* Closed on click, since jumping to an anchor is not a page load. */}
+      {/* Closed on click, since changing page leaves the menu open otherwise. */}
       {menuOpen && (
         <ul className="border-t border-line px-6 pb-4 md:hidden">
-          {links.map((link) => (
-            <li key={link.href}>
-              <a
-                href={link.href}
+          {pages.map((link) => (
+            <li key={link.to}>
+              <NavLink
+                to={link.to}
+                end
                 onClick={() => setMenuOpen(false)}
-                className={`block px-3 py-2 ${itemStyles}`}
+                className={({ isActive }) =>
+                  `${itemStyles} block px-3 py-2 ${isActive ? 'text-accent' : ''}`
+                }
               >
                 {link.label}
-              </a>
+              </NavLink>
             </li>
           ))}
         </ul>
