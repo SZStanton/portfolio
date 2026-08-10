@@ -1,3 +1,4 @@
+import { Footer } from './components/layout/Footer'
 import { Navbar } from './components/layout/Navbar'
 
 // Placeholder sections so the nav links and scrolling can be tested.
@@ -35,6 +36,8 @@ function App() {
           </section>
         ))}
       </main>
+
+      <Footer />
     </>
   )
 }
