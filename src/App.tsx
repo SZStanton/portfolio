@@ -1,11 +1,11 @@
 import { Footer } from './components/layout/Footer'
 import { Navbar } from './components/layout/Navbar'
+import { About } from './components/sections/About'
 import { Hero } from './components/sections/Hero'
 
 // Stand-ins until each real section is built. The ids are what the
 // navbar links scroll to.
 const placeholders = [
-  { id: 'about', label: 'About' },
   { id: 'skills', label: 'Skills' },
   { id: 'projects', label: 'Projects' },
   { id: 'contact', label: 'Contact' },
@@ -18,6 +18,7 @@ function App() {
 
       <main className="mx-auto max-w-5xl px-6">
         <Hero />
+        <About />
 
         {placeholders.map((section) => (
           <section
