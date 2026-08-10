@@ -1,5 +1,6 @@
 import { LuGithub, LuLinkedin } from 'react-icons/lu'
 
+// Icon is capitalised so it can be used as <Icon /> further down.
 const socials = [
   {
     href: 'https://github.com/SZStanton',
@@ -14,11 +15,12 @@ const socials = [
 ]
 
 export function Footer() {
-  // Works out the year when the page loads, so it never goes stale.
+  // Read on load, so the year never goes stale.
   const year = new Date().getFullYear()
 
   return (
     <footer className="mt-16 border-t border-line">
+      {/* Stacked on phones, spread across one row from small screens up. */}
       <div className="mx-auto flex max-w-5xl flex-col items-center gap-4 px-6 py-8 text-sm sm:flex-row sm:justify-between">
         <p>© {year} Sebastian Stanton</p>
 
@@ -29,7 +31,7 @@ export function Footer() {
                 href={href}
                 target="_blank"
                 rel="noreferrer"
-                aria-label={label}
+                aria-label={label} // no visible text in the link, only an icon
                 className="block rounded-md p-2 transition-colors hover:bg-hover hover:text-heading"
               >
                 <Icon className="size-5" />

@@ -2,9 +2,8 @@ import { Footer } from './components/layout/Footer'
 import { Navbar } from './components/layout/Navbar'
 import { Hero } from './components/sections/Hero'
 
-// Placeholder sections so the nav links and scrolling can be tested.
-// Each one gets replaced by a real component in build order:
-// Hero, About, Skills, Projects, Contact.
+// Stand-ins until each real section is built. The ids are what the
+// navbar links scroll to.
 const placeholders = [
   { id: 'about', label: 'About' },
   { id: 'skills', label: 'Skills' },
@@ -26,9 +25,7 @@ function App() {
             id={section.id}
             className="flex min-h-[60svh] items-center border-t border-line"
           >
-            <h2 className="text-2xl font-semibold text-heading">
-              {section.label}
-            </h2>
+            <h2 className="text-2xl font-semibold text-heading">{section.label}</h2>
           </section>
         ))}
       </main>

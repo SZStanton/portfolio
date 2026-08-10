@@ -1,6 +1,8 @@
+// All project content lives here, separate from the components that show it.
 import type { Project } from '../types'
 
-// Order here is the order they appear on the page.
+// Typing the array is what turns a missing or misspelled field into a build
+// error. Order here is the order they appear on the page.
 export const projects: Project[] = [
   {
     id: 'to-do-tasks',
@@ -37,7 +39,7 @@ export const projects: Project[] = [
     stack: ['React', 'Node.js', 'Express', 'JWT', 'Bootstrap', 'Vite'],
     features: [
       'Keyword search against the iTunes API',
-      'Filter by media type — music, movies, podcasts, audiobooks, TV, ebooks and more',
+      'Filter by media type: music, movies, podcasts, audiobooks, TV, ebooks and more',
       'Add and remove favourites',
       'Paginated search results',
     ],
@@ -105,7 +107,7 @@ export const projects: Project[] = [
     id: 'expense-tracker',
     title: 'Expense & Budget Tracker',
     description:
-      'A command-line Python app for tracking income and expenses, setting budgets by category and measuring progress toward savings goals. Built to practise relational data modelling and SQL — the side of databases the MongoDB projects do not cover.',
+      'A command-line Python app for tracking income and expenses, setting budgets by category and measuring progress toward savings goals. Built to practise relational data modelling and SQL, the side of databases the MongoDB projects do not cover.',
     kind: 'database',
     group: 'other',
     capstone: true,
@@ -163,11 +165,11 @@ export const projects: Project[] = [
     ],
     repoUrl: 'https://github.com/SZStanton/The-Cart',
     knownIssue:
-      'The login and register forms are interface only — they do not actually authenticate anyone yet. Wiring up real authentication is the main thing this one still needs.',
+      'The login and register forms are interface only, so they do not actually authenticate anyone yet. Wiring up real authentication is the main thing this one still needs.',
   },
   {
     id: 'e-commerce',
-    title: 'E-Commerce — Web Storage Demo',
+    title: 'E-Commerce (Web Storage Demo)',
     description:
       'A storefront built as a demonstration of browser data persistence, keeping user preferences and cart contents without any server behind it. My first project using four different storage methods side by side: cache, cookies, session storage and local storage.',
     kind: 'front-end',
@@ -187,7 +189,7 @@ export const projects: Project[] = [
     id: 'chefs-favorites',
     title: "Chef's Favorites",
     description:
-      'Submit a main ingredient and get a chef-picked dish back, with orders tracked through to completion. Real recipe data comes from TheMealDB API — this was my first time pulling live data from an API into a website, built in plain JavaScript with no framework involved.',
+      'Submit a main ingredient and get a chef-picked dish back, with orders tracked through to completion. Real recipe data comes from TheMealDB API. This was my first time pulling live data from an API into a website, built in plain JavaScript with no framework involved.',
     kind: 'front-end',
     group: 'other',
     stack: ['HTML', 'CSS', 'JavaScript', 'TheMealDB API'],

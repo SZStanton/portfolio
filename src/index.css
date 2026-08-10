@@ -5,8 +5,7 @@
 @custom-variant dark (&:where(.dark, .dark *));
 
 /* ---------------------------------------------------------------
-   THE PALETTE — every colour on the site is set here and nowhere else.
-   Change a value here and it updates everywhere it's used.
+   THE PALETTE. Every colour is set here and nowhere else.
 
    surface        page background
    surface-raised things sitting on top of the page, like the navbar
@@ -26,6 +25,8 @@
   --hover: #eceae5;
 }
 
+/* Same names, different values. Nothing using them needs to know
+   which theme is active. */
 .dark {
   /* Dark: near-black neutral greys, deliberately with no blue in them. */
   --surface: #101011;

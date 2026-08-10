@@ -2,6 +2,8 @@ import { useState } from 'react'
 import { LuMenu, LuMoon, LuSun, LuX } from 'react-icons/lu'
 import { useTheme } from '../../hooks/useTheme'
 
+// Kept in an array so adding a section is one line, and both the desktop
+// bar and the mobile dropdown pick it up.
 const links = [
   { href: '#about', label: 'About' },
   { href: '#skills', label: 'Skills' },
@@ -13,18 +15,20 @@ export function Navbar() {
   const { theme, toggleTheme } = useTheme()
   const [menuOpen, setMenuOpen] = useState(false)
 
-  // Shared hover styling for every clickable thing in the bar.
+  // Shared so the links and both buttons stay identical.
   const itemStyles = 'rounded-md transition-colors hover:bg-hover hover:text-heading'
 
   return (
+    // The /80 and backdrop-blur let content show softly through as it scrolls under.
     <header className="sticky top-0 z-50 border-b border-line bg-surface-raised/80 backdrop-blur">
+      {/* Same max width as <main>, so the bar and the content line up. */}
       <nav className="mx-auto flex max-w-5xl items-center justify-between px-6 py-4">
         <a href="#home" className="font-semibold text-heading transition-colors hover:opacity-70">
           Sebastian Stanton
         </a>
 
         <div className="flex items-center gap-1">
-          {/* Full link list, medium screens and up. */}
+          {/* Swaps with the hamburger below: only one is ever visible. */}
           <ul className="hidden md:flex md:items-center md:gap-1">
             {links.map((link) => (
               <li key={link.href}>
@@ -38,10 +42,11 @@ export function Navbar() {
           <button
             type="button"
             onClick={toggleTheme}
-            /* The icon alone can't tell a screen reader what this does. */
+            // Read out instead of the contents, which are icon only.
             aria-label={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}
             className={`p-2 ${itemStyles}`}
           >
+            {/* Shows the mode currently active, not the one it switches to. */}
             {theme === 'dark' ? <LuMoon className="size-5" /> : <LuSun className="size-5" />}
           </button>
 
@@ -57,7 +62,7 @@ export function Navbar() {
         </div>
       </nav>
 
-      {/* Dropdown for small screens. Tapping a link closes it again. */}
+      {/* Closed on click, since jumping to an anchor is not a page load. */}
       {menuOpen && (
         <ul className="border-t border-line px-6 pb-4 md:hidden">
           {links.map((link) => (

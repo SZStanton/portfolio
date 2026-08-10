@@ -8,7 +8,8 @@ import {
   SiReact,
 } from 'react-icons/si'
 
-// The tech worth showing at a glance, before anyone scrolls.
+// Brand logos come from react-icons/si, interface icons from /lu.
+// Keeping that split stops the site mixing drawing styles.
 const techs = [
   { name: 'JavaScript', Icon: SiJavascript },
   { name: 'React', Icon: SiReact },
@@ -22,12 +23,12 @@ export function Hero() {
   return (
     <section
       id="home"
-      /* Roughly a full screen minus the navbar, so it fills the view
-         on load without pushing the next section too far down. */
+      // svh over vh because mobile toolbars change the visible height.
+      // The 5rem leaves room for the navbar.
       className="flex min-h-[calc(100svh-5rem)] flex-col justify-center py-20"
     >
       <p className="flex items-center gap-2 text-sm">
-        {/* Small dot that quietly pulses, to draw the eye without shouting. */}
+        {/* Two stacked circles: the lower one pings outwards, the solid one stays. */}
         <span className="relative flex size-2">
           <span className="absolute inline-flex size-full animate-ping rounded-full bg-current opacity-60" />
           <span className="relative inline-flex size-2 rounded-full bg-current" />
@@ -39,6 +40,8 @@ export function Hero() {
         Sebastian Stanton
       </h1>
 
+      {/* Tech names lifted to heading colour so a skim picks up the stack.
+          The {' '} are real spaces, which JSX would otherwise drop at line ends. */}
       <p className="mt-6 max-w-2xl text-xl leading-relaxed sm:text-2xl">
         Junior full-stack developer building with{' '}
         <span className="text-heading">React</span>,{' '}
@@ -49,6 +52,7 @@ export function Hero() {
       <p className="mt-3 text-sm">Cape Town, South Africa</p>
 
       <div className="mt-10 flex flex-wrap items-center gap-3">
+        {/* group lets the arrow react to the whole button being hovered. */}
         <a
           href="#projects"
           className="group inline-flex items-center gap-2 rounded-full bg-heading px-6 py-3 font-medium text-surface transition-opacity hover:opacity-85"
@@ -64,7 +68,7 @@ export function Hero() {
         </a>
       </div>
 
-      {/* Logo strip. Muted until hovered, so it reads as texture rather than clutter. */}
+      {/* Faded until hovered, so it reads as texture rather than clutter. */}
       <ul className="mt-16 flex flex-wrap items-center gap-x-7 gap-y-4">
         {techs.map(({ name, Icon }) => (
           <li key={name} title={name}>
