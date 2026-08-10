@@ -1,5 +1,9 @@
 @import "tailwindcss";
 
+/* Switch dark: styles on a `dark` class on <html>, instead of the OS setting.
+   This is what lets the navbar button control the theme. */
+@custom-variant dark (&:where(.dark, .dark *));
+
 @theme {
   --font-sans: system-ui, "Segoe UI", Roboto, sans-serif;
   --font-mono: ui-monospace, Consolas, monospace;
@@ -11,6 +15,7 @@
   }
 
   body {
-    @apply font-sans antialiased;
+    @apply bg-white text-slate-700 antialiased;
+    @apply dark:bg-slate-900 dark:text-slate-300;
   }
 }

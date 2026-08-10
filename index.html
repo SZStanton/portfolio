@@ -5,6 +5,17 @@
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Portfolio — coming soon</title>
+    <!-- Runs before anything is painted, so dark mode users don't get a
+         white flash on load. Falls back to the OS setting on a first visit. -->
+    <script>
+      (() => {
+        const saved = localStorage.getItem('theme')
+        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches
+        if (saved === 'dark' || (!saved && prefersDark)) {
+          document.documentElement.classList.add('dark')
+        }
+      })()
+    </script>
   </head>
   <body>
     <div id="root"></div>
