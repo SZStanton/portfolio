@@ -1,5 +1,17 @@
 import type { VercelRequest, VercelResponse } from '@vercel/node'
-import { contactSchema } from '../src/lib/schemas'
+import { z } from 'zod'
+
+/*
+ * This mirrors src/lib/schemas.ts on purpose. Vercel compiles each
+ * function on its own and will not pull in TypeScript from outside
+ * api/, so importing the shared file fails at runtime.
+ * Keep the two in step: if one changes, change the other.
+ */
+const contactSchema = z.object({
+  name: z.string().trim().min(2),
+  email: z.email(),
+  message: z.string().trim().min(10).max(2000),
+})
 
 const RESEND_ENDPOINT = 'https://api.resend.com/emails'
 

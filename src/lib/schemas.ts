@@ -1,8 +1,10 @@
 import { z } from 'zod'
 
-// One definition of what a valid message looks like. The form checks
-// against it in the browser, and the API will check the same schema on
-// the server, since anything sent from a browser can be faked.
+// What a valid message looks like, used by the contact form in the browser.
+// api/contact.ts repeats these rules and re-checks them on the server,
+// because anything sent from a browser can be faked. It cannot import this
+// file: Vercel builds functions in isolation and will not reach outside api/.
+// If the rules change here, change them there too.
 export const contactSchema = z.object({
   name: z.string().trim().min(2, 'Please enter your name'),
   email: z.email('Please enter a valid email address'),

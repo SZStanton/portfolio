@@ -31,10 +31,18 @@ export function Contact() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(values),
       })
-      if (!response.ok) throw new Error('Request failed')
+
+      if (!response.ok) {
+        // Logged rather than shown, so the real reason is available in
+        // the browser console without putting it in front of a visitor.
+        console.error('Contact form failed', response.status, await response.text())
+        throw new Error('Request failed')
+      }
+
       setStatus('sent')
       reset()
-    } catch {
+    } catch (error) {
+      console.error('Contact form error', error)
       setStatus('error')
     }
   }
