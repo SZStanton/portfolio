@@ -13,17 +13,13 @@ export function Navbar() {
   const { theme, toggleTheme } = useTheme()
   const [menuOpen, setMenuOpen] = useState(false)
 
-  // Shared hover/focus styling for every clickable thing in the bar.
-  const itemStyles =
-    'rounded-md hover:bg-slate-100 hover:text-slate-900 dark:hover:bg-slate-800 dark:hover:text-white'
+  // Shared hover styling for every clickable thing in the bar.
+  const itemStyles = 'rounded-md transition-colors hover:bg-hover hover:text-heading'
 
   return (
-    <header className="sticky top-0 z-50 border-b border-slate-200 bg-white/80 backdrop-blur dark:border-slate-800 dark:bg-slate-900/80">
+    <header className="sticky top-0 z-50 border-b border-line bg-surface-raised/80 backdrop-blur">
       <nav className="mx-auto flex max-w-5xl items-center justify-between px-6 py-4">
-        <a
-          href="#home"
-          className="font-semibold text-slate-900 hover:text-sky-600 dark:text-white dark:hover:text-sky-400"
-        >
+        <a href="#home" className="font-semibold text-heading transition-colors hover:opacity-70">
           Sebastian Stanton
         </a>
 
@@ -63,7 +59,7 @@ export function Navbar() {
 
       {/* Dropdown for small screens. Tapping a link closes it again. */}
       {menuOpen && (
-        <ul className="border-t border-slate-200 px-6 pb-4 md:hidden dark:border-slate-800">
+        <ul className="border-t border-line px-6 pb-4 md:hidden">
           {links.map((link) => (
             <li key={link.href}>
               <a
