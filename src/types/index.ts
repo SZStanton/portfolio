@@ -10,6 +10,7 @@ export type Project = {
   description: string
   kind: ProjectKind
   group: ProjectGroup
+  capstone?: boolean // built as a bootcamp capstone — worth calling out on the card
   stack: string[] // shown as tags in this order, so lead with the good stuff
   features?: string[] // the ? means it can be left out
   futureImprovements?: string[]

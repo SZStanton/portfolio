@@ -9,6 +9,7 @@ export const projects: Project[] = [
       'A full-stack MERN task manager with secure user accounts and private task storage. Each user gets their own task list, protected by JWT authentication and guarded API routes.',
     kind: 'full-stack',
     group: 'featured',
+    capstone: true,
     stack: ['React', 'Node.js', 'Express', 'MongoDB', 'Mongoose', 'JWT', 'Context API', 'Vite'],
     features: [
       'Registration and login with hashed passwords',
@@ -32,6 +33,7 @@ export const projects: Project[] = [
       'A full-stack app for searching the iTunes Store through its public API, built as the capstone for a Full Stack with React and Express course.',
     kind: 'full-stack',
     group: 'featured',
+    capstone: true,
     stack: ['React', 'Node.js', 'Express', 'JWT', 'Bootstrap', 'Vite'],
     features: [
       'Keyword search against the iTunes API',
@@ -55,6 +57,7 @@ export const projects: Project[] = [
       'A job-tracking tool for logging, filtering and updating maintenance jobs. Started life as a front-end-only project and was later extended into a full-stack app with a proper database behind it.',
     kind: 'full-stack',
     group: 'featured',
+    capstone: true,
     stack: ['React', 'Axios', 'Node.js', 'Express', 'MongoDB', 'Mongoose'],
     features: [
       'Submit jobs with description, location and priority',
@@ -79,6 +82,7 @@ export const projects: Project[] = [
       'A React app for creating and tracking personal and professional events, from meetings and appointments to social plans. Built to get comfortable with shared state across a whole app using Context API, with no backend involved.',
     kind: 'front-end',
     group: 'featured',
+    capstone: true,
     stack: ['React', 'Vite', 'Context API', 'Bootstrap'],
     features: [
       'Registration and login',
@@ -104,6 +108,7 @@ export const projects: Project[] = [
       'A command-line Python app for tracking income and expenses, setting budgets by category and measuring progress toward savings goals. Built to practise relational data modelling and SQL — the side of databases the MongoDB projects do not cover.',
     kind: 'database',
     group: 'other',
+    capstone: true,
     stack: ['Python', 'SQLite'],
     features: [
       'Add, update, delete and view income and expense records',
