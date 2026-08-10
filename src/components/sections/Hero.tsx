@@ -30,8 +30,8 @@ export function Hero() {
       <p className="flex items-center gap-2 text-sm">
         {/* Two stacked circles: the lower one pings outwards, the solid one stays. */}
         <span className="relative flex size-2">
-          <span className="absolute inline-flex size-full animate-ping rounded-full bg-current opacity-60" />
-          <span className="relative inline-flex size-2 rounded-full bg-current" />
+          <span className="absolute inline-flex size-full animate-ping rounded-full bg-accent opacity-60" />
+          <span className="relative inline-flex size-2 rounded-full bg-accent" />
         </span>
         Open to junior developer roles
       </p>

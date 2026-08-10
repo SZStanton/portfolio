@@ -13,6 +13,8 @@
    heading        headings and other strong text
    body           normal paragraph text
    hover          background behind a link or button when hovered
+   accent         art deco gold, for small details only
+   accent-soft    faded gold, for hairlines and backgrounds
    --------------------------------------------------------------- */
 
 :root {
@@ -23,6 +25,10 @@
   --heading: #1c1b1a;
   --body: #55534e;
   --hover: #eceae5;
+  /* Deeper bronze than the dark theme uses. A bright gold on this
+     background looks washed out and fails contrast. */
+  --accent: #8a6d1f;
+  --accent-soft: #c9b075;
 }
 
 /* Same names, different values. Nothing using them needs to know
@@ -35,6 +41,10 @@
   --heading: #f4f4f5;
   --body: #a8a8ad;
   --hover: #222226;
+  /* Gold reads brightest against near-black, so this is the classic
+     deco pairing and can afford to be lighter than the light theme. */
+  --accent: #d4af37;
+  --accent-soft: #6b5720;
 }
 
 /* Hands the palette to Tailwind as ordinary utility classes:
@@ -48,6 +58,8 @@
   --color-heading: var(--heading);
   --color-body: var(--body);
   --color-hover: var(--hover);
+  --color-accent: var(--accent);
+  --color-accent-soft: var(--accent-soft);
 
   --font-sans: system-ui, "Segoe UI", Roboto, sans-serif;
   --font-mono: ui-monospace, Consolas, monospace;
@@ -60,5 +72,11 @@
 
   body {
     @apply bg-surface text-body antialiased;
+  }
+
+  /* Gold focus ring everywhere, on keyboard navigation only.
+     On theme as well as being the accessibility default. */
+  :focus-visible {
+    @apply outline-2 outline-offset-2 outline-accent;
   }
 }
