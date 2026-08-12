@@ -12,6 +12,21 @@ const contactSchema = z.object({
 
 const RESEND_ENDPOINT = 'https://api.resend.com/emails'
 
+// Crude rate limit: a few messages per address per window. Held in memory,
+// so it resets on a cold start and is not shared between instances. It stops
+// a simple flood, not a determined one. See the note in vercel.json.
+const WINDOW_MS = 10 * 60 * 1000
+const MAX_PER_WINDOW = 3
+const seen = new Map<string, number[]>()
+
+function tooMany(key: string) {
+  const now = Date.now()
+  const recent = (seen.get(key) ?? []).filter(time => now - time < WINDOW_MS)
+  recent.push(now)
+  seen.set(key, recent)
+  return recent.length > MAX_PER_WINDOW
+}
+
 // Resend lets you send from this shared address without owning a domain,
 // as long as the recipient is your own account email. Swap it for an
 // address on a verified domain if one is ever set up.
@@ -32,6 +47,16 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
   // Only a bot fills the honeypot. Report success so it does not retry.
   if (parsed.data.website) {
     return res.status(200).json({ ok: true })
+  }
+
+  // Vercel puts the caller's address here. Fall back to the email so a
+  // missing header does not switch the limit off entirely.
+  const caller =
+    (req.headers['x-forwarded-for'] as string | undefined)?.split(',')[0]?.trim() ??
+    parsed.data.email
+
+  if (tooMany(caller)) {
+    return res.status(429).json({ error: 'Too many messages. Please try again later.' })
   }
 
   const apiKey = process.env.RESEND_API_KEY
