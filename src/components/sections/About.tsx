@@ -1,15 +1,15 @@
-import { useState } from 'react'
-import { CertificateStack, type Certificate } from '../ui/CertificateStack'
-import { Lightbox } from '../ui/Lightbox'
-import { ScrollCue } from '../ui/ScrollCue'
-import { SectionLabel } from '../ui/SectionLabel'
+import { useState } from 'react';
+import { CertificateStack, type Certificate } from '../ui/CertificateStack';
+import { Lightbox } from '../ui/Lightbox';
+import { ScrollCue } from '../ui/ScrollCue';
+import { SectionLabel } from '../ui/SectionLabel';
 
 // Quick facts, kept beside the prose so the section scans as well as it reads.
 const facts = [
   { value: '9 Years', label: 'in fast-paced, high-accuracy admin roles' },
   { value: '2', label: 'HyperionDev bootcamps completed' },
   { value: 'Cape Town', label: 'South Africa' },
-]
+];
 
 // The route from admin into development, most recent first.
 // Images live in public/, so they are referenced from the site root.
@@ -17,11 +17,12 @@ const timeline = [
   {
     period: 'Now',
     title: 'Building and Still Learning',
-    detail: 'TypeScript, Tailwind and Docker, picked up on this site and on my own projects.',
+    detail:
+      'TypeScript, Tailwind and Docker, picked up on this site and on my own projects.',
     images: [],
   },
   {
-    period: '2026',
+    period: 'Mar to Jul 2026',
     title: 'Full Stack Web Developer Bootcamp',
     detail:
       'HyperionDev. JavaScript, React, Node, Express, MongoDB and JWT authentication, across four capstone projects.',
@@ -34,9 +35,10 @@ const timeline = [
     ],
   },
   {
-    period: '2023 to 2024',
+    period: 'Dec 2023 to Jun 2024',
     title: 'Software Engineering Bootcamp',
-    detail: 'HyperionDev. Python, SQL and SQLite, object-oriented programming, Git and Agile.',
+    detail:
+      'HyperionDev. Python, SQL and SQLite, object-oriented programming, Git and Agile.',
     images: [
       {
         src: '/software-engineering-bootcamp.jpeg',
@@ -45,9 +47,10 @@ const timeline = [
     ],
   },
   {
-    period: '2023',
+    period: 'May to Dec 2023',
     title: 'Started Writing Code',
-    detail: 'Python and web development through Sololearn, in my own time alongside full-time work.',
+    detail:
+      'Python courses and HTML/CSS with Javascript web development through Sololearn, in my own time alongside full-time work.',
     // Web development sits in front, python behind it.
     images: [
       {
@@ -63,19 +66,23 @@ const timeline = [
     ],
   },
   {
-    period: '2014 to 2026',
+    period: 'Aug 2017 to Jul 2026',
     title: 'Medical Aid Administration',
     detail:
       'Claims assessment, membership administration, then digital live chat at Medscheme. Founding agent on Bonitas’ first live chat system.',
     images: [
-      { src: '/medscheme.jpeg', alt: 'Medscheme certificate of service', portrait: true },
+      {
+        src: '/medscheme.jpeg',
+        alt: 'Medscheme certificate of service',
+        portrait: true,
+      },
     ],
   },
-]
+];
 
 export function About() {
   // Which certificate is open full size, if any.
-  const [open, setOpen] = useState<Certificate | null>(null)
+  const [open, setOpen] = useState<Certificate | null>(null);
 
   return (
     // scroll-mt keeps the heading clear of the sticky header when
@@ -91,30 +98,38 @@ export function About() {
       <div className="mt-10 grid gap-12 md:grid-cols-3">
         <div className="space-y-5 text-xl leading-relaxed md:col-span-2">
           <p>
-            I spent nine years at Medscheme in medical aid administration, working across claims
-            assessment, membership administration and, most recently, digital live chat. It was
-            detailed work under time pressure, where being accurate mattered as much as being fast.
+            I spent nine years at Medscheme in medical aid administration,
+            working across claims assessment, membership administration and,
+            most recently, digital live chat. It was detailed work under time
+            pressure, where being accurate mattered as much as being fast.
           </p>
           <p>
-            The thread running through all of it was improving the process rather than just working
-            inside it. I was one of the founding agents for Bonitas' first live chat system and
-            wrote message templates and standards that were adopted across the team, authored a
-            training guide still used to onboard new agents, and helped build a shared
+            The thread running through all of it was improving the process
+            rather than just working inside it. I was one of the founding agents
+            for Bonitas' first live chat system and wrote message templates and
+            standards that were adopted across the team, authored a training
+            guide still used to onboard new agents, and helped build a shared
             process-reference tool used company-wide.
           </p>
           <p>
-            I moved into development through HyperionDev, first a Software Engineering bootcamp
-            covering Python, SQL and object-oriented programming, then a Full Stack Web Developer
-            bootcamp in JavaScript, React, Node, Express and MongoDB. I am now looking for a junior
-            or graduate developer role, and still learning in the open: this site is where I am
-            picking up TypeScript and Tailwind.
+            I moved into development through HyperionDev, first a Software
+            Engineering bootcamp covering Python, SQL and object-oriented
+            programming, then a Full Stack Web Developer bootcamp in JavaScript,
+            React, Node, Express and MongoDB. I am now looking for a junior or
+            graduate developer role, and still learning in the open: this site
+            is where I am picking up TypeScript and Tailwind.
           </p>
         </div>
 
         <dl className="space-y-6">
-          {facts.map((fact) => (
-            <div key={fact.value} className="border-l-2 border-accent-soft pl-4">
-              <dt className="text-2xl font-semibold text-heading">{fact.value}</dt>
+          {facts.map(fact => (
+            <div
+              key={fact.value}
+              className="border-l-2 border-accent-soft pl-4"
+            >
+              <dt className="text-2xl font-semibold text-heading">
+                {fact.value}
+              </dt>
               <dd className="mt-1 text-sm">{fact.label}</dd>
             </div>
           ))}
@@ -137,7 +152,7 @@ export function About() {
 
         {/* Gold line down the left, with a diamond marking each step. */}
         <ol className="mt-8 space-y-6 border-l border-line pl-8">
-          {timeline.map((entry) => (
+          {timeline.map(entry => (
             // Text left, certificates right from medium screens up.
             <li
               key={entry.title}
@@ -149,7 +164,9 @@ export function About() {
                 <p className="font-display text-xs font-semibold uppercase tracking-[0.15em] text-accent">
                   {entry.period}
                 </p>
-                <p className="mt-1 text-lg font-medium text-heading">{entry.title}</p>
+                <p className="mt-1 text-lg font-medium text-heading">
+                  {entry.title}
+                </p>
                 <p className="mt-1 leading-relaxed">{entry.detail}</p>
               </div>
 
@@ -163,7 +180,9 @@ export function About() {
         </ol>
       </div>
 
-      {open && <Lightbox src={open.src} alt={open.alt} onClose={() => setOpen(null)} />}
+      {open && (
+        <Lightbox src={open.src} alt={open.alt} onClose={() => setOpen(null)} />
+      )}
     </section>
-  )
+  );
 }
