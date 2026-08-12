@@ -7,7 +7,7 @@ export function Skills() {
       <p className="text-xs font-medium uppercase tracking-[0.2em] text-accent">Skills</p>
 
       <h1 className="mt-4 max-w-3xl text-4xl font-semibold tracking-tight text-heading sm:text-5xl">
-        What I build with
+        What I Build With
       </h1>
 
       <p className="mt-6 max-w-2xl text-xl leading-relaxed">

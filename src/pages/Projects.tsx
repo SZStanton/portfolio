@@ -54,7 +54,7 @@ export function Projects() {
       </div>
 
       <div className="mt-16">
-        <SectionHeading>Also worth a look</SectionHeading>
+        <SectionHeading>Also Worth a Look</SectionHeading>
         <div className="mt-6 grid gap-6 md:grid-cols-2">
           {other.map((project) => (
             <CompactProjectCard key={project.id} project={project} />

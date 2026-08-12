@@ -44,7 +44,7 @@ export const skillGroups: SkillGroup[] = [
     ],
   },
   {
-    title: 'Tools and practices',
+    title: 'Tools and Practices',
     skills: [
       { name: 'Git', tech: 'Git' },
       { name: 'GitHub', tech: 'GitHub' },

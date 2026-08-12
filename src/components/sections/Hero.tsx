@@ -19,7 +19,7 @@ export function Hero() {
           <span className="absolute inline-flex size-full animate-ping rounded-full bg-accent opacity-60" />
           <span className="relative inline-flex size-2 rounded-full bg-accent" />
         </span>
-        Open to junior developer roles
+        Open to Junior Developer Roles
       </p>
 
       <h1 className="mt-6 text-5xl font-semibold tracking-tight text-heading sm:text-7xl">
@@ -29,7 +29,7 @@ export function Hero() {
       {/* Tech names lifted to heading colour so a skim picks up the stack.
           The {' '} are real spaces, which JSX would otherwise drop at line ends. */}
       <p className="mt-6 max-w-2xl text-xl leading-relaxed sm:text-2xl">
-        Junior full-stack developer building with{' '}
+        Junior Full-Stack Developer building with{' '}
         <span className="text-heading">React</span>,{' '}
         <span className="text-heading">Node</span> and{' '}
         <span className="text-heading">MongoDB</span>.

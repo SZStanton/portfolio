@@ -1,6 +1,6 @@
 // Quick facts, kept beside the prose so the section scans as well as it reads.
 const facts = [
-  { value: '9 years', label: 'in fast-paced, high-accuracy admin roles' },
+  { value: '9 Years', label: 'in fast-paced, high-accuracy admin roles' },
   { value: '2', label: 'HyperionDev bootcamps completed' },
   { value: 'Cape Town', label: 'South Africa' },
 ]
@@ -9,28 +9,28 @@ const facts = [
 const timeline = [
   {
     period: 'Now',
-    title: 'Building and still learning',
+    title: 'Building and Still Learning',
     detail: 'TypeScript, Tailwind and Docker, picked up on this site and on my own projects.',
   },
   {
     period: '2026',
-    title: 'Full Stack Web Developer bootcamp',
+    title: 'Full Stack Web Developer Bootcamp',
     detail:
       'HyperionDev. JavaScript, React, Node, Express, MongoDB and JWT authentication, across four capstone projects.',
   },
   {
     period: '2023 to 2024',
-    title: 'Software Engineering bootcamp',
+    title: 'Software Engineering Bootcamp',
     detail: 'HyperionDev. Python, SQL and SQLite, object-oriented programming, Git and Agile.',
   },
   {
     period: '2023',
-    title: 'Started writing code',
+    title: 'Started Writing Code',
     detail: 'Python and web development through Sololearn, in my own time alongside full-time work.',
   },
   {
     period: '2014 to 2026',
-    title: 'Medical aid administration',
+    title: 'Medical Aid Administration',
     detail:
       'Claims assessment, membership administration, then digital live chat at Medscheme. Founding agent on Bonitas’ first live chat system.',
   },
@@ -43,7 +43,7 @@ export function About() {
       <p className="text-xs font-medium uppercase tracking-[0.2em] text-accent">About</p>
 
       <h2 className="mt-4 max-w-3xl text-4xl font-semibold tracking-tight text-heading sm:text-5xl">
-        From medical aid administration to full-stack development
+        From Medical Aid Administration to Full-Stack Development
       </h2>
 
       {/* Prose takes two thirds, facts sit alongside from medium screens up. */}
@@ -82,7 +82,7 @@ export function About() {
 
       <div className="mt-20">
         <h3 className="flex items-center gap-3 text-sm font-medium uppercase tracking-[0.15em] text-heading">
-          How I got here
+          How I Got Here
           <span className="h-px flex-1 bg-gradient-to-r from-accent-soft to-transparent" />
         </h3>
 

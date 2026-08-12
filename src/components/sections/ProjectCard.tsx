@@ -5,8 +5,8 @@ import { TechIcon } from '../ui/TechIcon'
 // Record means every kind has to have a label, so adding one to the
 // type without labelling it fails the build.
 const kindLabels: Record<ProjectKind, string> = {
-  'full-stack': 'Full stack',
-  'front-end': 'Front end',
+  'full-stack': 'Full Stack',
+  'front-end': 'Front End',
   database: 'Database',
 }
 
@@ -46,7 +46,7 @@ function Links({ project }: { project: Project }) {
           className="inline-flex items-center gap-2 font-medium text-accent transition-opacity hover:opacity-75 active:opacity-75"
         >
           <LuExternalLink className="size-4" />
-          Live demo
+          Live Demo
         </a>
       )}
     </div>
@@ -98,7 +98,7 @@ export function FeaturedProjectCard({ project }: { project: Project }) {
           <details className="group/more mt-5">
             <summary className="flex cursor-pointer list-none items-center gap-2 text-sm font-medium text-heading transition-colors hover:text-accent">
               <LuChevronDown className="size-4 transition-transform group-open/more:rotate-180" />
-              What I would add next
+              What I Would Add Next
             </summary>
             <ul className="mt-3 space-y-2 pl-6 text-[0.9375rem]">
               {project.futureImprovements.map((item) => (

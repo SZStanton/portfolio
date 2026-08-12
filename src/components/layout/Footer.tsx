@@ -31,7 +31,7 @@ export function Footer() {
         {/* Name is left to the copyright line below, so it appears once here. */}
         <p className="flex items-center gap-3 text-[0.9375rem]">
           <span className="size-1.5 rotate-45 bg-accent/70" />
-          Junior full-stack developer, Cape Town
+          Junior Full-Stack Developer, Cape Town
         </p>
 
         {/* A second way to reach every page, without scrolling back up. */}

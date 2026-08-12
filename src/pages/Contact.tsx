@@ -85,7 +85,7 @@ export function Contact() {
       </p>
 
       <h1 className="mt-4 max-w-3xl text-4xl font-semibold tracking-tight text-heading sm:text-5xl">
-        Get in touch
+        Get in Touch
       </h1>
 
       <p className="mt-6 max-w-2xl text-xl leading-relaxed">
