@@ -1,3 +1,5 @@
+import { SectionLabel } from '../ui/SectionLabel'
+
 // Quick facts, kept beside the prose so the section scans as well as it reads.
 const facts = [
   { value: '9 Years', label: 'in fast-paced, high-accuracy admin roles' },
@@ -39,8 +41,7 @@ const timeline = [
 export function About() {
   return (
     <section id="about" className="border-t border-line py-24">
-      {/* Letterspaced gold label above the heading, the first real deco touch. */}
-      <p className="text-xs font-medium uppercase tracking-[0.2em] text-accent">About</p>
+      <SectionLabel>About</SectionLabel>
 
       <h2 className="mt-4 max-w-3xl text-4xl font-semibold tracking-tight text-heading sm:text-5xl">
         From Medical Aid Administration to Full-Stack Development
@@ -91,7 +92,9 @@ export function About() {
           {timeline.map((entry) => (
             <li key={entry.title} className="relative">
               <span className="absolute -left-[2.3rem] top-1.5 size-2.5 rotate-45 border border-accent bg-surface" />
-              <p className="text-xs uppercase tracking-[0.15em] text-accent">{entry.period}</p>
+              <p className="font-display text-xs font-semibold uppercase tracking-[0.15em] text-accent">
+                {entry.period}
+              </p>
               <p className="mt-1 text-lg font-medium text-heading">{entry.title}</p>
               <p className="mt-1 leading-relaxed">{entry.detail}</p>
             </li>

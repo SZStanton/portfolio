@@ -1,10 +1,11 @@
 import { ButtonLink } from '../components/ui/Button'
+import { SectionLabel } from '../components/ui/SectionLabel'
 
 // Catches any URL that does not match a real page.
 export function NotFound() {
   return (
     <section className="flex min-h-[60svh] flex-col justify-center py-24">
-      <p className="text-xs font-medium uppercase tracking-[0.2em] text-accent">404</p>
+      <SectionLabel>404</SectionLabel>
       <h1 className="mt-4 text-4xl font-semibold tracking-tight text-heading sm:text-5xl">
         That page does not exist
       </h1>

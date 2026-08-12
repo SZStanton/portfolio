@@ -21,7 +21,7 @@ export function PageNav() {
     <nav className="grid gap-3 border-t border-line py-12 sm:grid-cols-2">
       {previous ? (
         <Link to={previous.to} className={linkStyles}>
-          <span className="flex items-center gap-2 text-xs uppercase tracking-[0.2em] text-accent">
+          <span className="flex items-center gap-2 font-display text-xs font-semibold uppercase tracking-[0.2em] text-accent">
             <LuArrowLeft className="size-3 transition-transform group-hover:-translate-x-1" />
             Previous
           </span>
@@ -34,7 +34,7 @@ export function PageNav() {
 
       {next && (
         <Link to={next.to} className={`${linkStyles} sm:items-end sm:text-right`}>
-          <span className="flex items-center gap-2 text-xs uppercase tracking-[0.2em] text-accent">
+          <span className="flex items-center gap-2 font-display text-xs font-semibold uppercase tracking-[0.2em] text-accent">
             Next
             <LuArrowRight className="size-3 transition-transform group-hover:translate-x-1" />
           </span>

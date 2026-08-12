@@ -1,4 +1,5 @@
 import { CompactProjectCard, FeaturedProjectCard } from '../components/sections/ProjectCard'
+import { SectionLabel } from '../components/ui/SectionLabel'
 import { projects } from '../data/projects'
 
 // Split once here rather than filtering twice further down.
@@ -14,7 +15,7 @@ const stats = [
 
 function SectionHeading({ children }: { children: string }) {
   return (
-    <h2 className="flex items-center gap-3 text-sm font-medium uppercase tracking-[0.15em] text-heading">
+    <h2 className="flex items-center gap-3 text-sm font-semibold uppercase tracking-[0.15em] text-heading">
       {children}
       <span className="h-px flex-1 bg-gradient-to-r from-accent-soft to-transparent" />
     </h2>
@@ -24,7 +25,7 @@ function SectionHeading({ children }: { children: string }) {
 export function Projects() {
   return (
     <section className="py-24">
-      <p className="text-xs font-medium uppercase tracking-[0.2em] text-accent">Work</p>
+      <SectionLabel>Work</SectionLabel>
 
       <h1 className="mt-4 max-w-3xl text-4xl font-semibold tracking-tight text-heading sm:text-5xl">
         Projects
@@ -38,8 +39,8 @@ export function Projects() {
       <dl className="mt-10 flex flex-wrap gap-x-10 gap-y-4">
         {stats.map((stat) => (
           <div key={stat.label}>
-            <dt className="text-3xl font-semibold text-accent">{stat.value}</dt>
-            <dd className="mt-1 text-sm uppercase tracking-wider">{stat.label}</dd>
+            <dt className="font-display text-3xl font-semibold text-accent">{stat.value}</dt>
+            <dd className="mt-1 font-display text-sm uppercase tracking-wider">{stat.label}</dd>
           </div>
         ))}
       </dl>

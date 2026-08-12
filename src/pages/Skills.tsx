@@ -1,10 +1,11 @@
+import { SectionLabel } from '../components/ui/SectionLabel'
 import { TechIcon } from '../components/ui/TechIcon'
 import { skillGroups } from '../data/skills'
 
 export function Skills() {
   return (
     <section className="py-24">
-      <p className="text-xs font-medium uppercase tracking-[0.2em] text-accent">Skills</p>
+      <SectionLabel>Skills</SectionLabel>
 
       <h1 className="mt-4 max-w-3xl text-4xl font-semibold tracking-tight text-heading sm:text-5xl">
         What I Build With
@@ -19,7 +20,7 @@ export function Skills() {
       <div className="mt-14 space-y-12">
         {skillGroups.map((group) => (
           <div key={group.title}>
-            <h2 className="flex items-center gap-3 text-sm font-medium uppercase tracking-[0.15em] text-heading">
+            <h2 className="flex items-center gap-3 text-sm font-semibold uppercase tracking-[0.15em] text-heading">
               {group.title}
               <span className="h-px flex-1 bg-gradient-to-r from-accent-soft to-transparent" />
             </h2>

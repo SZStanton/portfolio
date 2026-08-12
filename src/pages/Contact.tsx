@@ -10,6 +10,7 @@ import {
   LuMapPin,
 } from 'react-icons/lu';
 import { Button } from '../components/ui/Button';
+import { SectionLabel } from '../components/ui/SectionLabel';
 import { contactSchema, type ContactFormValues } from '../lib/schemas';
 
 const EMAIL = 'ssebastianbusiness@gmail.com';
@@ -80,9 +81,7 @@ export function Contact() {
 
   return (
     <section className="py-24">
-      <p className="text-xs font-medium uppercase tracking-[0.2em] text-accent">
-        Contact
-      </p>
+      <SectionLabel>Contact</SectionLabel>
 
       <h1 className="mt-4 max-w-3xl text-4xl font-semibold tracking-tight text-heading sm:text-5xl">
         Get in Touch
@@ -179,7 +178,7 @@ export function Contact() {
         </form>
 
         <div className="md:col-span-2">
-          <h2 className="text-sm font-medium uppercase tracking-[0.15em] text-heading">
+          <h2 className="text-sm font-semibold uppercase tracking-[0.15em] text-heading">
             Elsewhere
           </h2>
 

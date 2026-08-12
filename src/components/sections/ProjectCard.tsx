@@ -129,9 +129,11 @@ export function CompactProjectCard({ project }: { project: Project }) {
   return (
     <article className="flex flex-col rounded-xl border border-line p-6 transition-colors hover:border-accent-soft active:border-accent">
       <div className="flex flex-wrap items-center gap-x-3 gap-y-2">
-        <span className="text-xs uppercase tracking-[0.15em]">{kindLabels[project.kind]}</span>
+        <span className="font-display text-xs font-semibold uppercase tracking-[0.15em]">
+          {kindLabels[project.kind]}
+        </span>
         {project.capstone && (
-          <span className="rounded-full border border-accent-soft px-2.5 py-0.5 text-xs uppercase tracking-wider text-accent">
+          <span className="rounded-full border border-accent-soft px-2.5 py-0.5 font-display text-xs font-semibold uppercase tracking-wider text-accent">
             Capstone
           </span>
         )}
