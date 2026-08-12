@@ -1,5 +1,3 @@
-import { LuDownload } from 'react-icons/lu'
-import { ButtonAnchor } from '../ui/Button'
 import { ScrollCue } from '../ui/ScrollCue'
 import { SectionLabel } from '../ui/SectionLabel'
 
@@ -83,16 +81,6 @@ export function About() {
               <dd className="mt-1 text-sm">{fact.label}</dd>
             </div>
           ))}
-
-          <ButtonAnchor
-            href="/sebastian-stanton-cv.pdf"
-            variant="secondary"
-            className="w-full"
-            download
-          >
-            <LuDownload className="size-4" />
-            Download CV
-          </ButtonAnchor>
         </dl>
       </div>
 

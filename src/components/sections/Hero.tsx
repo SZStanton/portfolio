@@ -1,5 +1,5 @@
-import { LuArrowRight } from 'react-icons/lu'
-import { ButtonLink } from '../ui/Button'
+import { LuArrowRight, LuDownload } from 'react-icons/lu'
+import { ButtonAnchor, ButtonLink } from '../ui/Button'
 import { ScrollCue } from '../ui/ScrollCue'
 import { TechIcon } from '../ui/TechIcon'
 
@@ -47,6 +47,11 @@ export function Hero() {
         <ButtonLink to="/contact" variant="secondary">
           Get in touch
         </ButtonLink>
+        {/* download makes the browser save it rather than open a tab. */}
+        <ButtonAnchor href="/sebastian-stanton-cv.pdf" variant="secondary" download>
+          <LuDownload className="size-4" />
+          CV
+        </ButtonAnchor>
       </div>
 
       {/* Muted until hovered, when the brand colour comes up. Keeps the
