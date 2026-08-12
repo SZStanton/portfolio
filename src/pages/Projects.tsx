@@ -24,7 +24,7 @@ function SectionHeading({ children }: { children: string }) {
 
 export function Projects() {
   return (
-    <section className="py-24">
+    <section className="pb-24 pt-16">
       <SectionLabel>Work</SectionLabel>
 
       <h1 className="mt-4 max-w-3xl text-4xl font-semibold tracking-tight text-heading sm:text-5xl">

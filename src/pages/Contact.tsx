@@ -80,7 +80,7 @@ export function Contact() {
     'mt-2 w-full rounded-lg border border-line bg-surface-raised px-4 py-3 transition-colors focus:border-accent';
 
   return (
-    <section className="py-24">
+    <section className="pb-24 pt-16">
       <SectionLabel>Contact</SectionLabel>
 
       <h1 className="mt-4 max-w-3xl text-4xl font-semibold tracking-tight text-heading sm:text-5xl">
