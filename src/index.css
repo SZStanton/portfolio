@@ -17,6 +17,9 @@
    accent-soft    faded gold, for hairlines and backgrounds
    danger         form errors and anything that went wrong
    success        form sent, and anything that worked
+
+   surface-gradient sits on top of surface: a faint gold glow at the top
+   of the page over a soft vertical shift. Subtle on purpose.
    --------------------------------------------------------------- */
 
 :root {
@@ -33,6 +36,9 @@
   --accent-soft: #d8b564;
   --danger: #a8321f;
   --success: #2f6b3f;
+  --surface-gradient:
+    radial-gradient(1000px 480px at 50% -10%, rgb(174 133 19 / 0.06), transparent 70%),
+    linear-gradient(180deg, #fefefd 0%, #edece7 100%);
 }
 
 /* Same names, different values. Nothing using them needs to know
@@ -51,6 +57,9 @@
   --accent-soft: #6b5720;
   --danger: #e5705c;
   --success: #6dbd85;
+  --surface-gradient:
+    radial-gradient(1100px 520px at 50% -10%, rgb(212 175 55 / 0.1), transparent 70%),
+    linear-gradient(180deg, #141416 0%, #0c0c0d 100%);
 }
 
 /* Hands the palette to Tailwind as ordinary utility classes:
@@ -86,6 +95,10 @@
     /* Slightly above the 16px default. Easier to read, and it lifts
        everything that does not set its own size. */
     font-size: 1.0625rem;
+    /* fixed so the glow stays put at the top of the window instead of
+       scrolling away with the content. */
+    background-image: var(--surface-gradient);
+    background-attachment: fixed;
   }
 
   /* Josefin runs small and light, so headings get a touch more weight. */
