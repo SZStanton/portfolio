@@ -1,3 +1,4 @@
+import { resolveMx } from 'node:dns/promises'
 import type { VercelRequest, VercelResponse } from '@vercel/node'
 import { z } from 'zod'
 
@@ -18,6 +19,19 @@ const RESEND_ENDPOINT = 'https://api.resend.com/emails'
 const WINDOW_MS = 10 * 60 * 1000
 const MAX_PER_WINDOW = 3
 const seen = new Map<string, number[]>()
+
+// Checks the domain can receive mail at all. Catches typos and made-up
+// domains. It cannot tell whether the mailbox exists or who owns it.
+async function domainAcceptsMail(email: string) {
+  const domain = email.split('@')[1]
+  if (!domain) return false
+  try {
+    const records = await resolveMx(domain)
+    return records.length > 0
+  } catch {
+    return false
+  }
+}
 
 function tooMany(key: string) {
   const now = Date.now()
@@ -59,6 +73,10 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     return res.status(429).json({ error: 'Too many messages. Please try again later.' })
   }
 
+  if (!(await domainAcceptsMail(parsed.data.email))) {
+    return res.status(400).json({ error: 'That email address does not look reachable.' })
+  }
+
   const apiKey = process.env.RESEND_API_KEY
   const to = process.env.CONTACT_TO_EMAIL
 
@@ -84,7 +102,18 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
         // Makes Reply in the mail client answer the sender, not Resend.
         reply_to: email,
         subject: `Portfolio message from ${name}`,
-        text: `From: ${name} <${email}>\n\n${message}`,
+        // The warning is deliberate: anyone can type any address into a
+        // form, so Reply-To is only ever as good as what they entered.
+        text: [
+          `From: ${name} <${email}>`,
+          '',
+          message,
+          '',
+          '---',
+          'Sent from the portfolio contact form.',
+          'This address was typed by the sender and has not been verified.',
+          'Check the message reads genuinely before replying.',
+        ].join('\n'),
       }),
     })
 
