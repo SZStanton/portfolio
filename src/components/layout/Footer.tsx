@@ -28,16 +28,11 @@ export function Footer() {
       </div>
 
       <div className="mx-auto flex max-w-6xl flex-col gap-4 px-6 py-6 sm:flex-row sm:items-center sm:justify-between">
-        <div className="flex items-center gap-3">
-          {/* Small gold diamond, the same deco language as the frame. */}
+        {/* Name is left to the copyright line below, so it appears once here. */}
+        <p className="flex items-center gap-3 text-[0.9375rem]">
           <span className="size-1.5 rotate-45 bg-accent/70" />
-          <Link
-            to="/"
-            className="text-[0.9375rem] font-semibold text-heading transition-colors hover:text-accent"
-          >
-            Sebastian Stanton
-          </Link>
-        </div>
+          Junior full-stack developer, Cape Town
+        </p>
 
         {/* A second way to reach every page, without scrolling back up. */}
         <nav>
