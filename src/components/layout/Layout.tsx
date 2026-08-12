@@ -44,10 +44,9 @@ export function Layout() {
             transition={{ duration: 0.3, ease: 'easeOut' }}
           >
             <Outlet />
+            <PageNav />
           </m.div>
         </LazyMotion>
-
-        <PageNav />
       </main>
 
       <Footer />

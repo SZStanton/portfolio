@@ -1,6 +1,7 @@
 import { lazy, Suspense } from 'react'
 import { Route, Routes } from 'react-router'
 import { Layout } from './components/layout/Layout'
+import { PageLoader } from './components/ui/PageLoader'
 import { Home } from './pages/Home'
 
 // Home loads up front, the rest only when visited. Keeps the contact
@@ -12,50 +13,20 @@ const NotFound = lazy(() => import('./pages/NotFound').then((m) => ({ default: m
 
 function App() {
   return (
-    <Routes>
-      {/* Every route nested here renders inside Layout's Outlet,
-          so they all share the navbar and footer. */}
-      <Route element={<Layout />}>
-        <Route path="/" element={<Home />} />
-
-        {/* Suspense covers the moment a split page is being fetched.
-            The pages are small enough that a spinner would flash, so
-            this holds empty space instead. */}
-        <Route
-          path="/skills"
-          element={
-            <Suspense fallback={<div className="min-h-[60svh]" />}>
-              <Skills />
-            </Suspense>
-          }
-        />
-        <Route
-          path="/projects"
-          element={
-            <Suspense fallback={<div className="min-h-[60svh]" />}>
-              <Projects />
-            </Suspense>
-          }
-        />
-        <Route
-          path="/contact"
-          element={
-            <Suspense fallback={<div className="min-h-[60svh]" />}>
-              <Contact />
-            </Suspense>
-          }
-        />
-        {/* The * catches anything that matched nothing above. */}
-        <Route
-          path="*"
-          element={
-            <Suspense fallback={<div className="min-h-[60svh]" />}>
-              <NotFound />
-            </Suspense>
-          }
-        />
-      </Route>
-    </Routes>
+    // Sits above Layout, so the navbar and footer go too and the loader
+    // is the only thing on screen.
+    <Suspense fallback={<PageLoader />}>
+      <Routes>
+        <Route element={<Layout />}>
+          <Route path="/" element={<Home />} />
+          <Route path="/skills" element={<Skills />} />
+          <Route path="/projects" element={<Projects />} />
+          <Route path="/contact" element={<Contact />} />
+          {/* The * catches anything that matched nothing above. */}
+          <Route path="*" element={<NotFound />} />
+        </Route>
+      </Routes>
+    </Suspense>
   )
 }
 
