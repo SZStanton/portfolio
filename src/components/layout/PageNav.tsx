@@ -15,7 +15,7 @@ export function PageNav() {
   const next = pages[index + 1]
 
   const linkStyles =
-    'group flex flex-col gap-1 rounded-lg border border-line p-5 transition-colors hover:border-accent-soft hover:bg-hover'
+    'group flex flex-col gap-1 rounded-lg border border-line bg-surface-raised p-5 shadow-card transition-colors hover:border-accent-soft hover:bg-hover active:border-accent'
 
   return (
     <nav className="grid gap-3 border-t border-line py-12 sm:grid-cols-2">

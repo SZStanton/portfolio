@@ -190,7 +190,7 @@ export function Contact() {
                   // mailto should not open a tab, the others should.
                   target={href.startsWith('mailto:') ? undefined : '_blank'}
                   rel="noreferrer"
-                  className="flex items-center gap-3 rounded-lg border border-line p-3 transition-colors hover:border-accent-soft active:border-accent"
+                  className="flex items-center gap-3 rounded-lg border border-line bg-surface-raised p-3 shadow-card transition-colors hover:border-accent-soft active:border-accent"
                 >
                   <Icon className="size-4 shrink-0 text-accent" />
                   <span className="min-w-0">

@@ -1,4 +1,4 @@
-@import "tailwindcss";
+@import 'tailwindcss';
 
 /* Switch dark: styles on a `dark` class on <html>, instead of the OS setting.
    This is what lets the navbar button control the theme. */
@@ -26,7 +26,7 @@
   /* Light: warm off-white, so it reads as paper rather than a lightbox. */
   --surface: #f7f6f3;
   --surface-raised: #fdfdfc;
-  --line: #e4e2dd;
+  --line: #dcd9d1;
   --heading: #1c1b1a;
   --body: #55534e;
   --hover: #eceae5;
@@ -36,9 +36,21 @@
   --accent-soft: #d8b564;
   --danger: #a8321f;
   --success: #2f6b3f;
+  /* Light mode gets depth from shadow, since a raised surface cannot be
+     much lighter than an almost-white page. */
+  --card-shadow:
+    0 1px 2px rgb(28 27 26 / 0.05), 0 10px 24px -14px rgb(28 27 26 / 0.22);
+  /* Three layers, front to back: gold glow at the top, a soft shadow
+     rising from the bottom, then the base shift. Both effects are kept
+     near their own edge so the middle of the page stays clean white. */
   --surface-gradient:
-    radial-gradient(1000px 480px at 50% -10%, rgb(174 133 19 / 0.06), transparent 70%),
-    linear-gradient(180deg, #fefefd 0%, #edece7 100%);
+    radial-gradient(
+      900px 260px at 50% -8%,
+      rgb(174 133 19 / 0.1),
+      transparent 58%
+    ),
+    linear-gradient(0deg, rgb(28 27 26 / 0.12) 0%, transparent 10%),
+    linear-gradient(180deg, #fefefd 0%, #fdfdfb 84%, #f2f0ea 100%);
 }
 
 /* Same names, different values. Nothing using them needs to know
@@ -57,8 +69,15 @@
   --accent-soft: #6b5720;
   --danger: #e5705c;
   --success: #6dbd85;
+  /* Dark mode already separates by being lighter, so shadow would just
+     turn into a dark smudge. */
+  --card-shadow: none;
   --surface-gradient:
-    radial-gradient(1100px 520px at 50% -10%, rgb(212 175 55 / 0.1), transparent 70%),
+    radial-gradient(
+      1100px 520px at 50% -10%,
+      rgb(212 175 55 / 0.1),
+      transparent 70%
+    ),
     linear-gradient(180deg, #141416 0%, #0c0c0d 100%);
 }
 
@@ -78,10 +97,13 @@
   --color-danger: var(--danger);
   --color-success: var(--success);
 
+  /* Gives a shadow-card utility that changes with the theme. */
+  --shadow-card: var(--card-shadow);
+
   /* Josefin is the 1920s geometric face for headings. Manrope is also
      geometric, so the two share a skeleton instead of clashing. */
-  --font-display: "Josefin Sans Variable", system-ui, sans-serif;
-  --font-sans: "Manrope Variable", system-ui, sans-serif;
+  --font-display: 'Josefin Sans Variable', system-ui, sans-serif;
+  --font-sans: 'Manrope Variable', system-ui, sans-serif;
   --font-mono: ui-monospace, Consolas, monospace;
 }
 
@@ -115,3 +137,4 @@
     @apply outline-2 outline-offset-2 outline-accent;
   }
 }
+

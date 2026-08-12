@@ -57,7 +57,7 @@ function Links({ project }: { project: Project }) {
 // The four capstones. Everything in the data gets shown.
 export function FeaturedProjectCard({ project }: { project: Project }) {
   return (
-    <article className="group relative flex flex-col overflow-hidden rounded-xl border border-line bg-surface-raised transition-colors hover:border-accent-soft active:border-accent">
+    <article className="group relative flex flex-col overflow-hidden rounded-xl border border-line bg-surface-raised shadow-card transition-colors hover:border-accent-soft active:border-accent">
       {/* Gold rule along the top, brighter on hover. */}
       <span className="h-0.5 w-full bg-gradient-to-r from-accent/60 via-accent/20 to-transparent transition-opacity group-hover:opacity-100 sm:opacity-70" />
 
@@ -127,7 +127,7 @@ export function FeaturedProjectCard({ project }: { project: Project }) {
 // The rest. Same information, minus the feature lists.
 export function CompactProjectCard({ project }: { project: Project }) {
   return (
-    <article className="flex flex-col rounded-xl border border-line p-6 transition-colors hover:border-accent-soft active:border-accent">
+    <article className="flex flex-col rounded-xl border border-line bg-surface-raised p-6 shadow-card transition-colors hover:border-accent-soft active:border-accent">
       <div className="flex flex-wrap items-center gap-x-3 gap-y-2">
         <span className="font-display text-xs font-semibold uppercase tracking-[0.15em]">
           {kindLabels[project.kind]}
