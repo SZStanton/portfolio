@@ -9,6 +9,7 @@ import {
   LuMail,
   LuMapPin,
 } from 'react-icons/lu';
+import { Button } from '../components/ui/Button';
 import { contactSchema, type ContactFormValues } from '../lib/schemas';
 
 const EMAIL = 'ssebastianbusiness@gmail.com';
@@ -155,13 +156,9 @@ export function Contact() {
             className="absolute left-[-9999px] size-0"
           />
 
-          <button
-            type="submit"
-            disabled={status === 'sending'}
-            className="inline-flex items-center rounded-full bg-heading px-6 py-3 font-medium text-surface transition-opacity hover:opacity-85 active:opacity-85 disabled:opacity-50"
-          >
+          <Button type="submit" disabled={status === 'sending'}>
             {status === 'sending' ? 'Sending...' : 'Send message'}
-          </button>
+          </Button>
 
           {/* aria-live tells screen readers to announce these when they appear. */}
           <div aria-live="polite">
