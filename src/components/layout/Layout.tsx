@@ -1,6 +1,7 @@
 import { domAnimation, LazyMotion, m, useReducedMotion } from 'motion/react'
 import { useEffect } from 'react'
 import { Outlet, useLocation } from 'react-router'
+import { useArrowNavigation } from '../../hooks/useArrowNavigation'
 import { Footer } from './Footer'
 import { Navbar } from './Navbar'
 import { PageNav } from './PageNav'
@@ -12,6 +13,8 @@ export function Layout() {
   // Set when the visitor's system asks for less animation. Drop the
   // movement for them, keep the fade.
   const reduceMotion = useReducedMotion()
+
+  useArrowNavigation()
 
   // Changing route is not a page load, so the scroll position sticks.
   useEffect(() => {
