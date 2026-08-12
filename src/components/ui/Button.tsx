@@ -3,10 +3,10 @@ import { Link } from 'react-router'
 
 type Variant = 'primary' | 'secondary'
 
-// Small caps and wide letter spacing, which suits the deco look better
-// than sentence case. The offset gold outline appears on hover.
+// The outline is always there but transparent, so hover only animates its
+// colour. Adding it on hover instead made it fade in from the text colour.
 const base =
-  'group inline-flex items-center justify-center gap-2 rounded-sm px-7 py-3.5 font-display text-sm font-semibold uppercase tracking-[0.15em] outline-offset-[3px] transition-all duration-200 hover:-translate-y-0.5 hover:outline hover:outline-1 hover:outline-accent/60 active:translate-y-0 disabled:pointer-events-none disabled:opacity-50'
+  'group inline-flex items-center justify-center gap-2 rounded-sm px-7 py-3.5 font-display text-sm font-semibold uppercase tracking-[0.15em] outline outline-1 outline-offset-[3px] outline-transparent transition-all duration-200 hover:-translate-y-0.5 hover:outline-accent/60 active:translate-y-0 disabled:pointer-events-none disabled:opacity-50'
 
 const variants: Record<Variant, string> = {
   primary: 'bg-heading text-surface',
