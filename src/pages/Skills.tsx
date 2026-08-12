@@ -1,4 +1,4 @@
-import type { CSSProperties } from 'react'
+import { TechIcon } from '../components/ui/TechIcon'
 import { skillGroups } from '../data/skills'
 
 export function Skills() {
@@ -21,8 +21,6 @@ export function Skills() {
           <div key={group.title}>
             <h2 className="flex items-center gap-3 text-sm font-medium uppercase tracking-[0.15em] text-heading">
               {group.title}
-              {/* Gold hairline running out from the heading, a deco touch
-                  that also does the job the old bottom border did. */}
               <span className="h-px flex-1 bg-gradient-to-r from-accent-soft to-transparent" />
             </h2>
 
@@ -30,23 +28,11 @@ export function Skills() {
               {group.skills.map((skill) => (
                 <li
                   key={skill.name}
-                  /* active: covers a finger held on the chip, which is the
-                     closest a touchscreen gets to hovering. */
+                  // active: covers a finger held on the chip, which is the
+                  // closest a touchscreen gets to hovering.
                   className="flex items-center gap-2 rounded-full border border-line bg-surface-raised px-4 py-2 text-[0.9375rem] transition-colors hover:border-accent-soft active:border-accent"
                 >
-                  {skill.Icon && (
-                    /* Both colours are handed over as variables, and the
-                       theme decides which one is used. */
-                    <skill.Icon
-                      className="size-4 text-[var(--tech-light)] dark:text-[var(--tech)]"
-                      style={
-                        {
-                          '--tech': skill.color,
-                          '--tech-light': skill.colorLight ?? skill.color,
-                        } as CSSProperties
-                      }
-                    />
-                  )}
+                  {skill.tech && <TechIcon tech={skill.tech} className="size-4" />}
                   {skill.name}
                   {skill.status === 'learning' && (
                     // Deliberately quiet. This is a footnote, not a headline.

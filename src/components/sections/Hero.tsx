@@ -1,27 +1,9 @@
-import type { CSSProperties } from 'react'
 import { LuArrowRight } from 'react-icons/lu'
 import { Link } from 'react-router'
-import {
-  SiExpress,
-  SiJavascript,
-  SiMongodb,
-  SiNodedotjs,
-  SiPython,
-  SiReact,
-} from 'react-icons/si'
+import { TechIcon } from '../ui/TechIcon'
 
-// Brand logos come from react-icons/si, interface icons from /lu.
-// Keeping that split stops the site mixing drawing styles.
-// Two colours each: the brand one for dark mode, a deeper mix for light.
-// Express has no colour because its brand black vanishes in dark mode.
-const techs = [
-  { name: 'JavaScript', Icon: SiJavascript, color: '#f7df1e', colorLight: '#9a8100' },
-  { name: 'React', Icon: SiReact, color: '#61dafb', colorLight: '#0b7f9e' },
-  { name: 'Node.js', Icon: SiNodedotjs, color: '#7cc35f', colorLight: '#3f7a32' },
-  { name: 'Express', Icon: SiExpress },
-  { name: 'MongoDB', Icon: SiMongodb, color: '#5cc063', colorLight: '#2f7a35' },
-  { name: 'Python', Icon: SiPython, color: '#4b9fd5', colorLight: '#2d6389' },
-]
+// Names key into data/tech.ts, where the logos and colours live.
+const techs = ['JavaScript', 'React', 'Node.js', 'Express', 'MongoDB', 'Python']
 
 export function Hero() {
   return (
@@ -75,18 +57,12 @@ export function Hero() {
       {/* Muted until hovered, when the brand colour comes up. Keeps the
           hero calm while still rewarding a bit of curiosity. */}
       <ul className="mt-16 flex flex-wrap items-center gap-x-7 gap-y-4">
-        {techs.map(({ name, Icon, color, colorLight }) => (
+        {techs.map((name) => (
           <li key={name} title={name}>
-            <Icon
-              className="size-7 text-[var(--tech-light)] opacity-70 transition-all duration-300 hover:scale-110 hover:opacity-100 active:scale-110 active:opacity-100 dark:text-[var(--tech)]"
-              style={
-                {
-                  '--tech': color,
-                  '--tech-light': colorLight ?? color,
-                } as CSSProperties
-              }
-              aria-label={name}
-              role="img"
+            <TechIcon
+              tech={name}
+              label={name}
+              className="size-7 opacity-70 transition-all duration-300 hover:scale-110 hover:opacity-100 active:scale-110 active:opacity-100"
             />
           </li>
         ))}

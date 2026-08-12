@@ -1,5 +1,3 @@
-import type { IconType } from 'react-icons'
-
 // The shape every entry in data/projects.ts has to match.
 
 // Drives the label on the card, and gives something to filter by later.
@@ -35,15 +33,9 @@ export type SkillStatus = 'learning'
 export type Skill = {
   name: string
   status?: SkillStatus
-  Icon?: IconType // only the ones with a real brand logo
-  /*
-   * Brand colours need two values. Most are designed for dark backgrounds,
-   * so the official colour goes in `color` for dark mode, and `colorLight`
-   * holds a deeper version that still reads on the pale background.
-   * Left off entirely where the brand colour is near black.
-   */
-  color?: string
-  colorLight?: string
+  // Key into techStyles in data/tech.ts, where the logo and colours live.
+  // Left off for skills with no logo, like Agile or REST.
+  tech?: string
 }
 
 export type SkillGroup = {
