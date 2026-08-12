@@ -10,6 +10,8 @@ export const contactSchema = z.object({
     .trim()
     .min(10, 'Please write a little more so I know what this is about')
     .max(2000, 'That is a bit long, please keep it under 2000 characters'),
+  // Honeypot. Hidden from people, so anything in it came from a bot.
+  website: z.string().max(0).optional(),
 })
 
 // Derives the TypeScript type from the schema, so the rules and the

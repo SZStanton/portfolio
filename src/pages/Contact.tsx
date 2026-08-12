@@ -144,6 +144,17 @@ export function Contact() {
             )}
           </div>
 
+          {/* Honeypot. Off screen rather than display:none, which bots skip.
+              tabIndex -1 and aria-hidden keep it away from real users. */}
+          <input
+            {...register('website')}
+            type="text"
+            tabIndex={-1}
+            autoComplete="off"
+            aria-hidden="true"
+            className="absolute left-[-9999px] size-0"
+          />
+
           <button
             type="submit"
             disabled={status === 'sending'}

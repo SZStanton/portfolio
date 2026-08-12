@@ -7,6 +7,7 @@ const contactSchema = z.object({
   name: z.string().trim().min(2),
   email: z.email(),
   message: z.string().trim().min(10).max(2000),
+  website: z.string().optional(), // honeypot, checked below
 })
 
 const RESEND_ENDPOINT = 'https://api.resend.com/emails'
@@ -26,6 +27,11 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
   const parsed = contactSchema.safeParse(req.body)
   if (!parsed.success) {
     return res.status(400).json({ error: 'Please check the form and try again' })
+  }
+
+  // Only a bot fills the honeypot. Report success so it does not retry.
+  if (parsed.data.website) {
+    return res.status(200).json({ ok: true })
   }
 
   const apiKey = process.env.RESEND_API_KEY
