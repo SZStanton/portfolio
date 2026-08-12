@@ -14,9 +14,19 @@ export function useTheme() {
   const [theme, setTheme] = useState<Theme>(getInitialTheme)
 
   useEffect(() => {
-    document.documentElement.classList.toggle('dark', theme === 'dark')
+    const root = document.documentElement
+
+    // Without this every transition on the page animates from the old
+    // palette to the new one, which reads as a flash.
+    root.classList.add('no-transitions')
+    root.classList.toggle('dark', theme === 'dark')
+
     // Saved so the choice survives a refresh and the index.html script can read it.
     localStorage.setItem('theme', theme)
+
+    // Put transitions back once the new colours have been painted.
+    const frame = requestAnimationFrame(() => root.classList.remove('no-transitions'))
+    return () => cancelAnimationFrame(frame)
   }, [theme])
 
   const toggleTheme = () => {

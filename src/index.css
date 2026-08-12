@@ -136,5 +136,14 @@
   :focus-visible {
     @apply outline-2 outline-offset-2 outline-accent;
   }
+
+  /* Added for one frame while the theme swaps, so nothing animates
+     between the two palettes. See hooks/useTheme.ts. */
+  .no-transitions,
+  .no-transitions *,
+  .no-transitions *::before,
+  .no-transitions *::after {
+    transition: none !important;
+  }
 }
 
