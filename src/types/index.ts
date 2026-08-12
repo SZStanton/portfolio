@@ -36,6 +36,14 @@ export type Skill = {
   name: string
   status?: SkillStatus
   Icon?: IconType // only the ones with a real brand logo
+  /*
+   * Brand colours need two values. Most are designed for dark backgrounds,
+   * so the official colour goes in `color` for dark mode, and `colorLight`
+   * holds a deeper version that still reads on the pale background.
+   * Left off entirely where the brand colour is near black.
+   */
+  color?: string
+  colorLight?: string
 }
 
 export type SkillGroup = {

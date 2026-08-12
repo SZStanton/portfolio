@@ -1,3 +1,4 @@
+import type { CSSProperties } from 'react'
 import { skillGroups } from '../data/skills'
 
 export function Skills() {
@@ -5,11 +6,11 @@ export function Skills() {
     <section className="py-24">
       <p className="text-xs font-medium uppercase tracking-[0.2em] text-accent">Skills</p>
 
-      <h1 className="mt-4 max-w-3xl text-3xl font-semibold tracking-tight text-heading sm:text-4xl">
+      <h1 className="mt-4 max-w-3xl text-4xl font-semibold tracking-tight text-heading sm:text-5xl">
         What I build with
       </h1>
 
-      <p className="mt-6 max-w-2xl text-lg leading-relaxed">
+      <p className="mt-6 max-w-2xl text-xl leading-relaxed">
         The MERN stack is where I am most at home, on top of Python and SQL from an earlier
         bootcamp. Anything marked as learning is something I am working on right now, including on
         this site.
@@ -18,25 +19,38 @@ export function Skills() {
       <div className="mt-14 space-y-12">
         {skillGroups.map((group) => (
           <div key={group.title}>
-            <h2 className="border-b border-line pb-3 text-sm font-medium uppercase tracking-[0.15em] text-heading">
+            <h2 className="flex items-center gap-3 text-sm font-medium uppercase tracking-[0.15em] text-heading">
               {group.title}
+              {/* Gold hairline running out from the heading, a deco touch
+                  that also does the job the old bottom border did. */}
+              <span className="h-px flex-1 bg-gradient-to-r from-accent-soft to-transparent" />
             </h2>
 
             <ul className="mt-5 flex flex-wrap gap-2.5">
               {group.skills.map((skill) => (
                 <li
                   key={skill.name}
-                  // Learning ones get a gold outline instead of the plain border.
-                  className={`flex items-center gap-2 rounded-full border px-4 py-2 text-sm transition-colors ${
-                    skill.status === 'learning'
-                      ? 'border-accent-soft text-heading'
-                      : 'border-line hover:border-accent-soft'
-                  }`}
+                  /* active: covers a finger held on the chip, which is the
+                     closest a touchscreen gets to hovering. */
+                  className="flex items-center gap-2 rounded-full border border-line bg-surface-raised px-4 py-2 text-[0.9375rem] transition-colors hover:border-accent-soft active:border-accent"
                 >
-                  {skill.Icon && <skill.Icon className="size-4 opacity-70" />}
+                  {skill.Icon && (
+                    /* Both colours are handed over as variables, and the
+                       theme decides which one is used. */
+                    <skill.Icon
+                      className="size-4 text-[var(--tech-light)] dark:text-[var(--tech)]"
+                      style={
+                        {
+                          '--tech': skill.color,
+                          '--tech-light': skill.colorLight ?? skill.color,
+                        } as CSSProperties
+                      }
+                    />
+                  )}
                   {skill.name}
                   {skill.status === 'learning' && (
-                    <span className="text-xs uppercase tracking-wider text-accent">learning</span>
+                    // Deliberately quiet. This is a footnote, not a headline.
+                    <span className="text-xs uppercase tracking-wider opacity-50">learning</span>
                   )}
                 </li>
               ))}

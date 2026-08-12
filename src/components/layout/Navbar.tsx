@@ -11,17 +11,30 @@ export function Navbar() {
   // Shared so the links and both buttons stay identical.
   const itemStyles = 'rounded-md transition-colors hover:bg-hover hover:text-heading'
 
-  // NavLink hands className a flag for whether this is the current page,
-  // which is what marks the active link in gold.
+  /*
+   * NavLink hands className a flag for whether this is the current page.
+   * The current one gets full heading colour and a gold underline, the
+   * rest sit a step below it, so which page you are on is obvious at a
+   * glance rather than needing to be hunted for.
+   */
   const linkClass = ({ isActive }: { isActive: boolean }) =>
-    `${itemStyles} px-3 py-2 text-sm ${isActive ? 'text-accent' : ''}`
+    [
+      'relative px-3 py-2 text-[0.9375rem] font-medium transition-colors',
+      'after:absolute after:inset-x-3 after:-bottom-0.5 after:h-px after:transition-colors',
+      isActive
+        ? 'text-heading after:bg-accent'
+        : 'text-body hover:text-heading after:bg-transparent hover:after:bg-accent-soft',
+    ].join(' ')
 
   return (
     // The /80 and backdrop-blur let content show softly through as it scrolls under.
     <header className="sticky top-0 z-50 border-b border-line bg-surface-raised/80 backdrop-blur">
       {/* Same max width as <main>, so the bar and the content line up. */}
       <nav className="mx-auto flex max-w-5xl items-center justify-between px-6 py-4">
-        <NavLink to="/" className="font-semibold text-heading transition-colors hover:opacity-70">
+        <NavLink
+          to="/"
+          className="text-[1.0625rem] font-semibold text-heading transition-colors hover:text-accent"
+        >
           Sebastian Stanton
         </NavLink>
 
@@ -71,7 +84,9 @@ export function Navbar() {
                 end
                 onClick={() => setMenuOpen(false)}
                 className={({ isActive }) =>
-                  `${itemStyles} block px-3 py-2 ${isActive ? 'text-accent' : ''}`
+                  `${itemStyles} block px-3 py-2 font-medium ${
+                    isActive ? 'border-l-2 border-accent text-heading' : 'text-body'
+                  }`
                 }
               >
                 {link.label}

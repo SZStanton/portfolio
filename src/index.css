@@ -72,6 +72,9 @@
 
   body {
     @apply bg-surface text-body antialiased;
+    /* Slightly above the 16px default. Easier to read, and it lifts
+       everything that does not set its own size. */
+    font-size: 1.0625rem;
   }
 
   /* Gold focus ring everywhere, on keyboard navigation only.

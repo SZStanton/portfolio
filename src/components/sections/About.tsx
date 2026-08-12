@@ -11,13 +11,13 @@ export function About() {
       {/* Letterspaced gold label above the heading, the first real deco touch. */}
       <p className="text-xs font-medium uppercase tracking-[0.2em] text-accent">About</p>
 
-      <h2 className="mt-4 max-w-3xl text-3xl font-semibold tracking-tight text-heading sm:text-4xl">
+      <h2 className="mt-4 max-w-3xl text-4xl font-semibold tracking-tight text-heading sm:text-5xl">
         From medical aid administration to full-stack development
       </h2>
 
       {/* Prose takes two thirds, facts sit alongside from medium screens up. */}
       <div className="mt-10 grid gap-12 md:grid-cols-3">
-        <div className="space-y-5 text-lg leading-relaxed md:col-span-2">
+        <div className="space-y-5 text-xl leading-relaxed md:col-span-2">
           <p>
             I spent nine years at Medscheme in medical aid administration, working across claims
             assessment, membership administration and, most recently, digital live chat. It was
