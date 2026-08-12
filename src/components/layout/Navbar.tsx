@@ -11,12 +11,8 @@ export function Navbar() {
   // Shared so the links and both buttons stay identical.
   const itemStyles = 'rounded-md transition-colors hover:bg-hover hover:text-heading'
 
-  /*
-   * NavLink hands className a flag for whether this is the current page.
-   * The current one gets full heading colour and a gold underline, the
-   * rest sit a step below it, so which page you are on is obvious at a
-   * glance rather than needing to be hunted for.
-   */
+  // NavLink says whether this is the current page. Current one gets a
+  // gold underline, the rest sit a step below.
   const linkClass = ({ isActive }: { isActive: boolean }) =>
     [
       'relative px-3 py-2 text-[0.9375rem] font-medium transition-colors',

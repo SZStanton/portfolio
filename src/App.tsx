@@ -3,11 +3,8 @@ import { Route, Routes } from 'react-router'
 import { Layout } from './components/layout/Layout'
 import { Home } from './pages/Home'
 
-/*
- * Home loads normally since it is the first thing most people see.
- * The rest are split into their own files and only fetched when visited,
- * which keeps the contact form's validation libraries off the landing page.
- */
+// Home loads up front, the rest only when visited. Keeps the contact
+// form's validation libraries off the landing page.
 const Skills = lazy(() => import('./pages/Skills').then((m) => ({ default: m.Skills })))
 const Projects = lazy(() => import('./pages/Projects').then((m) => ({ default: m.Projects })))
 const Contact = lazy(() => import('./pages/Contact').then((m) => ({ default: m.Contact })))

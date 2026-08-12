@@ -15,6 +15,8 @@
    hover          background behind a link or button when hovered
    accent         art deco gold, for small details only
    accent-soft    faded gold, for hairlines and backgrounds
+   danger         form errors and anything that went wrong
+   success        form sent, and anything that worked
    --------------------------------------------------------------- */
 
 :root {
@@ -27,8 +29,10 @@
   --hover: #eceae5;
   /* Deeper bronze than the dark theme uses. A bright gold on this
      background looks washed out and fails contrast. */
-  --accent: #9a7b23;
-  --accent-soft: #c9b075;
+  --accent: #ae8513;
+  --accent-soft: #d8b564;
+  --danger: #a8321f;
+  --success: #2f6b3f;
 }
 
 /* Same names, different values. Nothing using them needs to know
@@ -45,6 +49,8 @@
      deco pairing and can afford to be lighter than the light theme. */
   --accent: #d4af37;
   --accent-soft: #6b5720;
+  --danger: #e5705c;
+  --success: #6dbd85;
 }
 
 /* Hands the palette to Tailwind as ordinary utility classes:
@@ -60,6 +66,8 @@
   --color-hover: var(--hover);
   --color-accent: var(--accent);
   --color-accent-soft: var(--accent-soft);
+  --color-danger: var(--danger);
+  --color-success: var(--success);
 
   --font-sans: system-ui, "Segoe UI", Roboto, sans-serif;
   --font-mono: ui-monospace, Consolas, monospace;

@@ -1,9 +1,7 @@
 import type { SkillGroup } from '../types'
 
-// Groupings follow the CV, so the two tell the same story.
-// Anything marked 'learning' is being picked up right now, including
-// on this site. `tech` points at data/tech.ts for the logo and colours,
-// and is left off for anything without a logo.
+// Groupings follow the CV so the two match. `tech` points at data/tech.ts
+// for the logo, and is left off for anything without one.
 export const skillGroups: SkillGroup[] = [
   {
     title: 'Languages',

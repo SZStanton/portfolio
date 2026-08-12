@@ -5,6 +5,37 @@ const facts = [
   { value: 'Cape Town', label: 'South Africa' },
 ]
 
+// The route from admin into development, most recent first.
+const timeline = [
+  {
+    period: 'Now',
+    title: 'Building and still learning',
+    detail: 'TypeScript, Tailwind and Docker, picked up on this site and on my own projects.',
+  },
+  {
+    period: '2026',
+    title: 'Full Stack Web Developer bootcamp',
+    detail:
+      'HyperionDev. JavaScript, React, Node, Express, MongoDB and JWT authentication, across four capstone projects.',
+  },
+  {
+    period: '2023 to 2024',
+    title: 'Software Engineering bootcamp',
+    detail: 'HyperionDev. Python, SQL and SQLite, object-oriented programming, Git and Agile.',
+  },
+  {
+    period: '2023',
+    title: 'Started writing code',
+    detail: 'Python and web development through Sololearn, in my own time alongside full-time work.',
+  },
+  {
+    period: '2014 to 2026',
+    title: 'Medical aid administration',
+    detail:
+      'Claims assessment, membership administration, then digital live chat at Medscheme. Founding agent on Bonitas’ first live chat system.',
+  },
+]
+
 export function About() {
   return (
     <section id="about" className="border-t border-line py-24">
@@ -47,6 +78,25 @@ export function About() {
             </div>
           ))}
         </dl>
+      </div>
+
+      <div className="mt-20">
+        <h3 className="flex items-center gap-3 text-sm font-medium uppercase tracking-[0.15em] text-heading">
+          How I got here
+          <span className="h-px flex-1 bg-gradient-to-r from-accent-soft to-transparent" />
+        </h3>
+
+        {/* Gold line down the left, with a diamond marking each step. */}
+        <ol className="mt-8 space-y-8 border-l border-line pl-8">
+          {timeline.map((entry) => (
+            <li key={entry.title} className="relative">
+              <span className="absolute -left-[2.3rem] top-1.5 size-2.5 rotate-45 border border-accent bg-surface" />
+              <p className="text-xs uppercase tracking-[0.15em] text-accent">{entry.period}</p>
+              <p className="mt-1 text-lg font-medium text-heading">{entry.title}</p>
+              <p className="mt-1 leading-relaxed">{entry.detail}</p>
+            </li>
+          ))}
+        </ol>
       </div>
     </section>
   )

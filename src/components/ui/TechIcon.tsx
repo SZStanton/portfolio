@@ -8,8 +8,7 @@ type TechIconProps = {
   label?: string
 }
 
-// Looks up the logo and hands both brand colours to CSS as variables,
-// then lets the theme pick which one to use.
+// Hands both colours to CSS as variables and lets the theme pick.
 export function TechIcon({ tech, className, label }: TechIconProps) {
   const style = techStyles[tech]
   if (!style) return null
@@ -20,7 +19,7 @@ export function TechIcon({ tech, className, label }: TechIconProps) {
       style={
         {
           '--tech': style.color,
-          '--tech-light': style.colorLight ?? style.color,
+          '--tech-light': style.colorLight,
         } as CSSProperties
       }
       role={label ? 'img' : undefined}

@@ -9,13 +9,11 @@ import { PageNav } from './PageNav'
 export function Layout() {
   const { pathname } = useLocation()
 
-  // True when the visitor has asked their system to limit animation.
-  // Motion sickness and vestibular disorders are real, so movement is
-  // dropped for them while the fade stays.
+  // Set when the visitor's system asks for less animation. Drop the
+  // movement for them, keep the fade.
   const reduceMotion = useReducedMotion()
 
-  // Without this a new page opens at whatever scroll position the
-  // last one was left at, since no full page load happens.
+  // Changing route is not a page load, so the scroll position sticks.
   useEffect(() => {
     window.scrollTo(0, 0)
   }, [pathname])
@@ -25,11 +23,9 @@ export function Layout() {
       <Navbar />
 
       <main className="mx-auto max-w-5xl px-6">
-        {/* LazyMotion with the m component loads only the animation
-            features actually used, instead of Motion's whole feature set. */}
+        {/* LazyMotion and m load only the features used, not all of Motion. */}
         <LazyMotion features={domAnimation}>
-          {/* Changing the key remounts this on every route change, which
-              replays the fade. Outlet is where the matched page renders. */}
+          {/* New key on each route remounts this, which replays the fade. */}
           <m.div
             key={pathname}
             initial={{ opacity: 0, y: reduceMotion ? 0 : 8 }}
