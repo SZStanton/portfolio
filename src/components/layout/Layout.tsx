@@ -2,6 +2,7 @@ import { domAnimation, LazyMotion, m, useReducedMotion } from 'motion/react'
 import { useEffect } from 'react'
 import { Outlet, useLocation } from 'react-router'
 import { useArrowNavigation } from '../../hooks/useArrowNavigation'
+import { EdgeNav } from './EdgeNav'
 import { Footer } from './Footer'
 import { Navbar } from './Navbar'
 import { PageNav } from './PageNav'
@@ -32,6 +33,7 @@ export function Layout() {
       </a>
 
       <Navbar />
+      <EdgeNav />
 
       <main id="main" className="mx-auto max-w-5xl px-6">
         {/* LazyMotion and m load only the features used, not all of Motion. */}
