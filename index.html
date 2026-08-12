@@ -28,20 +28,19 @@
          on the right background instead of flashing white. These two values
          mirror --surface in index.css and must be changed alongside it. -->
     <style>
+      /* Dark is the default here too, so the very first paint matches. */
       html {
-        background-color: #f7f6f3;
-      }
-      html.dark {
         background-color: #101011;
       }
+      html:not(.dark) {
+        background-color: #f7f6f3;
+      }
     </style>
-    <!-- Runs before first paint, so dark mode users get no white flash while
-         React starts. Falls back to the OS setting on a first visit. -->
+    <!-- Runs before first paint, so there is no flash while React starts.
+         Dark is the default, and only an explicit choice of light wins. -->
     <script>
       (() => {
-        const saved = localStorage.getItem('theme')
-        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches
-        if (saved === 'dark' || (!saved && prefersDark)) {
+        if (localStorage.getItem('theme') !== 'light') {
           document.documentElement.classList.add('dark')
         }
       })()

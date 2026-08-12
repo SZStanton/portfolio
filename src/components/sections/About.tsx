@@ -1,3 +1,5 @@
+import { useState } from 'react'
+import { Lightbox } from '../ui/Lightbox'
 import { ScrollCue } from '../ui/ScrollCue'
 import { SectionLabel } from '../ui/SectionLabel'
 
@@ -9,37 +11,56 @@ const facts = [
 ]
 
 // The route from admin into development, most recent first.
+// Images live in public/, so they are referenced from the site root.
 const timeline = [
   {
     period: 'Now',
     title: 'Building and Still Learning',
     detail: 'TypeScript, Tailwind and Docker, picked up on this site and on my own projects.',
+    images: [],
   },
   {
     period: '2026',
     title: 'Full Stack Web Developer Bootcamp',
     detail:
       'HyperionDev. JavaScript, React, Node, Express, MongoDB and JWT authentication, across four capstone projects.',
+    images: [
+      { src: '/full-stack-bootcamp.png', alt: 'HyperionDev Full Stack Web Developer certificate' },
+    ],
   },
   {
     period: '2023 to 2024',
     title: 'Software Engineering Bootcamp',
     detail: 'HyperionDev. Python, SQL and SQLite, object-oriented programming, Git and Agile.',
+    images: [
+      {
+        src: '/software-engineering-bootcamp.jpeg',
+        alt: 'HyperionDev Software Engineering bootcamp certificate',
+      },
+    ],
   },
   {
     period: '2023',
     title: 'Started Writing Code',
     detail: 'Python and web development through Sololearn, in my own time alongside full-time work.',
+    images: [
+      { src: '/python-intermediate.jpg', alt: 'Sololearn Python Intermediate certificate' },
+      { src: '/web-development.jpg', alt: 'Sololearn Web Development certificate' },
+    ],
   },
   {
     period: '2014 to 2026',
     title: 'Medical Aid Administration',
     detail:
       'Claims assessment, membership administration, then digital live chat at Medscheme. Founding agent on Bonitas’ first live chat system.',
+    images: [{ src: '/medscheme.jpeg', alt: 'Medscheme certificate of service' }],
   },
 ]
 
 export function About() {
+  // Which certificate is open full size, if any.
+  const [open, setOpen] = useState<{ src: string; alt: string } | null>(null)
+
   return (
     // scroll-mt keeps the heading clear of the sticky header when
     // the hero button jumps down to here.
@@ -108,10 +129,34 @@ export function About() {
               </p>
               <p className="mt-1 text-lg font-medium text-heading">{entry.title}</p>
               <p className="mt-1 leading-relaxed">{entry.detail}</p>
+
+              {entry.images.length > 0 && (
+                <ul className="mt-4 flex flex-wrap gap-3">
+                  {entry.images.map(image => (
+                    <li key={image.src}>
+                      <button
+                        type="button"
+                        onClick={() => setOpen(image)}
+                        aria-label={`View ${image.alt}`}
+                        className="block overflow-hidden rounded-md border border-line bg-surface-raised shadow-card transition-all duration-300 hover:scale-110 hover:border-accent-soft active:scale-110"
+                      >
+                        <img
+                          src={image.src}
+                          alt={image.alt}
+                          loading="lazy"
+                          className="h-36 w-52 object-cover object-top"
+                        />
+                      </button>
+                    </li>
+                  ))}
+                </ul>
+              )}
             </li>
           ))}
         </ol>
       </div>
+
+      {open && <Lightbox src={open.src} alt={open.alt} onClose={() => setOpen(null)} />}
     </section>
   )
 }
