@@ -69,7 +69,10 @@
   --color-danger: var(--danger);
   --color-success: var(--success);
 
-  --font-sans: system-ui, "Segoe UI", Roboto, sans-serif;
+  /* Josefin is the 1920s geometric face for headings. Manrope is also
+     geometric, so the two share a skeleton instead of clashing. */
+  --font-display: "Josefin Sans Variable", system-ui, sans-serif;
+  --font-sans: "Manrope Variable", system-ui, sans-serif;
   --font-mono: ui-monospace, Consolas, monospace;
 }
 
@@ -83,6 +86,14 @@
     /* Slightly above the 16px default. Easier to read, and it lifts
        everything that does not set its own size. */
     font-size: 1.0625rem;
+  }
+
+  /* Josefin runs small and light, so headings get a touch more weight. */
+  h1,
+  h2,
+  h3 {
+    font-family: var(--font-display);
+    letter-spacing: -0.005em;
   }
 
   /* Gold focus ring everywhere, on keyboard navigation only.
