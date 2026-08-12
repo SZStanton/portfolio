@@ -32,6 +32,7 @@ export function Lightbox({ src, alt, onClose }: Props) {
       aria-modal="true"
       aria-label={alt}
       onClick={onClose}
+      onContextMenu={event => event.preventDefault()}
       className="fixed inset-0 z-[70] grid place-items-center bg-black/80 p-4 backdrop-blur-sm sm:p-10"
     >
       <button
@@ -46,6 +47,7 @@ export function Lightbox({ src, alt, onClose }: Props) {
       <img
         src={src}
         alt={alt}
+        draggable={false}
         onClick={event => event.stopPropagation()}
         className="max-h-[76vh] max-w-[86%] rounded-sm object-contain shadow-2xl"
       />

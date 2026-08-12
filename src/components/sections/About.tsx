@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { CertificateStack, type Certificate } from '../ui/CertificateStack'
 import { Lightbox } from '../ui/Lightbox'
 import { ScrollCue } from '../ui/ScrollCue'
 import { SectionLabel } from '../ui/SectionLabel'
@@ -25,7 +26,11 @@ const timeline = [
     detail:
       'HyperionDev. JavaScript, React, Node, Express, MongoDB and JWT authentication, across four capstone projects.',
     images: [
-      { src: '/full-stack-bootcamp.png', alt: 'HyperionDev Full Stack Web Developer certificate' },
+      {
+        src: '/full-stack-bootcamp.jpg',
+        alt: 'HyperionDev Full Stack Web Developer certificate',
+        portrait: true,
+      },
     ],
   },
   {
@@ -43,9 +48,18 @@ const timeline = [
     period: '2023',
     title: 'Started Writing Code',
     detail: 'Python and web development through Sololearn, in my own time alongside full-time work.',
+    // Web development sits in front, python behind it.
     images: [
-      { src: '/python-intermediate.jpg', alt: 'Sololearn Python Intermediate certificate' },
-      { src: '/web-development.jpg', alt: 'Sololearn Web Development certificate' },
+      {
+        src: '/web-development.jpg',
+        alt: 'Sololearn Web Development certificate',
+        label: 'Web Development certificate',
+      },
+      {
+        src: '/python-developer.jpg',
+        alt: 'Sololearn Python Developer certificate',
+        label: 'Python Developer certificate',
+      },
     ],
   },
   {
@@ -53,13 +67,15 @@ const timeline = [
     title: 'Medical Aid Administration',
     detail:
       'Claims assessment, membership administration, then digital live chat at Medscheme. Founding agent on Bonitas’ first live chat system.',
-    images: [{ src: '/medscheme.jpeg', alt: 'Medscheme certificate of service' }],
+    images: [
+      { src: '/medscheme.jpeg', alt: 'Medscheme certificate of service', portrait: true },
+    ],
   },
 ]
 
 export function About() {
   // Which certificate is open full size, if any.
-  const [open, setOpen] = useState<{ src: string; alt: string } | null>(null)
+  const [open, setOpen] = useState<Certificate | null>(null)
 
   return (
     // scroll-mt keeps the heading clear of the sticky header when
@@ -120,36 +136,27 @@ export function About() {
         </h3>
 
         {/* Gold line down the left, with a diamond marking each step. */}
-        <ol className="mt-8 space-y-8 border-l border-line pl-8">
+        <ol className="mt-8 space-y-6 border-l border-line pl-8">
           {timeline.map((entry) => (
-            <li key={entry.title} className="relative">
+            // Text left, certificates right from medium screens up.
+            <li
+              key={entry.title}
+              className="relative md:grid md:grid-cols-[minmax(0,1fr)_auto] md:items-start md:gap-8"
+            >
               <span className="absolute -left-[2.3rem] top-1.5 size-2.5 rotate-45 border border-accent bg-surface" />
-              <p className="font-display text-xs font-semibold uppercase tracking-[0.15em] text-accent">
-                {entry.period}
-              </p>
-              <p className="mt-1 text-lg font-medium text-heading">{entry.title}</p>
-              <p className="mt-1 leading-relaxed">{entry.detail}</p>
+
+              <div>
+                <p className="font-display text-xs font-semibold uppercase tracking-[0.15em] text-accent">
+                  {entry.period}
+                </p>
+                <p className="mt-1 text-lg font-medium text-heading">{entry.title}</p>
+                <p className="mt-1 leading-relaxed">{entry.detail}</p>
+              </div>
 
               {entry.images.length > 0 && (
-                <ul className="mt-4 flex flex-wrap gap-3">
-                  {entry.images.map(image => (
-                    <li key={image.src}>
-                      <button
-                        type="button"
-                        onClick={() => setOpen(image)}
-                        aria-label={`View ${image.alt}`}
-                        className="block overflow-hidden rounded-md border border-line bg-surface-raised shadow-card transition-all duration-300 hover:scale-110 hover:border-accent-soft active:scale-110"
-                      >
-                        <img
-                          src={image.src}
-                          alt={image.alt}
-                          loading="lazy"
-                          className="h-36 w-52 object-cover object-top"
-                        />
-                      </button>
-                    </li>
-                  ))}
-                </ul>
+                <div className="mt-4 md:mt-0">
+                  <CertificateStack images={entry.images} onOpen={setOpen} />
+                </div>
               )}
             </li>
           ))}
