@@ -1,6 +1,4 @@
 import { LuGithub, LuLinkedin, LuMail } from 'react-icons/lu'
-import { Link } from 'react-router'
-import { pages } from '../../data/navigation'
 
 const EMAIL = 'ssebastianbusiness@gmail.com'
 
@@ -27,27 +25,18 @@ export function Footer() {
         <div className="h-px bg-gradient-to-r from-transparent via-accent/40 to-transparent" />
       </div>
 
-      <div className="mx-auto flex max-w-6xl flex-col gap-4 px-6 py-6 sm:flex-row sm:items-center sm:justify-between">
+      {/* Three columns so the tagline sits dead centre, with an empty
+          first column balancing the socials. Stacks on small screens. */}
+      <div className="mx-auto grid max-w-6xl gap-4 px-6 py-6 sm:grid-cols-3 sm:items-center">
+        <span className="hidden sm:block" aria-hidden="true" />
+
         {/* Name is left to the copyright line below, so it appears once here. */}
-        <p className="flex items-center gap-3 text-[0.9375rem]">
-          <span className="size-1.5 rotate-45 bg-accent/70" />
+        <p className="flex items-center justify-center gap-3 text-center text-[0.9375rem]">
+          <span className="size-1.5 shrink-0 rotate-45 bg-accent/70" />
           Junior Full-Stack Developer, Cape Town
         </p>
 
-        {/* A second way to reach every page, without scrolling back up. */}
-        <nav>
-          <ul className="flex flex-wrap items-center gap-x-5 gap-y-1 text-[0.9375rem]">
-            {pages.map((page) => (
-              <li key={page.to}>
-                <Link to={page.to} className="transition-colors hover:text-accent">
-                  {page.label}
-                </Link>
-              </li>
-            ))}
-          </ul>
-        </nav>
-
-        <ul className="flex items-center gap-1">
+        <ul className="flex items-center justify-center gap-1 sm:justify-end">
           {socials.map(({ href, label, Icon }) => (
             <li key={href}>
               <a

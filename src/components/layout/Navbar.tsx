@@ -1,48 +1,31 @@
-import { useState } from 'react';
-import { LuMenu, LuMoon, LuSun, LuX } from 'react-icons/lu';
+import { LuMoon, LuSun } from 'react-icons/lu';
 import { NavLink } from 'react-router';
 import { pages } from '../../data/navigation';
 import { useTheme } from '../../hooks/useTheme';
 
 export function Navbar() {
   const { theme, toggleTheme } = useTheme();
-  const [menuOpen, setMenuOpen] = useState(false);
-
-  // Shared so the links and both buttons stay identical.
-  const itemStyles =
-    'rounded-md transition-colors hover:bg-hover hover:text-heading';
 
   // NavLink says whether this is the current page. Current one gets a
   // gold underline, the rest sit a step below.
   const linkClass = ({ isActive }: { isActive: boolean }) =>
     [
-      'relative px-3 py-2 text-[0.9375rem] font-medium transition-colors',
-      'after:absolute after:inset-x-3 after:-bottom-0.5 after:h-px after:transition-colors',
+      // Josefin runs light, so caps need a heavier weight to hold up.
+      'relative flex h-full items-center justify-center px-4 font-display text-xs font-semibold uppercase tracking-[0.14em] transition-colors sm:px-7 sm:text-sm',
+      'after:absolute after:inset-x-0 after:bottom-0 after:h-0.5 after:transition-colors',
       isActive
         ? 'text-heading after:bg-accent'
-        : 'text-body hover:text-heading after:bg-transparent hover:after:bg-accent-soft',
+        : 'text-body hover:bg-hover hover:text-heading after:bg-transparent hover:after:bg-accent-soft',
     ].join(' ');
 
   return (
     // The /80 and backdrop-blur let content show softly through as it scrolls under.
     <header className="sticky top-0 z-50 border-b border-line bg-surface-raised/80 backdrop-blur">
-      {/* Same max width as <main>, so the bar and the content line up. */}
-      <nav className="mx-auto flex max-w-5xl items-center justify-between px-6 py-4">
-        {/* Monogram rather than the full name, which the hero already carries. */}
-        <NavLink
-          to="/"
-          aria-label="Sebastian Stanton, home"
-          className="group flex items-center gap-2.5 transition-colors hover:text-accent"
-        >
-          <span className="size-1.5 rotate-45 bg-accent transition-transform group-hover:rotate-[135deg]" />
-          <span className="font-display text-lg font-semibold tracking-[0.2em] text-heading">
-            SS
-          </span>
-        </NavLink>
-
-        <div className="flex items-center gap-1">
-          {/* Swaps with the hamburger below: only one is ever visible. */}
-          <ul className="hidden md:flex md:items-center md:gap-1">
+      {/* items-stretch so the links fill the full header height, which
+          makes the whole strip clickable rather than just the text. */}
+      <div className="relative flex h-14 items-stretch sm:h-16">
+        <nav className="mx-auto flex items-stretch">
+          <ul className="flex items-stretch">
             {pages.map(link => (
               <li key={link.to}>
                 {/* `end` stops "/" counting as active on every other page. */}
@@ -52,64 +35,27 @@ export function Navbar() {
               </li>
             ))}
           </ul>
+        </nav>
 
-          <button
-            type="button"
-            onClick={toggleTheme}
-            // Read out instead of the contents, which are icon only.
-            aria-label={
-              theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'
-            }
-            className={`p-2 ${itemStyles}`}
-          >
-            {/* Shows the mode currently active, not the one it switches to. */}
-            {theme === 'dark' ? (
-              <LuMoon className="size-5" />
-            ) : (
-              <LuSun className="size-5" />
-            )}
-          </button>
-
-          <button
-            type="button"
-            onClick={() => setMenuOpen(open => !open)}
-            aria-label={menuOpen ? 'Close menu' : 'Open menu'}
-            aria-expanded={menuOpen}
-            className={`p-2 md:hidden ${itemStyles}`}
-          >
-            {menuOpen ? (
-              <LuX className="size-5" />
-            ) : (
-              <LuMenu className="size-5" />
-            )}
-          </button>
-        </div>
-      </nav>
-
-      {/* Closed on click, since changing page leaves the menu open otherwise. */}
-      {menuOpen && (
-        <ul className="border-t border-line px-6 pb-4 md:hidden">
-          {pages.map(link => (
-            <li key={link.to}>
-              <NavLink
-                to={link.to}
-                end
-                onClick={() => setMenuOpen(false)}
-                className={({ isActive }) =>
-                  `${itemStyles} block px-3 py-2 font-medium ${
-                    isActive
-                      ? 'border-l-2 border-accent text-heading'
-                      : 'text-body'
-                  }`
-                }
-              >
-                {link.label}
-              </NavLink>
-            </li>
-          ))}
-        </ul>
-      )}
+        {/* Pinned to the corner and out of the flex row, so the links stay
+            centred on the page rather than centred in what is left over. */}
+        <button
+          type="button"
+          onClick={toggleTheme}
+          // Read out instead of the contents, which are icon only.
+          aria-label={
+            theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'
+          }
+          className="absolute inset-y-0 right-0 grid w-14 place-items-center transition-colors hover:bg-hover hover:text-heading sm:w-16"
+        >
+          {/* Shows the mode currently active, not the one it switches to. */}
+          {theme === 'dark' ? (
+            <LuMoon className="size-5" />
+          ) : (
+            <LuSun className="size-5" />
+          )}
+        </button>
+      </div>
     </header>
   );
 }
-
