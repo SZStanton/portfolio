@@ -17,7 +17,7 @@ export function Skills() {
         this site.
       </p>
 
-      <div className="mt-14 space-y-12">
+      <div className="mt-12 space-y-8">
         {skillGroups.map((group) => (
           <div key={group.title}>
             <h2 className="flex items-center gap-3 text-sm font-semibold uppercase tracking-[0.15em] text-heading">
@@ -25,7 +25,7 @@ export function Skills() {
               <span className="h-px flex-1 bg-gradient-to-r from-accent-soft to-transparent" />
             </h2>
 
-            <ul className="mt-5 flex flex-wrap gap-2.5">
+            <ul className="mt-4 flex flex-wrap gap-2.5">
               {group.skills.map((skill) => (
                 <li
                   key={skill.name}
