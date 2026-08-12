@@ -20,9 +20,17 @@ export function Layout() {
 
   return (
     <>
+      {/* Hidden until tabbed to, so keyboard users can skip the nav. */}
+      <a
+        href="#main"
+        className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-[60] focus:rounded-full focus:bg-heading focus:px-5 focus:py-2 focus:font-medium focus:text-surface"
+      >
+        Skip to content
+      </a>
+
       <Navbar />
 
-      <main className="mx-auto max-w-5xl px-6">
+      <main id="main" className="mx-auto max-w-5xl px-6">
         {/* LazyMotion and m load only the features used, not all of Motion. */}
         <LazyMotion features={domAnimation}>
           {/* New key on each route remounts this, which replays the fade. */}
