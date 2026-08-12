@@ -16,7 +16,8 @@ function StackTags({ stack }: { stack: string[] }) {
       {stack.map((tech) => (
         <li
           key={tech}
-          className="flex items-center gap-1.5 rounded-full border border-line bg-surface px-2.5 py-1 text-xs transition-colors hover:border-accent-soft active:border-accent"
+          // select-none and touch-callout stop a press selecting the text.
+          className="flex select-none items-center gap-1.5 rounded-full border border-line bg-surface px-2.5 py-1 text-xs transition-colors [-webkit-touch-callout:none] hover:border-accent-soft active:border-accent"
         >
           <TechIcon tech={tech} className="size-3.5" />
           {tech}

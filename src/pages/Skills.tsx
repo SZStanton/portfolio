@@ -28,9 +28,9 @@ export function Skills() {
               {group.skills.map((skill) => (
                 <li
                   key={skill.name}
-                  // active: covers a finger held on the chip, which is the
-                  // closest a touchscreen gets to hovering.
-                  className="flex items-center gap-2 rounded-full border border-line bg-surface-raised px-4 py-2 text-[0.9375rem] transition-colors hover:border-accent-soft active:border-accent"
+                  // active: covers a finger held on the chip. select-none and
+                  // touch-callout stop that press selecting the text instead.
+                  className="flex select-none items-center gap-2 rounded-full border border-line bg-surface-raised px-4 py-2 text-[0.9375rem] transition-colors [-webkit-touch-callout:none] hover:border-accent-soft active:border-accent"
                 >
                   {skill.tech && <TechIcon tech={skill.tech} className="size-4" />}
                   {skill.name}
