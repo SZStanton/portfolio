@@ -32,6 +32,29 @@ export function ButtonLink({ to, variant = 'primary', className, children }: Lin
   )
 }
 
+type AnchorProps = {
+  href: string
+  variant?: Variant
+  className?: string
+  children: ReactNode
+  download?: boolean
+}
+
+// For same-page anchors and file downloads, where a router Link is wrong.
+export function ButtonAnchor({
+  href,
+  variant = 'primary',
+  className,
+  children,
+  download,
+}: AnchorProps) {
+  return (
+    <a href={href} download={download} className={styles(variant, className)}>
+      {children}
+    </a>
+  )
+}
+
 type Props = ButtonHTMLAttributes<HTMLButtonElement> & {
   variant?: Variant
 }

@@ -1,3 +1,6 @@
+import { LuDownload } from 'react-icons/lu'
+import { ButtonAnchor } from '../ui/Button'
+import { ScrollCue } from '../ui/ScrollCue'
 import { SectionLabel } from '../ui/SectionLabel'
 
 // Quick facts, kept beside the prose so the section scans as well as it reads.
@@ -40,7 +43,9 @@ const timeline = [
 
 export function About() {
   return (
-    <section id="about" className="border-t border-line py-24">
+    // scroll-mt keeps the heading clear of the sticky header when
+    // the hero button jumps down to here.
+    <section id="about" className="scroll-mt-20 border-t border-line py-24">
       <SectionLabel>About</SectionLabel>
 
       <h2 className="mt-4 max-w-3xl text-4xl font-semibold tracking-tight text-heading sm:text-5xl">
@@ -78,12 +83,30 @@ export function About() {
               <dd className="mt-1 text-sm">{fact.label}</dd>
             </div>
           ))}
+
+          <ButtonAnchor
+            href="/sebastian-stanton-cv.pdf"
+            variant="secondary"
+            className="w-full"
+            download
+          >
+            <LuDownload className="size-4" />
+            Download CV
+          </ButtonAnchor>
         </dl>
       </div>
 
-      <div className="mt-20">
-        <h3 className="flex items-center gap-3 text-sm font-medium uppercase tracking-[0.15em] text-heading">
-          How I Got Here
+      {/* Hangs on longer than the hero cue, since Experience is right below it. */}
+      <ScrollCue
+        href="#experience"
+        label="Experience"
+        fadeAt={280}
+        className="mx-auto mt-16 w-fit"
+      />
+
+      <div id="experience" className="mt-16 scroll-mt-20">
+        <h3 className="flex items-center gap-3 text-sm font-semibold uppercase tracking-[0.15em] text-heading">
+          Experience
           <span className="h-px flex-1 bg-gradient-to-r from-accent-soft to-transparent" />
         </h3>
 

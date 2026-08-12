@@ -1,5 +1,6 @@
 import { LuArrowRight } from 'react-icons/lu'
 import { ButtonLink } from '../ui/Button'
+import { ScrollCue } from '../ui/ScrollCue'
 import { TechIcon } from '../ui/TechIcon'
 
 // Names key into data/tech.ts, where the logos and colours live.
@@ -11,7 +12,7 @@ export function Hero() {
       id="home"
       // svh over vh because mobile toolbars change the visible height.
       // The 5rem leaves room for the navbar.
-      className="flex min-h-[calc(100svh-5rem)] flex-col justify-center py-20"
+      className="relative flex min-h-[calc(100svh-5rem)] flex-col justify-center py-20"
     >
       <p className="flex items-center gap-2 text-sm">
         {/* Two stacked circles: the lower one pings outwards, the solid one stays. */}
@@ -61,6 +62,10 @@ export function Hero() {
           </li>
         ))}
       </ul>
+
+      {/* Sits at the foot of the first screen and clears out as soon as
+          the page moves, since by then it has done its job. */}
+      <ScrollCue href="#about" label="About Me" className="absolute inset-x-0 bottom-2 mx-auto w-fit" />
     </section>
   )
 }
