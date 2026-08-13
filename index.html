@@ -32,6 +32,42 @@
     <meta property="og:image:height" content="630" />
     <meta property="og:image:alt" content="Sebastian Stanton, Junior Full-Stack Developer" />
     <meta name="twitter:card" content="summary_large_image" />
+
+    <!-- Tells search engines this site is about a person, and which
+         other profiles are the same person. Only public details. -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "name": "Sebastian Stanton",
+        "jobTitle": "Junior Full-Stack Developer",
+        "url": "https://szstanton.vercel.app/",
+        "image": "https://szstanton.vercel.app/og-image.jpg",
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "Cape Town",
+          "addressCountry": "ZA"
+        },
+        "alumniOf": {
+          "@type": "EducationalOrganization",
+          "name": "HyperionDev"
+        },
+        "knowsAbout": [
+          "JavaScript",
+          "TypeScript",
+          "React",
+          "Node.js",
+          "Express",
+          "MongoDB",
+          "Python",
+          "SQL"
+        ],
+        "sameAs": [
+          "https://github.com/SZStanton",
+          "https://www.linkedin.com/in/sebastian-stanton-5464b0139"
+        ]
+      }
+    </script>
     <meta name="twitter:image" content="https://szstanton.vercel.app/og-image.jpg" />
     <!-- Painted before the stylesheet has even downloaded, so the page starts
          on the right background instead of flashing white. These two values
