@@ -1,4 +1,4 @@
-import { z } from 'zod'
+import { z } from 'zod';
 
 // Browser-side rules. api/contact.ts repeats them and re-checks on the
 // server, and cannot import this file, so change both together.
@@ -12,8 +12,8 @@ export const contactSchema = z.object({
     .max(2000, 'That is a bit long, please keep it under 2000 characters'),
   // Honeypot. Hidden from people, so anything in it came from a bot.
   website: z.string().max(0).optional(),
-})
+});
 
 // Derives the TypeScript type from the schema, so the rules and the
 // type can never disagree.
-export type ContactFormValues = z.infer<typeof contactSchema>
+export type ContactFormValues = z.infer<typeof contactSchema>;

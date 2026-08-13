@@ -1,28 +1,28 @@
-import { useEffect } from 'react'
-import { LuX } from 'react-icons/lu'
+import { useEffect } from 'react';
+import { LuX } from 'react-icons/lu';
 
 type Props = {
-  src: string
-  alt: string
-  onClose: () => void
-}
+  src: string;
+  alt: string;
+  onClose: () => void;
+};
 
 export function Lightbox({ src, alt, onClose }: Props) {
   useEffect(() => {
     const onKey = (event: KeyboardEvent) => {
-      if (event.key === 'Escape') onClose()
-    }
-    window.addEventListener('keydown', onKey)
+      if (event.key === 'Escape') onClose();
+    };
+    window.addEventListener('keydown', onKey);
 
     // Stop the page behind scrolling while this is open.
-    const previous = document.body.style.overflow
-    document.body.style.overflow = 'hidden'
+    const previous = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
 
     return () => {
-      window.removeEventListener('keydown', onKey)
-      document.body.style.overflow = previous
-    }
-  }, [onClose])
+      window.removeEventListener('keydown', onKey);
+      document.body.style.overflow = previous;
+    };
+  }, [onClose]);
 
   return (
     // The backdrop closes it. The image below stops the click bubbling
@@ -52,5 +52,5 @@ export function Lightbox({ src, alt, onClose }: Props) {
         className="max-h-[76vh] max-w-[86%] rounded-sm object-contain shadow-2xl"
       />
     </div>
-  )
+  );
 }

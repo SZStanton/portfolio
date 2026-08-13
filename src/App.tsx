@@ -1,15 +1,23 @@
-import { lazy, Suspense } from 'react'
-import { Route, Routes } from 'react-router'
-import { Layout } from './components/layout/Layout'
-import { PageLoader } from './components/ui/PageLoader'
-import { Home } from './pages/Home'
+import { lazy, Suspense } from 'react';
+import { Route, Routes } from 'react-router';
+import { Layout } from './components/layout/Layout';
+import { PageLoader } from './components/ui/PageLoader';
+import { Home } from './pages/Home';
 
 // Home loads up front, the rest only when visited. Keeps the contact
 // form's validation libraries off the landing page.
-const Skills = lazy(() => import('./pages/Skills').then((m) => ({ default: m.Skills })))
-const Projects = lazy(() => import('./pages/Projects').then((m) => ({ default: m.Projects })))
-const Contact = lazy(() => import('./pages/Contact').then((m) => ({ default: m.Contact })))
-const NotFound = lazy(() => import('./pages/NotFound').then((m) => ({ default: m.NotFound })))
+const Skills = lazy(() =>
+  import('./pages/Skills').then(m => ({ default: m.Skills })),
+);
+const Projects = lazy(() =>
+  import('./pages/Projects').then(m => ({ default: m.Projects })),
+);
+const Contact = lazy(() =>
+  import('./pages/Contact').then(m => ({ default: m.Contact })),
+);
+const NotFound = lazy(() =>
+  import('./pages/NotFound').then(m => ({ default: m.NotFound })),
+);
 
 function App() {
   return (
@@ -27,7 +35,8 @@ function App() {
         </Route>
       </Routes>
     </Suspense>
-  )
+  );
 }
 
-export default App
+export default App;
+

@@ -1,5 +1,5 @@
 // All project content lives here, separate from the components that show it.
-import type { Project } from '../types'
+import type { Project } from '../types';
 
 // Typing the array is what turns a missing or misspelled field into a build
 // error. Order here is the order they appear on the page.
@@ -12,7 +12,16 @@ export const projects: Project[] = [
     kind: 'full-stack',
     group: 'featured',
     capstone: true,
-    stack: ['React', 'Node.js', 'Express', 'MongoDB', 'Mongoose', 'JWT', 'Context API', 'Vite'],
+    stack: [
+      'React',
+      'Node.js',
+      'Express',
+      'MongoDB',
+      'Mongoose',
+      'JWT',
+      'Context API',
+      'Vite',
+    ],
     features: [
       'Registration and login with hashed passwords',
       'JWT authentication with protected routes',
@@ -207,4 +216,4 @@ export const projects: Project[] = [
     repoUrl: 'https://github.com/SZStanton/Chefs-Favorites',
     liveUrl: 'https://szstanton.github.io/Chefs-Favorites/',
   },
-]
+];

@@ -1,4 +1,4 @@
-import type { SkillGroup } from '../types'
+import type { SkillGroup } from '../types';
 
 // Groupings follow the CV so the two match. `tech` points at data/tech.ts
 // for the logo, and is left off for anything without one.
@@ -56,4 +56,4 @@ export const skillGroups: SkillGroup[] = [
       { name: 'Docker', tech: 'Docker', status: 'learning' },
     ],
   },
-]
+];

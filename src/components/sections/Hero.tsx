@@ -1,11 +1,18 @@
-import { LuArrowRight, LuDownload } from 'react-icons/lu'
-import cv from '../../assets/docs/sebastian-stanton-cv.pdf'
-import { ButtonAnchor, ButtonLink } from '../ui/Button'
-import { ScrollCue } from '../ui/ScrollCue'
-import { TechIcon } from '../ui/TechIcon'
+import { LuArrowRight, LuDownload } from 'react-icons/lu';
+import cv from '../../assets/docs/sebastian-stanton-cv.pdf';
+import { ButtonAnchor, ButtonLink } from '../ui/Button';
+import { ScrollCue } from '../ui/ScrollCue';
+import { TechIcon } from '../ui/TechIcon';
 
 // Names key into data/tech.ts, where the logos and colours live.
-const techs = ['JavaScript', 'React', 'Node.js', 'Express', 'MongoDB', 'Python']
+const techs = [
+  'JavaScript',
+  'React',
+  'Node.js',
+  'Express',
+  'MongoDB',
+  'Python',
+];
 
 export function Hero() {
   return (
@@ -18,7 +25,8 @@ export function Hero() {
       <p className="flex items-center gap-2 text-sm">
         {/* Two stacked circles: the lower one pings outwards, the solid one stays. */}
         <span className="relative flex size-2">
-          <span className="absolute inline-flex size-full animate-ping rounded-full bg-accent opacity-60" />
+          {/* Decorative, so it stops for anyone asking for less motion. */}
+          <span className="absolute inline-flex size-full animate-ping rounded-full bg-accent opacity-60 motion-reduce:animate-none" />
           <span className="relative inline-flex size-2 rounded-full bg-accent" />
         </span>
         Open to Junior Developer Roles
@@ -49,7 +57,11 @@ export function Hero() {
           Get in touch
         </ButtonLink>
         {/* The built file name is fingerprinted, so download names it. */}
-        <ButtonAnchor href={cv} variant="secondary" download="sebastian-stanton-cv.pdf">
+        <ButtonAnchor
+          href={cv}
+          variant="secondary"
+          download="sebastian-stanton-cv.pdf"
+        >
           <LuDownload className="size-4" />
           CV
         </ButtonAnchor>
@@ -58,7 +70,7 @@ export function Hero() {
       {/* Muted until hovered, when the brand colour comes up. Keeps the
           hero calm while still rewarding a bit of curiosity. */}
       <ul className="mt-16 flex flex-wrap items-center gap-x-7 gap-y-4">
-        {techs.map((name) => (
+        {techs.map(name => (
           <li key={name} title={name}>
             <TechIcon
               tech={name}
@@ -71,7 +83,11 @@ export function Hero() {
 
       {/* Sits at the foot of the first screen and clears out as soon as
           the page moves, since by then it has done its job. */}
-      <ScrollCue href="#about" label="About Me" className="absolute inset-x-0 bottom-2 mx-auto w-fit" />
+      <ScrollCue
+        href="#about"
+        label="About Me"
+        className="absolute inset-x-0 bottom-2 mx-auto w-fit"
+      />
     </section>
-  )
+  );
 }

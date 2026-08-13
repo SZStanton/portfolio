@@ -30,17 +30,17 @@ exists to work those out in the open rather than because a portfolio strictly ne
 
 ## Built with
 
-| | |
-|---|---|
-| **Framework** | React 19, TypeScript 6, Vite 8 |
-| **Routing** | React Router 8 |
-| **Styling** | Tailwind CSS 4, CSS-first config |
-| **Animation** | Motion, loaded lazily |
-| **Forms** | React Hook Form + Zod |
-| **Icons** | react-icons: Lucide for interface, Simple Icons for brand logos |
-| **Fonts** | Josefin Sans and Manrope, self-hosted variable fonts |
-| **Backend** | Vercel serverless function, Resend for delivery |
-| **CI** | GitHub Actions, lint and build on every push and pull request |
+|               |                                                                 |
+| ------------- | --------------------------------------------------------------- |
+| **Framework** | React 19, TypeScript 6, Vite 8                                  |
+| **Routing**   | React Router 8                                                  |
+| **Styling**   | Tailwind CSS 4, CSS-first config                                |
+| **Animation** | Motion, loaded lazily                                           |
+| **Forms**     | React Hook Form + Zod                                           |
+| **Icons**     | react-icons: Lucide for interface, Simple Icons for brand logos |
+| **Fonts**     | Josefin Sans and Manrope, self-hosted variable fonts            |
+| **Backend**   | Vercel serverless function, Resend for delivery                 |
+| **CI**        | GitHub Actions, lint and build on every push and pull request   |
 
 ## Running it locally
 
@@ -57,22 +57,22 @@ The contact form needs two environment variables. Copy the example file and fill
 cp .env.example .env.local
 ```
 
-| Variable | What it is |
-|---|---|
-| `RESEND_API_KEY` | API key from [resend.com](https://resend.com) |
-| `CONTACT_TO_EMAIL` | Where form submissions are delivered |
+| Variable           | What it is                                    |
+| ------------------ | --------------------------------------------- |
+| `RESEND_API_KEY`   | API key from [resend.com](https://resend.com) |
+| `CONTACT_TO_EMAIL` | Where form submissions are delivered          |
 
 Note that `npm run dev` runs Vite only, so `/api/contact` will not exist. Testing the form locally
 needs `vercel dev`.
 
 ### Scripts
 
-| Command | Does |
-|---|---|
-| `npm run dev` | Start the dev server |
-| `npm run build` | Type-check, then build for production |
-| `npm run preview` | Serve the production build locally |
-| `npm run lint` | Run ESLint |
+| Command           | Does                                  |
+| ----------------- | ------------------------------------- |
+| `npm run dev`     | Start the dev server                  |
+| `npm run build`   | Type-check, then build for production |
+| `npm run preview` | Serve the production build locally    |
+| `npm run lint`    | Run ESLint                            |
 
 ## Structure
 

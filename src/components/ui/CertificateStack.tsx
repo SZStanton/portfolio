@@ -1,29 +1,29 @@
-import { useState } from 'react'
+import { useState } from 'react';
 
 export type Certificate = {
-  src: string
-  alt: string
-  label?: string
+  src: string;
+  alt: string;
+  label?: string;
   // Taller than it is wide, so it gets the upright box.
-  portrait?: boolean
-}
+  portrait?: boolean;
+};
 
 type Props = {
-  images: Certificate[]
-  onOpen: (image: Certificate) => void
-}
+  images: Certificate[];
+  onOpen: (image: Certificate) => void;
+};
 
 // Two standard boxes, one per orientation, so nothing is letterboxed
 // into a shape that does not suit it. No padding, so the picture fills
 // the frame, and no overflow clip, so it can grow past it on hover.
 const box =
-  'group relative block rounded-md border border-line bg-surface-raised shadow-card transition-colors duration-300 hover:z-10 hover:border-accent-soft active:z-10 active:border-accent'
+  'group relative block rounded-md border border-line bg-surface-raised shadow-card transition-colors duration-300 hover:z-10 hover:border-accent-soft active:z-10 active:border-accent';
 
 export function CertificateStack({ images, onOpen }: Props) {
   // Which one is on top. The first in the list starts in front.
-  const [index, setIndex] = useState(0)
-  const current = images[index]
-  const size = current.portrait ? 'h-52 w-40' : 'h-36 w-52'
+  const [index, setIndex] = useState(0);
+  const current = images[index];
+  const size = current.portrait ? 'h-52 w-40' : 'h-36 w-52';
 
   return (
     <div className="flex flex-col items-start gap-2 md:items-end">
@@ -82,5 +82,5 @@ export function CertificateStack({ images, onOpen }: Props) {
         </div>
       )}
     </div>
-  )
+  );
 }

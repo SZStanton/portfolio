@@ -1,50 +1,50 @@
-import { useEffect, useState } from 'react'
-import { LuChevronLeft, LuChevronRight } from 'react-icons/lu'
-import { Link, useLocation } from 'react-router'
-import { pages } from '../../data/navigation'
+import { useEffect, useState } from 'react';
+import { LuChevronLeft, LuChevronRight } from 'react-icons/lu';
+import { Link, useLocation } from 'react-router';
+import { pages } from '../../data/navigation';
 
 // How close to the edge the pointer has to get before the arrow shows.
-const EDGE = 90
+const EDGE = 90;
 
 export function EdgeNav() {
-  const { pathname } = useLocation()
-  const [near, setNear] = useState<'left' | 'right' | null>(null)
+  const { pathname } = useLocation();
+  const [near, setNear] = useState<'left' | 'right' | null>(null);
 
   useEffect(() => {
     const onMove = (event: MouseEvent) => {
-      if (event.clientX < EDGE) setNear('left')
-      else if (event.clientX > window.innerWidth - EDGE) setNear('right')
-      else setNear(null)
-    }
+      if (event.clientX < EDGE) setNear('left');
+      else if (event.clientX > window.innerWidth - EDGE) setNear('right');
+      else setNear(null);
+    };
 
     // passive tells the browser we will not block the event.
-    window.addEventListener('mousemove', onMove, { passive: true })
-    return () => window.removeEventListener('mousemove', onMove)
-  }, [])
+    window.addEventListener('mousemove', onMove, { passive: true });
+    return () => window.removeEventListener('mousemove', onMove);
+  }, []);
 
-  const index = pages.findIndex(page => page.to === pathname)
+  const index = pages.findIndex(page => page.to === pathname);
   // Anything not in the list, such as the 404, gets no arrows.
-  if (index === -1) return null
+  if (index === -1) return null;
 
   return (
     <>
       <Arrow page={pages[index - 1]} side="left" visible={near === 'left'} />
       <Arrow page={pages[index + 1]} side="right" visible={near === 'right'} />
     </>
-  )
+  );
 }
 
 type ArrowProps = {
-  page: (typeof pages)[number] | undefined
-  side: 'left' | 'right'
-  visible: boolean
-}
+  page: (typeof pages)[number] | undefined;
+  side: 'left' | 'right';
+  visible: boolean;
+};
 
 function Arrow({ page, side, visible }: ArrowProps) {
   // No page that way, so nothing to show.
-  if (!page) return null
+  if (!page) return null;
 
-  const Icon = side === 'left' ? LuChevronLeft : LuChevronRight
+  const Icon = side === 'left' ? LuChevronLeft : LuChevronRight;
 
   return (
     <Link
@@ -64,5 +64,5 @@ function Arrow({ page, side, visible }: ArrowProps) {
         {page.label}
       </span>
     </Link>
-  )
+  );
 }

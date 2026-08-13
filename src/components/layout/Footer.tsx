@@ -1,21 +1,25 @@
-import { LuGithub, LuLinkedin, LuMail } from 'react-icons/lu'
+import { LuGithub, LuLinkedin, LuMail } from 'react-icons/lu';
 
-const EMAIL = 'ssebastianbusiness@gmail.com'
+const EMAIL = 'ssebastianbusiness@gmail.com';
 
 // Icon is capitalised so it can be used as <Icon /> further down.
 const socials = [
-  { href: 'https://github.com/SZStanton', label: 'GitHub profile', Icon: LuGithub },
+  {
+    href: 'https://github.com/SZStanton',
+    label: 'GitHub profile',
+    Icon: LuGithub,
+  },
   {
     href: 'https://www.linkedin.com/in/sebastian-stanton-5464b0139',
     label: 'LinkedIn profile',
     Icon: LuLinkedin,
   },
   { href: `mailto:${EMAIL}`, label: 'Email me', Icon: LuMail },
-]
+];
 
 export function Footer() {
   // Read on load, so the year never goes stale.
-  const year = new Date().getFullYear()
+  const year = new Date().getFullYear();
 
   return (
     <footer className="mt-4">
@@ -56,9 +60,10 @@ export function Footer() {
 
       <div className="mx-auto max-w-6xl px-6 pb-6 text-xs opacity-70">
         <p>
-          © {year} Sebastian Stanton. Built with React, TypeScript and Tailwind CSS.
+          © {year} Sebastian Stanton. Built with React, TypeScript and Tailwind
+          CSS.
         </p>
       </div>
     </footer>
-  )
+  );
 }

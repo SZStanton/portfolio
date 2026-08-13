@@ -6,4 +6,4 @@ export const pages = [
   { to: '/skills', label: 'Skills' },
   { to: '/projects', label: 'Projects' },
   { to: '/contact', label: 'Contact' },
-]
+];

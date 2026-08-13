@@ -1,6 +1,11 @@
-import { LuChevronDown, LuExternalLink, LuGithub, LuTriangleAlert } from 'react-icons/lu'
-import type { Project, ProjectKind } from '../../types'
-import { TechIcon } from '../ui/TechIcon'
+import {
+  LuChevronDown,
+  LuExternalLink,
+  LuGithub,
+  LuTriangleAlert,
+} from 'react-icons/lu';
+import type { Project, ProjectKind } from '../../types';
+import { TechIcon } from '../ui/TechIcon';
 
 // Record means every kind has to have a label, so adding one to the
 // type without labelling it fails the build.
@@ -8,12 +13,12 @@ const kindLabels: Record<ProjectKind, string> = {
   'full-stack': 'Full Stack',
   'front-end': 'Front End',
   database: 'Database',
-}
+};
 
 function StackTags({ stack }: { stack: string[] }) {
   return (
     <ul className="flex flex-wrap gap-2">
-      {stack.map((tech) => (
+      {stack.map(tech => (
         <li
           key={tech}
           // select-none and touch-callout stop a press selecting the text.
@@ -24,7 +29,7 @@ function StackTags({ stack }: { stack: string[] }) {
         </li>
       ))}
     </ul>
-  )
+  );
 }
 
 function Links({ project }: { project: Project }) {
@@ -51,7 +56,7 @@ function Links({ project }: { project: Project }) {
         </a>
       )}
     </div>
-  )
+  );
 }
 
 // The four capstones. Everything in the data gets shown.
@@ -63,7 +68,9 @@ export function FeaturedProjectCard({ project }: { project: Project }) {
 
       <div className="flex flex-1 flex-col p-6 sm:p-7">
         <div className="flex flex-wrap items-center gap-x-3 gap-y-2">
-          <span className="text-xs uppercase tracking-[0.15em]">{kindLabels[project.kind]}</span>
+          <span className="text-xs uppercase tracking-[0.15em]">
+            {kindLabels[project.kind]}
+          </span>
           {project.capstone && (
             <span className="rounded-full border border-accent-soft px-2.5 py-0.5 text-xs uppercase tracking-wider text-accent">
               Capstone
@@ -71,13 +78,15 @@ export function FeaturedProjectCard({ project }: { project: Project }) {
           )}
         </div>
 
-        <h3 className="mt-3 text-2xl font-semibold text-heading">{project.title}</h3>
+        <h3 className="mt-3 text-2xl font-semibold text-heading">
+          {project.title}
+        </h3>
 
         <p className="mt-3 leading-relaxed">{project.description}</p>
 
         {project.features && (
           <ul className="mt-5 space-y-2 text-[0.9375rem]">
-            {project.features.map((feature) => (
+            {project.features.map(feature => (
               <li key={feature} className="flex gap-3">
                 {/* Small gold diamond instead of a bullet. */}
                 <span className="mt-2 size-1.5 shrink-0 rotate-45 bg-accent/70" />
@@ -102,7 +111,7 @@ export function FeaturedProjectCard({ project }: { project: Project }) {
               What I Would Add Next
             </summary>
             <ul className="mt-3 space-y-2 pl-6 text-[0.9375rem]">
-              {project.futureImprovements.map((item) => (
+              {project.futureImprovements.map(item => (
                 <li key={item} className="list-disc">
                   {item}
                 </li>
@@ -121,7 +130,7 @@ export function FeaturedProjectCard({ project }: { project: Project }) {
         </div>
       </div>
     </article>
-  )
+  );
 }
 
 // The rest. Same information, minus the feature lists.
@@ -139,12 +148,18 @@ export function CompactProjectCard({ project }: { project: Project }) {
         )}
       </div>
 
-      <h3 className="mt-3 text-xl font-semibold text-heading">{project.title}</h3>
+      <h3 className="mt-3 text-xl font-semibold text-heading">
+        {project.title}
+      </h3>
 
-      <p className="mt-3 text-[0.9375rem] leading-relaxed">{project.description}</p>
+      <p className="mt-3 text-[0.9375rem] leading-relaxed">
+        {project.description}
+      </p>
 
       {project.knownIssue && (
-        <p className="mt-4 border-l-2 border-accent-soft pl-3 text-sm">{project.knownIssue}</p>
+        <p className="mt-4 border-l-2 border-accent-soft pl-3 text-sm">
+          {project.knownIssue}
+        </p>
       )}
 
       <div className="mt-5">
@@ -155,5 +170,5 @@ export function CompactProjectCard({ project }: { project: Project }) {
         <Links project={project} />
       </div>
     </article>
-  )
+  );
 }

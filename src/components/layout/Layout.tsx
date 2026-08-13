@@ -1,26 +1,26 @@
-import { domAnimation, LazyMotion, m, useReducedMotion } from 'motion/react'
-import { useEffect } from 'react'
-import { Outlet, useLocation } from 'react-router'
-import { useArrowNavigation } from '../../hooks/useArrowNavigation'
-import { EdgeNav } from './EdgeNav'
-import { Footer } from './Footer'
-import { Navbar } from './Navbar'
-import { PageNav } from './PageNav'
+import { domAnimation, LazyMotion, m, useReducedMotion } from 'motion/react';
+import { useEffect } from 'react';
+import { Outlet, useLocation } from 'react-router';
+import { useArrowNavigation } from '../../hooks/useArrowNavigation';
+import { EdgeNav } from './EdgeNav';
+import { Footer } from './Footer';
+import { Navbar } from './Navbar';
+import { PageNav } from './PageNav';
 
 // Wraps every page, so the navbar and footer are written once.
 export function Layout() {
-  const { pathname } = useLocation()
+  const { pathname } = useLocation();
 
   // Set when the visitor's system asks for less animation. Drop the
   // movement for them, keep the fade.
-  const reduceMotion = useReducedMotion()
+  const reduceMotion = useReducedMotion();
 
-  useArrowNavigation()
+  useArrowNavigation();
 
   // Changing route is not a page load, so the scroll position sticks.
   useEffect(() => {
-    window.scrollTo(0, 0)
-  }, [pathname])
+    window.scrollTo(0, 0);
+  }, [pathname]);
 
   return (
     <>
@@ -53,5 +53,5 @@ export function Layout() {
 
       <Footer />
     </>
-  )
+  );
 }
