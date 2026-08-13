@@ -37,7 +37,8 @@ type AnchorProps = {
   variant?: Variant
   className?: string
   children: ReactNode
-  download?: boolean
+  // true to just download, or a string to set the saved file name.
+  download?: boolean | string
 }
 
 // For same-page anchors and file downloads, where a router Link is wrong.

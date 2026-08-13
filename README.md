@@ -78,6 +78,7 @@ needs `vercel dev`.
 
 ```
 src/
+├── assets/          Certificates, photo, CV. Imported, so they get hashed
 ├── components/
 │   ├── layout/      Navbar, Footer, PageNav, Layout
 │   ├── sections/    Hero, About, ProjectCard

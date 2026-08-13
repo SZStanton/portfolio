@@ -1,4 +1,5 @@
 import { LuArrowRight, LuDownload } from 'react-icons/lu'
+import cv from '../../assets/docs/sebastian-stanton-cv.pdf'
 import { ButtonAnchor, ButtonLink } from '../ui/Button'
 import { ScrollCue } from '../ui/ScrollCue'
 import { TechIcon } from '../ui/TechIcon'
@@ -47,8 +48,8 @@ export function Hero() {
         <ButtonLink to="/contact" variant="secondary">
           Get in touch
         </ButtonLink>
-        {/* download makes the browser save it rather than open a tab. */}
-        <ButtonAnchor href="/sebastian-stanton-cv.pdf" variant="secondary" download>
+        {/* The built file name is fingerprinted, so download names it. */}
+        <ButtonAnchor href={cv} variant="secondary" download="sebastian-stanton-cv.pdf">
           <LuDownload className="size-4" />
           CV
         </ButtonAnchor>

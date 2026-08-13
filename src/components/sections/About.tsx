@@ -1,4 +1,11 @@
 import { useState } from 'react';
+// Imported rather than linked from public, so Vite fingerprints them for
+// caching and a missing file fails the build instead of 404ing quietly.
+import fullStackBootcamp from '../../assets/images/full-stack-bootcamp.jpg';
+import medscheme from '../../assets/images/medscheme.jpeg';
+import pythonDeveloper from '../../assets/images/python-developer.jpg';
+import softwareEngineeringBootcamp from '../../assets/images/software-engineering-bootcamp.jpeg';
+import webDevelopment from '../../assets/images/web-development.jpg';
 import { CertificateStack, type Certificate } from '../ui/CertificateStack';
 import { Lightbox } from '../ui/Lightbox';
 import { ScrollCue } from '../ui/ScrollCue';
@@ -28,7 +35,7 @@ const timeline = [
       'HyperionDev. JavaScript, React, Node, Express, MongoDB and JWT authentication, across four capstone projects.',
     images: [
       {
-        src: '/full-stack-bootcamp.jpg',
+        src: fullStackBootcamp,
         alt: 'HyperionDev Full Stack Web Developer certificate',
         portrait: true,
       },
@@ -41,7 +48,7 @@ const timeline = [
       'HyperionDev. Python, SQL and SQLite, object-oriented programming, Git and Agile.',
     images: [
       {
-        src: '/software-engineering-bootcamp.jpeg',
+        src: softwareEngineeringBootcamp,
         alt: 'HyperionDev Software Engineering bootcamp certificate',
       },
     ],
@@ -54,12 +61,12 @@ const timeline = [
     // Web development sits in front, python behind it.
     images: [
       {
-        src: '/web-development.jpg',
+        src: webDevelopment,
         alt: 'Sololearn Web Development certificate',
         label: 'Web Development certificate',
       },
       {
-        src: '/python-developer.jpg',
+        src: pythonDeveloper,
         alt: 'Sololearn Python Developer certificate',
         label: 'Python Developer certificate',
       },
@@ -72,7 +79,7 @@ const timeline = [
       'Claims assessment, membership administration, then digital live chat at Medscheme. Founding agent on Bonitas’ first live chat system.',
     images: [
       {
-        src: '/medscheme.jpeg',
+        src: medscheme,
         alt: 'Medscheme certificate of service',
         portrait: true,
       },
