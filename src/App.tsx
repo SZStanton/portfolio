@@ -1,5 +1,6 @@
 import { lazy, Suspense } from 'react';
 import { Route, Routes } from 'react-router';
+import { Analytics } from '@vercel/analytics/react';
 import { Layout } from './components/layout/Layout';
 import { PageLoader } from './components/ui/PageLoader';
 import { Home } from './pages/Home';
@@ -23,18 +24,21 @@ function App() {
   return (
     // Sits above Layout, so the navbar and footer go too and the loader
     // is the only thing on screen.
-    <Suspense fallback={<PageLoader />}>
-      <Routes>
-        <Route element={<Layout />}>
-          <Route path="/" element={<Home />} />
-          <Route path="/skills" element={<Skills />} />
-          <Route path="/projects" element={<Projects />} />
-          <Route path="/contact" element={<Contact />} />
-          {/* The * catches anything that matched nothing above. */}
-          <Route path="*" element={<NotFound />} />
-        </Route>
-      </Routes>
-    </Suspense>
+    <>
+      <Suspense fallback={<PageLoader />}>
+        <Routes>
+          <Route element={<Layout />}>
+            <Route path="/" element={<Home />} />
+            <Route path="/skills" element={<Skills />} />
+            <Route path="/projects" element={<Projects />} />
+            <Route path="/contact" element={<Contact />} />
+            {/* The * catches anything that matched nothing above. */}
+            <Route path="*" element={<NotFound />} />
+          </Route>
+        </Routes>
+      </Suspense>
+      <Analytics />
+    </>
   );
 }
 
