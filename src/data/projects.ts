@@ -43,7 +43,8 @@ export const projects: Project[] = [
     ],
     repoUrl: 'https://github.com/SZStanton/To-Do-Tasks',
     liveUrl: 'https://to-do-tasks-szstanton.vercel.app/',
-    screenshot: { light: todoLight, dark: todoDark },
+    // 1366x1049
+    screenshot: { light: todoLight, dark: todoDark, ratio: 1.302 },
     apiUrl: 'https://to-do-tasks-api.onrender.com',
   },
   {
@@ -69,7 +70,8 @@ export const projects: Project[] = [
     repoUrl: 'https://github.com/SZStanton/iTunes-Search',
     liveUrl: 'https://itunes-search-szstanton.vercel.app/',
     // knownIssue removed: favourites now persist, so it was out of date.
-    screenshot: { light: itunesLight, dark: itunesDark },
+    // 1440x900
+    screenshot: { light: itunesLight, dark: itunesDark, ratio: 1.6 },
     apiUrl: 'https://itunes-search-api-xojd.onrender.com',
   },
   {
@@ -97,7 +99,8 @@ export const projects: Project[] = [
     ],
     repoUrl: 'https://github.com/SZStanton/Jobs-App',
     liveUrl: 'https://jobs-app-szstanton.vercel.app/',
-    screenshot: { light: jobsLight, dark: jobsDark },
+    // 1280x1026
+    screenshot: { light: jobsLight, dark: jobsDark, ratio: 1.248 },
     apiUrl: 'https://jobs-app-api-ivt0.onrender.com',
   },
   {

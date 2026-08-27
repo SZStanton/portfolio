@@ -85,18 +85,21 @@ function Screenshot({
         {
           '--shot-light': `url(${project.screenshot.light})`,
           '--shot-dark': `url(${project.screenshot.dark})`,
+          '--shot-ratio': String(project.screenshot.ratio),
         } as CSSProperties
       }
-      /* cover so it fills the panel with no empty space, anchored top
-         left because that is where each app's header and main content
-         sit. The mask fades the cropped edge into the card so the cut
-         looks deliberate: bottom on small screens where it crops
-         downwards, right on large where it crops sideways.
+      /* Stacked, the box takes the image's own ratio, so cover has
+         nothing to crop and the whole screenshot shows. Beside the text
+         the height is set by the card instead, so cover crops sideways
+         and the mask fades that edge to make the cut look deliberate.
 
          Hovering the panel itself, not the card, expands it across the
          whole card and lifts it above the text. The fade is dropped at
-         that point, since there is no cropped edge left to disguise. */
-      className="aspect-[16/11] w-full shrink-0 overflow-hidden bg-[image:var(--shot-light)] bg-cover bg-left-top bg-no-repeat [mask-image:linear-gradient(to_bottom,black_80%,transparent)] dark:bg-[image:var(--shot-dark)] lg:absolute lg:inset-y-0 lg:left-0 lg:aspect-auto lg:w-[42%] lg:transition-[width] lg:duration-700 lg:ease-out lg:[mask-image:linear-gradient(to_right,black_80%,transparent)] lg:hover:z-20 lg:hover:w-full lg:hover:[mask-image:none]"
+         that point, since there is no cropped edge left to disguise.
+
+         Covering the Code and Live Demo links is intended: move off the
+         image and they come back. The lightbox carries a live link too. */
+      className="aspect-[var(--shot-ratio)] w-full shrink-0 overflow-hidden bg-[image:var(--shot-light)] bg-cover bg-left-top bg-no-repeat [mask-image:linear-gradient(to_bottom,black_80%,transparent)] dark:bg-[image:var(--shot-dark)] lg:absolute lg:inset-y-0 lg:left-0 lg:aspect-auto lg:w-[42%] lg:transition-[width] lg:duration-700 lg:ease-out lg:[mask-image:linear-gradient(to_right,black_80%,transparent)] lg:hover:z-20 lg:hover:w-full lg:hover:[mask-image:none]"
     />
   );
 }

@@ -29,8 +29,12 @@ export type Project = {
   repoUrl: string;
   knownIssue?: string; // for being upfront about a limitation
 
-  // Both themes, so the shot on the card matches the site around it.
-  screenshot?: { light: string; dark: string };
+  /*
+   * Both themes, so the shot on the card matches the site around it.
+   * ratio is width over height of the image. Stacked layouts size the
+   * box to it, so nothing is cropped or letterboxed.
+   */
+  screenshot?: { light: string; dark: string; ratio: number };
 
   // Backend on Render's free tier, which sleeps when idle. Pinged when
   // the Projects page opens so the demo is awake if anyone clicks.
