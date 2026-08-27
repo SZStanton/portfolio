@@ -1,8 +1,11 @@
 import { ButtonLink } from '../components/ui/Button';
 import { SectionLabel } from '../components/ui/SectionLabel';
+import { useDocumentTitle } from '../hooks/useDocumentTitle';
 
 // Catches any URL that does not match a real page.
 export function NotFound() {
+  useDocumentTitle('Page not found');
+
   return (
     <section className="flex min-h-[60svh] flex-col justify-center py-24">
       <SectionLabel>404</SectionLabel>

@@ -1,8 +1,11 @@
 import { SectionLabel } from '../components/ui/SectionLabel';
 import { TechIcon } from '../components/ui/TechIcon';
 import { skillGroups } from '../data/skills';
+import { useDocumentTitle } from '../hooks/useDocumentTitle';
 
 export function Skills() {
+  useDocumentTitle('Skills');
+
   return (
     <section className="pb-24 pt-16">
       <SectionLabel>Skills</SectionLabel>
