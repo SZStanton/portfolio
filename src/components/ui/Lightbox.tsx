@@ -31,11 +31,17 @@ export function Lightbox({ src, alt, onClose, liveUrl }: Props) {
 
       const first = stops[0];
       const last = stops[stops.length - 1];
+      const active = document.activeElement;
 
-      if (event.shiftKey && document.activeElement === first) {
+      // Clicking the image parks focus on body, which is at neither end of
+      // the trap, so pull it back in before Tab reaches the page behind.
+      if (!dialog.current?.contains(active)) {
+        event.preventDefault();
+        (event.shiftKey ? last : first).focus();
+      } else if (event.shiftKey && active === first) {
         event.preventDefault();
         last.focus();
-      } else if (!event.shiftKey && document.activeElement === last) {
+      } else if (!event.shiftKey && active === last) {
         event.preventDefault();
         first.focus();
       }

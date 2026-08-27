@@ -114,7 +114,9 @@ export function Hero() {
 // Sized by the column width, not fixed pixels, so it scales with the browser.
 function HeroPhoto() {
   return (
-    <div className="relative mx-auto w-full max-w-xs sm:max-w-sm lg:mx-0">
+    // isolate keeps the glow's negative z-index inside this box, instead of
+    // escaping to the root and painting behind the page gradient.
+    <div className="relative isolate mx-auto w-full max-w-xs sm:max-w-sm lg:mx-0">
       {/* Sits behind the figure, hence the negative z and aria-hidden. */}
       <div
         aria-hidden="true"
