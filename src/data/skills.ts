@@ -41,6 +41,7 @@ export const skillGroups: SkillGroup[] = [
       { name: 'Mongoose', tech: 'Mongoose' },
       { name: 'SQL' },
       { name: 'SQLite', tech: 'SQLite' },
+      { name: 'PostgreSQL', tech: 'PostgreSQL', status: 'learning' },
     ],
   },
   {

@@ -14,6 +14,7 @@ import {
   SiMongodb,
   SiMongoose,
   SiNodedotjs,
+  SiPostgresql,
   SiPython,
   SiReact,
   SiReactrouter,
@@ -63,4 +64,5 @@ export const techStyles: Record<string, TechStyle> = {
   Docker: { Icon: SiDocker, color: '#3ba3f0', colorLight: '#0d74c9' },
   Git: { Icon: SiGit, color: '#f05032', colorLight: '#c73110' },
   GitHub: { Icon: SiGithub, color: '#e6e6e6', colorLight: '#1f1f22' },
+  PostgreSQL: { Icon: SiPostgresql, color: '#5fa8dc', colorLight: '#15618f' },
 };
