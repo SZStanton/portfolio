@@ -111,10 +111,20 @@ export function Contact() {
             <label htmlFor="name" className="text-sm font-medium text-heading">
               Name
             </label>
-            {/* register wires the input to the form and its validation. */}
-            <input id="name" {...register('name')} className={fieldStyles} />
+            {/* register wires the input to the form and its validation.
+                aria-describedby ties the error below to the field, so a
+                screen reader reads the reason and not just the label. */}
+            <input
+              id="name"
+              {...register('name')}
+              aria-invalid={errors.name ? true : undefined}
+              aria-describedby={errors.name ? 'name-error' : undefined}
+              className={fieldStyles}
+            />
             {errors.name && (
-              <p className="mt-2 text-sm text-danger">{errors.name.message}</p>
+              <p id="name-error" className="mt-2 text-sm text-danger">
+                {errors.name.message}
+              </p>
             )}
           </div>
 
@@ -126,10 +136,14 @@ export function Contact() {
               id="email"
               type="email"
               {...register('email')}
+              aria-invalid={errors.email ? true : undefined}
+              aria-describedby={errors.email ? 'email-error' : undefined}
               className={fieldStyles}
             />
             {errors.email && (
-              <p className="mt-2 text-sm text-danger">{errors.email.message}</p>
+              <p id="email-error" className="mt-2 text-sm text-danger">
+                {errors.email.message}
+              </p>
             )}
           </div>
 
@@ -144,10 +158,12 @@ export function Contact() {
               id="message"
               rows={6}
               {...register('message')}
+              aria-invalid={errors.message ? true : undefined}
+              aria-describedby={errors.message ? 'message-error' : undefined}
               className={fieldStyles}
             />
             {errors.message && (
-              <p className="mt-2 text-sm text-danger">
+              <p id="message-error" className="mt-2 text-sm text-danger">
                 {errors.message.message}
               </p>
             )}

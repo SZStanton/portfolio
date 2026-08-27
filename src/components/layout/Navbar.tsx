@@ -24,7 +24,7 @@ export function Navbar() {
       {/* items-stretch makes the whole header strip clickable, not just the text. */}
       {/* Right padding reserves the toggle's corner so links never sit under it. */}
       <div className="relative flex h-14 items-stretch pr-14 sm:h-16 sm:pr-16">
-        <nav className="mx-auto flex items-stretch">
+        <nav aria-label="Main" className="mx-auto flex items-stretch">
           <ul className="flex items-stretch">
             {pages.map(link => (
               <li key={link.to}>

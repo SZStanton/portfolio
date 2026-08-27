@@ -17,7 +17,12 @@ export function PageNav() {
     'group flex flex-col gap-1 rounded-lg border border-line bg-surface-raised p-5 shadow-card transition-colors hover:border-accent-soft hover:bg-hover active:border-accent';
 
   return (
-    <nav className="grid gap-3 border-t border-line py-12 sm:grid-cols-2">
+    // Labelled because the navbar is a landmark too, and screen readers
+    // otherwise announce both as an unhelpful "navigation".
+    <nav
+      aria-label="Pagination"
+      className="grid gap-3 border-t border-line py-12 sm:grid-cols-2"
+    >
       {previous ? (
         <Link to={previous.to} className={linkStyles}>
           <span className="flex items-center gap-2 font-display text-xs font-semibold uppercase tracking-[0.2em] text-accent">

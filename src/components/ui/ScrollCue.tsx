@@ -47,7 +47,7 @@ export function ScrollCue({ href, label, fadeAt = 160, className }: Props) {
       ref={ref}
       href={href}
       className={`group flex min-w-64 flex-col items-center gap-1.5 rounded-sm px-16 py-3 font-display text-[0.8125rem] font-semibold uppercase tracking-[0.22em] transition-all duration-300 hover:text-accent ${
-        faded ? 'pointer-events-none opacity-0' : 'opacity-50 hover:opacity-100'
+        faded ? 'pointer-events-none opacity-0' : 'opacity-85 hover:opacity-100'
       } ${className ?? ''}`}
     >
       {label}
