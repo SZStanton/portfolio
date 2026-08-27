@@ -3,8 +3,12 @@ import { LuChevronLeft, LuChevronRight } from 'react-icons/lu';
 import { Link, useLocation } from 'react-router';
 import { pages } from '../../data/navigation';
 
-// How close to the edge the pointer has to get before the arrow shows.
-const EDGE = 90;
+/*
+ * How close to the edge the pointer has to get before the arrow shows.
+ * Wider than the arrow box itself, which reaches 84px and 100px at xl,
+ * so the arrow appears before the pointer arrives rather than under it.
+ */
+const EDGE = 140;
 
 export function EdgeNav() {
   const { pathname } = useLocation();
@@ -50,11 +54,15 @@ function Arrow({ page, side, visible }: ArrowProps) {
     <Link
       to={page.to}
       aria-label={`Go to ${page.label}`}
-      /* Hidden on small screens, where there is no pointer to track.
+      /* lg and up only. Below that the window is narrow enough that the
+         arrows kept appearing while reading, and the content column sits
+         close enough to the edge that they got in the way. Touch has
+         swiping, and everything else has the navbar and the pager.
+
          Fixed width so the chevron sits in the same place whatever the
          label says. Without it the box is as wide as the word, and the
          centred icon shifts between Home and Projects. */
-      className={`fixed top-1/2 z-40 hidden w-32 -translate-y-1/2 flex-col items-center gap-1 px-2 py-44 text-accent transition-all duration-300 md:flex ${
+      className={`fixed top-1/2 z-40 hidden w-20 -translate-y-1/2 flex-col items-center gap-1 px-1 py-44 text-accent transition-all duration-300 lg:flex xl:w-24 ${
         side === 'left' ? 'left-1' : 'right-1'
       } ${
         visible

@@ -11,7 +11,9 @@ export function Navbar() {
   const linkClass = ({ isActive }: { isActive: boolean }) =>
     [
       // Josefin runs light, so caps need a heavier weight to hold up.
-      'relative flex h-full items-center justify-center px-4 font-display text-xs font-semibold uppercase tracking-[0.14em] transition-colors sm:px-7 sm:text-sm',
+      // Tighter type and padding below sm, so all four labels plus the
+      // toggle fit a 320px phone without colliding.
+      'relative flex h-full items-center justify-center px-1.5 font-display text-[0.6875rem] font-semibold uppercase tracking-[0.08em] transition-colors sm:px-7 sm:text-sm sm:tracking-[0.14em]',
       'after:absolute after:inset-x-0 after:bottom-0 after:h-0.5 after:transition-colors',
       isActive
         ? 'text-heading after:bg-accent'
@@ -23,7 +25,9 @@ export function Navbar() {
     <header className="sticky top-0 z-50 border-b border-line bg-surface-raised/80 backdrop-blur">
       {/* items-stretch so the links fill the full header height, which
           makes the whole strip clickable rather than just the text. */}
-      <div className="relative flex h-14 items-stretch sm:h-16">
+      {/* Right padding reserves the toggle's corner, so the centred links
+          are never laid out underneath it on a narrow screen. */}
+      <div className="relative flex h-14 items-stretch pr-14 sm:h-16 sm:pr-16">
         <nav className="mx-auto flex items-stretch">
           <ul className="flex items-stretch">
             {pages.map(link => (
