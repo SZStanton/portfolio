@@ -2,6 +2,7 @@ import { domAnimation, LazyMotion, m, useReducedMotion } from 'motion/react';
 import { useEffect } from 'react';
 import { Outlet, useLocation } from 'react-router';
 import { useArrowNavigation } from '../../hooks/useArrowNavigation';
+import { useSwipeNavigation } from '../../hooks/useSwipeNavigation';
 import { EdgeNav } from './EdgeNav';
 import { Footer } from './Footer';
 import { Navbar } from './Navbar';
@@ -16,6 +17,7 @@ export function Layout() {
   const reduceMotion = useReducedMotion();
 
   useArrowNavigation();
+  useSwipeNavigation();
 
   // Changing route is not a page load, so the scroll position sticks.
   useEffect(() => {

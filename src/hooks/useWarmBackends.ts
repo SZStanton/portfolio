@@ -8,13 +8,19 @@ import { projects } from '../data/projects';
  * by the time someone actually clicks through to it.
  */
 
-// Module level, so it only fires once however many times the page mounts.
-let warmed = false;
+/*
+ * Module level, so bouncing between pages does not re-ping. Stored as a
+ * timestamp rather than a flag because Render puts an instance back to
+ * sleep after about 15 minutes: a plain flag would mean someone who
+ * reads for a while and then returns to this page never wakes them again.
+ */
+let lastWarmed = 0;
+const WARM_AGAIN_AFTER = 10 * 60 * 1000;
 
 export function useWarmBackends() {
   useEffect(() => {
-    if (warmed) return;
-    warmed = true;
+    if (Date.now() - lastWarmed < WARM_AGAIN_AFTER) return;
+    lastWarmed = Date.now();
 
     for (const project of projects) {
       if (!project.apiUrl) continue;
