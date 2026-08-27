@@ -56,7 +56,8 @@ export function Footer() {
         </ul>
       </div>
 
-      <div className="mx-auto max-w-6xl px-6 pb-6 text-xs opacity-70">
+      {/* 85% is the lowest opacity that still clears AA contrast in light mode. */}
+      <div className="mx-auto max-w-6xl px-6 pb-6 text-xs opacity-85">
         <p>
           © {year} Sebastian Stanton. Built with React, TypeScript and Tailwind
           CSS.

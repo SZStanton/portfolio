@@ -14,20 +14,31 @@ export function ScrollCue({ href, label, fadeAt = 160, className }: Props) {
   const [faded, setFaded] = useState(false);
 
   useEffect(() => {
+    let frame = 0;
+
     // Measured off its own position, not page scroll, so every cue fades the same way.
-    const update = () => {
+    const measure = () => {
+      frame = 0;
       const top = ref.current?.getBoundingClientRect().top;
       if (top === undefined) return;
       setFaded(top < window.innerHeight - fadeAt);
     };
 
+    // Scroll fires far more often than the screen redraws and measuring forces a
+    // layout, so it waits for the next frame and drops the events in between.
+    const onScroll = () => {
+      if (frame) return;
+      frame = requestAnimationFrame(measure);
+    };
+
     // passive tells the browser this handler never blocks the scroll.
-    window.addEventListener('scroll', update, { passive: true });
-    window.addEventListener('resize', update);
-    update();
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', onScroll);
+    measure();
     return () => {
-      window.removeEventListener('scroll', update);
-      window.removeEventListener('resize', update);
+      window.removeEventListener('scroll', onScroll);
+      window.removeEventListener('resize', onScroll);
+      if (frame) cancelAnimationFrame(frame);
     };
   }, [fadeAt]);
 
@@ -35,8 +46,11 @@ export function ScrollCue({ href, label, fadeAt = 160, className }: Props) {
     <a
       ref={ref}
       href={href}
+      // Out of the tab order once invisible, so keyboard users do not land
+      // on a focus stop they cannot see.
+      tabIndex={faded ? -1 : undefined}
       className={`group flex min-w-64 flex-col items-center gap-1.5 rounded-sm px-16 py-3 font-display text-[0.8125rem] font-semibold uppercase tracking-[0.22em] transition-all duration-300 hover:text-accent ${
-        faded ? 'pointer-events-none opacity-0' : 'opacity-50 hover:opacity-100'
+        faded ? 'pointer-events-none opacity-0' : 'opacity-85 hover:opacity-100'
       } ${className ?? ''}`}
     >
       {label}

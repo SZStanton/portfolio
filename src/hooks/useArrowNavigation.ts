@@ -15,6 +15,10 @@ export function useArrowNavigation() {
       if (event.metaKey || event.ctrlKey || event.altKey || event.shiftKey)
         return;
 
+      // The lightbox locks body scroll while open, and an arrow would
+      // otherwise change route out from under it.
+      if (document.body.style.overflow === 'hidden') return;
+
       // Arrows belong to the field while someone is typing.
       const target = event.target as HTMLElement | null;
       if (target?.closest('input, textarea, select, [contenteditable="true"]'))

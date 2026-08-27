@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 import { LuExternalLink, LuX } from 'react-icons/lu';
 
 type Props = {
@@ -10,25 +10,63 @@ type Props = {
 };
 
 export function Lightbox({ src, alt, onClose, liveUrl }: Props) {
+  const dialog = useRef<HTMLDivElement>(null);
+
   useEffect(() => {
+    // Whatever was focused before, so it can be handed back on close.
+    const opener = document.activeElement as HTMLElement | null;
+
     const onKey = (event: KeyboardEvent) => {
-      if (event.key === 'Escape') onClose();
+      if (event.key === 'Escape') {
+        onClose();
+        return;
+      }
+      if (event.key !== 'Tab') return;
+
+      // aria-modal only promises this, it does not do it, so Tab is
+      // wrapped by hand to keep focus from reaching the page behind.
+      const stops =
+        dialog.current?.querySelectorAll<HTMLElement>('a[href], button');
+      if (!stops?.length) return;
+
+      const first = stops[0];
+      const last = stops[stops.length - 1];
+      const active = document.activeElement;
+
+      // Clicking the image parks focus on body, which is at neither end of
+      // the trap, so pull it back in before Tab reaches the page behind.
+      if (!dialog.current?.contains(active)) {
+        event.preventDefault();
+        (event.shiftKey ? last : first).focus();
+      } else if (event.shiftKey && active === first) {
+        event.preventDefault();
+        last.focus();
+      } else if (!event.shiftKey && active === last) {
+        event.preventDefault();
+        first.focus();
+      }
     };
+
     window.addEventListener('keydown', onKey);
 
     // Stop the page behind scrolling while this is open.
     const previous = document.body.style.overflow;
     document.body.style.overflow = 'hidden';
 
+    // Move focus in, so the dialog is announced and Tab starts inside it.
+    dialog.current?.querySelector('button')?.focus();
+
     return () => {
       window.removeEventListener('keydown', onKey);
       document.body.style.overflow = previous;
+      opener?.focus();
     };
   }, [onClose]);
 
   return (
     // Backdrop click closes it; the image stops that click bubbling up.
     <div
+      ref={dialog}
       role="dialog"
       aria-modal="true"
       aria-label={alt}
