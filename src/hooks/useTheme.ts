@@ -2,8 +2,7 @@ import { useEffect, useState } from 'react';
 
 export type Theme = 'light' | 'dark';
 
-// The dark class goes on <html>, which sits outside React's root, so it
-// has to be set directly. Doing it in an effect keeps that out of render.
+// dark goes on <html>, outside React's root, so it's set directly in an effect.
 
 // The script in index.html already worked this out, so just read it back.
 function getInitialTheme(): Theme {
@@ -16,8 +15,7 @@ export function useTheme() {
   useEffect(() => {
     const root = document.documentElement;
 
-    // Without this every transition on the page animates from the old
-    // palette to the new one, which reads as a flash.
+    // Without this every transition animates old palette to new, reading as a flash.
     root.classList.add('no-transitions');
     root.classList.toggle('dark', theme === 'dark');
 

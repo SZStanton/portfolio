@@ -1,5 +1,4 @@
-// Shown while a page chunk downloads, which only happens the first time
-// a tab is opened. Covers the screen so nothing else renders behind it.
+// Shown once per tab while a page chunk downloads, covering the screen underneath.
 export function PageLoader() {
   return (
     <div

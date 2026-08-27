@@ -1,12 +1,12 @@
 import { lazy, Suspense } from 'react';
 import { Route, Routes } from 'react-router';
 import { Analytics } from '@vercel/analytics/react';
+import { SpeedInsights } from '@vercel/speed-insights/react';
 import { Layout } from './components/layout/Layout';
 import { PageLoader } from './components/ui/PageLoader';
 import { Home } from './pages/Home';
 
-// Home loads up front, the rest only when visited. Keeps the contact
-// form's validation libraries off the landing page.
+// Home loads up front; the rest loads on visit, keeping validation libs off it.
 const Skills = lazy(() =>
   import('./pages/Skills').then(m => ({ default: m.Skills })),
 );
@@ -22,8 +22,7 @@ const NotFound = lazy(() =>
 
 function App() {
   return (
-    // Sits above Layout, so the navbar and footer go too and the loader
-    // is the only thing on screen.
+    // Wraps Layout, so navbar and footer wait too and the loader is all that shows.
     <>
       <Suspense fallback={<PageLoader />}>
         <Routes>
@@ -37,7 +36,9 @@ function App() {
           </Route>
         </Routes>
       </Suspense>
+      {/* Both report to /_vercel/, excluded from vercel.json's SPA rewrite. */}
       <Analytics />
+      <SpeedInsights />
     </>
   );
 }

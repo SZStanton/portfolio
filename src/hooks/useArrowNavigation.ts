@@ -11,7 +11,7 @@ export function useArrowNavigation() {
     function onKeyDown(event: KeyboardEvent) {
       if (event.key !== 'ArrowLeft' && event.key !== 'ArrowRight') return;
 
-      // Leave shortcuts like alt+left, which is browser back, alone.
+      // Skips modified shortcuts like alt+left, which is browser back.
       if (event.metaKey || event.ctrlKey || event.altKey || event.shiftKey)
         return;
 

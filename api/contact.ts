@@ -2,8 +2,7 @@ import { resolveMx } from 'node:dns/promises';
 import type { VercelRequest, VercelResponse } from '@vercel/node';
 import { z } from 'zod';
 
-// Mirrors src/lib/schemas.ts. Vercel compiles this file on its own and
-// cannot import from outside api/, so keep the two in step by hand.
+// Mirrors src/lib/schemas.ts by hand; this file can't import from outside api/.
 const contactSchema = z.object({
   name: z.string().trim().min(2),
   email: z.email(),
@@ -13,15 +12,12 @@ const contactSchema = z.object({
 
 const RESEND_ENDPOINT = 'https://api.resend.com/emails';
 
-// Crude rate limit: a few messages per address per window. Held in memory,
-// so it resets on a cold start and is not shared between instances. It stops
-// a simple flood, not a determined one. See the note in vercel.json.
+// Crude in-memory rate limit; resets on a cold start and stops a flood, not a determined attacker.
 const WINDOW_MS = 10 * 60 * 1000;
 const MAX_PER_WINDOW = 3;
 const seen = new Map<string, number[]>();
 
-// Checks the domain can receive mail at all. Catches typos and made-up
-// domains. It cannot tell whether the mailbox exists or who owns it.
+// Checks the domain can receive mail; can't confirm the mailbox itself exists.
 async function domainAcceptsMail(email: string) {
   const domain = email.split('@')[1];
   if (!domain) return false;
@@ -41,9 +37,7 @@ function tooMany(key: string) {
   return recent.length > MAX_PER_WINDOW;
 }
 
-// Resend lets you send from this shared address without owning a domain,
-// as long as the recipient is your own account email. Swap it for an
-// address on a verified domain if one is ever set up.
+// Works via Resend's shared address until a verified domain exists to send from instead.
 const DEFAULT_FROM = 'Portfolio <onboarding@resend.dev>';
 
 export default async function handler(req: VercelRequest, res: VercelResponse) {
@@ -51,8 +45,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     return res.status(405).json({ error: 'Method not allowed' });
   }
 
-  // The browser already checked this, but anything can post here,
-  // so the same schema runs again on the server.
+  // The browser already checked this, but anything can POST here, so it re-validates.
   const parsed = contactSchema.safeParse(req.body);
   if (!parsed.success) {
     return res
@@ -65,8 +58,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     return res.status(200).json({ ok: true });
   }
 
-  // Vercel puts the caller's address here. Fall back to the email so a
-  // missing header does not switch the limit off entirely.
+  // Vercel puts the caller's IP here; falls back to email if the header's missing.
   const caller =
     (req.headers['x-forwarded-for'] as string | undefined)
       ?.split(',')[0]
@@ -88,8 +80,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
   const to = process.env.CONTACT_TO_EMAIL;
 
   if (!apiKey || !to) {
-    // Logged for the Vercel dashboard, but never sent back to the
-    // visitor, since config problems are not their business.
+    // Logged for the dashboard only; a visitor doesn't need to see config errors.
     console.error('Missing RESEND_API_KEY or CONTACT_TO_EMAIL');
     return res.status(500).json({ error: 'Email is not set up correctly' });
   }
@@ -109,8 +100,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
         // Makes Reply in the mail client answer the sender, not Resend.
         reply_to: email,
         subject: `Portfolio message from ${name}`,
-        // The warning is deliberate: anyone can type any address into a
-        // form, so Reply-To is only ever as good as what they entered.
+        // The warning is deliberate: Reply-To is only as good as what the sender typed.
         text: [
           `From: ${name} <${email}>`,
           '',

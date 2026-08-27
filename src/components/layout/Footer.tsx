@@ -23,14 +23,12 @@ export function Footer() {
 
   return (
     <footer className="mt-4">
-      {/* Gold rule that fades out at both ends, so the footer is separated
-          by something with a bit of character rather than a flat line. */}
+      {/* Gold rule fading at both ends, more character than a flat line. */}
       <div className="mx-auto max-w-6xl px-6">
         <div className="h-px bg-gradient-to-r from-transparent via-accent/40 to-transparent" />
       </div>
 
-      {/* Three columns so the tagline sits dead centre, with an empty
-          first column balancing the socials. Stacks on small screens. */}
+      {/* Three columns centre the tagline; an empty first column balances the socials. */}
       <div className="mx-auto grid max-w-6xl gap-4 px-6 py-6 sm:grid-cols-3 sm:items-center">
         <span className="hidden sm:block" aria-hidden="true" />
 

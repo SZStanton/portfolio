@@ -6,12 +6,12 @@ import { useTheme } from '../../hooks/useTheme';
 export function Navbar() {
   const { theme, toggleTheme } = useTheme();
 
-  // NavLink says whether this is the current page. Current one gets a
-  // gold underline, the rest sit a step below.
+  // NavLink flags the current page with a gold underline; others sit a step below.
   const linkClass = ({ isActive }: { isActive: boolean }) =>
     [
       // Josefin runs light, so caps need a heavier weight to hold up.
-      'relative flex h-full items-center justify-center px-4 font-display text-xs font-semibold uppercase tracking-[0.14em] transition-colors sm:px-7 sm:text-sm',
+      // Smaller type and padding below sm, so labels and the toggle fit a 320px phone.
+      'relative flex h-full items-center justify-center px-1.5 font-display text-[0.6875rem] font-semibold uppercase tracking-[0.08em] transition-colors sm:px-7 sm:text-sm sm:tracking-[0.14em]',
       'after:absolute after:inset-x-0 after:bottom-0 after:h-0.5 after:transition-colors',
       isActive
         ? 'text-heading after:bg-accent'
@@ -21,9 +21,9 @@ export function Navbar() {
   return (
     // The /80 and backdrop-blur let content show softly through as it scrolls under.
     <header className="sticky top-0 z-50 border-b border-line bg-surface-raised/80 backdrop-blur">
-      {/* items-stretch so the links fill the full header height, which
-          makes the whole strip clickable rather than just the text. */}
-      <div className="relative flex h-14 items-stretch sm:h-16">
+      {/* items-stretch makes the whole header strip clickable, not just the text. */}
+      {/* Right padding reserves the toggle's corner so links never sit under it. */}
+      <div className="relative flex h-14 items-stretch pr-14 sm:h-16 sm:pr-16">
         <nav className="mx-auto flex items-stretch">
           <ul className="flex items-stretch">
             {pages.map(link => (
@@ -37,8 +37,7 @@ export function Navbar() {
           </ul>
         </nav>
 
-        {/* Pinned to the corner and out of the flex row, so the links stay
-            centred on the page rather than centred in what is left over. */}
+        {/* Pinned to the corner, out of the flex row, so the links stay centred on the page. */}
         <button
           type="button"
           onClick={toggleTheme}

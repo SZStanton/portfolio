@@ -4,8 +4,7 @@ import { LuChevronDown } from 'react-icons/lu';
 type Props = {
   href: string;
   label: string;
-  // How far the cue climbs from the bottom of the window before it fades.
-  // Bigger number means it hangs around longer.
+  // Distance from the bottom before the cue fades; bigger means it lingers longer.
   fadeAt?: number;
   className?: string;
 };
@@ -15,15 +14,14 @@ export function ScrollCue({ href, label, fadeAt = 160, className }: Props) {
   const [faded, setFaded] = useState(false);
 
   useEffect(() => {
-    // Measured off its own position rather than the page scroll, so a cue
-    // further down the page fades on the same short scroll as the first one.
+    // Measured off its own position, not page scroll, so every cue fades the same way.
     const update = () => {
       const top = ref.current?.getBoundingClientRect().top;
       if (top === undefined) return;
       setFaded(top < window.innerHeight - fadeAt);
     };
 
-    // passive tells the browser we will not block the scroll.
+    // passive tells the browser this handler never blocks the scroll.
     window.addEventListener('scroll', update, { passive: true });
     window.addEventListener('resize', update);
     update();

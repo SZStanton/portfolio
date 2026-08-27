@@ -14,6 +14,7 @@ import {
   SiMongodb,
   SiMongoose,
   SiNodedotjs,
+  SiPostgresql,
   SiPython,
   SiReact,
   SiReactrouter,
@@ -23,16 +24,16 @@ import {
   SiVite,
 } from 'react-icons/si';
 
-// Logos and colours, looked up by the names used in projects.ts and skills.ts.
-// color is for dark mode, colorLight for the pale background.
+// Logos and colours, looked up by name from projects.ts and skills.ts.
+// color is for dark mode; colorLight is for the light background.
 export type TechStyle = {
   Icon: IconType;
   color: string;
   colorLight: string;
 };
 
-// Light values are saturated rather than just dark, so they stay rich
-// against the off-white. The near-black brands go the other way round.
+// Light values are saturated, not just darker, to stay rich against off-white.
+// Near-black brands (Express, GitHub) flip that pattern instead.
 export const techStyles: Record<string, TechStyle> = {
   React: { Icon: SiReact, color: '#61dafb', colorLight: '#098caa' },
   'React Router': {
@@ -63,4 +64,5 @@ export const techStyles: Record<string, TechStyle> = {
   Docker: { Icon: SiDocker, color: '#3ba3f0', colorLight: '#0d74c9' },
   Git: { Icon: SiGit, color: '#f05032', colorLight: '#c73110' },
   GitHub: { Icon: SiGithub, color: '#e6e6e6', colorLight: '#1f1f22' },
+  PostgreSQL: { Icon: SiPostgresql, color: '#5fa8dc', colorLight: '#15618f' },
 };

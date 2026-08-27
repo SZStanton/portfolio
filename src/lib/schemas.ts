@@ -1,7 +1,6 @@
 import { z } from 'zod';
 
-// Browser-side rules. api/contact.ts repeats them and re-checks on the
-// server, and cannot import this file, so change both together.
+// Browser-side rules, mirrored in api/contact.ts since it can't import this file.
 export const contactSchema = z.object({
   name: z.string().trim().min(2, 'Please enter your name'),
   email: z.email('Please enter a valid email address'),
@@ -14,6 +13,5 @@ export const contactSchema = z.object({
   website: z.string().max(0).optional(),
 });
 
-// Derives the TypeScript type from the schema, so the rules and the
-// type can never disagree.
+// Derives the TypeScript type from the schema, so the two can't disagree.
 export type ContactFormValues = z.infer<typeof contactSchema>;

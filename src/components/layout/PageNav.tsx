@@ -2,8 +2,7 @@ import { LuArrowLeft, LuArrowRight } from 'react-icons/lu';
 import { Link, useLocation } from 'react-router';
 import { pages } from '../../data/navigation';
 
-// Previous and next links at the foot of every page, so moving on
-// never means going back up to the navbar.
+// Previous/next links at the page foot, so moving on skips the navbar.
 export function PageNav() {
   const { pathname } = useLocation();
   const index = pages.findIndex(page => page.to === pathname);

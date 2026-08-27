@@ -1,5 +1,4 @@
-// The one place pages are listed. The navbar, the footer and the
-// previous/next pager all read from here, so they stay in step.
+// The one place pages are listed; navbar, footer and pager all read from here.
 // Order matters: it decides what previous and next mean.
 export const pages = [
   { to: '/', label: 'Home' },

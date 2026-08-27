@@ -1,8 +1,11 @@
 import { SectionLabel } from '../components/ui/SectionLabel';
 import { TechIcon } from '../components/ui/TechIcon';
 import { skillGroups } from '../data/skills';
+import { useDocumentTitle } from '../hooks/useDocumentTitle';
 
 export function Skills() {
+  useDocumentTitle('Skills');
+
   return (
     <section className="pb-24 pt-16">
       <SectionLabel>Skills</SectionLabel>
@@ -29,8 +32,7 @@ export function Skills() {
               {group.skills.map(skill => (
                 <li
                   key={skill.name}
-                  // active: covers a finger held on the chip. select-none and
-                  // touch-callout stop that press selecting the text instead.
+                  // active: covers a finger held down; select-none stops it selecting text.
                   className="flex select-none items-center gap-2 rounded-full border border-line bg-surface-raised px-3.5 py-1.5 text-[0.9375rem] transition-colors [-webkit-touch-callout:none] hover:border-accent-soft active:border-accent"
                 >
                   {skill.tech && (

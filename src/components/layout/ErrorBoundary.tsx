@@ -3,12 +3,8 @@ import { Component, type ErrorInfo, type ReactNode } from 'react';
 type Props = { children: ReactNode };
 type State = { failed: boolean };
 
-/*
- * Catches a crash anywhere below it. Without one, React unmounts the whole
- * tree on an error and the visitor gets a blank white page.
- *
- * Has to be a class. Hooks cannot do this, there is no function equivalent.
- */
+// Catches a crash below it; without one React unmounts the tree to a blank page.
+// Has to be a class: hooks have no equivalent for this.
 export class ErrorBoundary extends Component<Props, State> {
   state: State = { failed: false };
 
@@ -36,8 +32,7 @@ export class ErrorBoundary extends Component<Props, State> {
           <p className="mt-4">
             Sorry about that. Reloading the page usually sorts it.
           </p>
-          {/* A plain link, not a router one, so it works even if
-              routing is what broke. */}
+          {/* A plain link, not a router one, so it still works if routing is what broke. */}
           <a
             href="/"
             className="mt-8 inline-flex rounded-sm bg-heading px-7 py-3.5 font-display text-sm font-semibold uppercase tracking-[0.15em] text-surface"

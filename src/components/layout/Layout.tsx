@@ -2,6 +2,7 @@ import { domAnimation, LazyMotion, m, useReducedMotion } from 'motion/react';
 import { useEffect } from 'react';
 import { Outlet, useLocation } from 'react-router';
 import { useArrowNavigation } from '../../hooks/useArrowNavigation';
+import { useSwipeNavigation } from '../../hooks/useSwipeNavigation';
 import { EdgeNav } from './EdgeNav';
 import { Footer } from './Footer';
 import { Navbar } from './Navbar';
@@ -11,11 +12,11 @@ import { PageNav } from './PageNav';
 export function Layout() {
   const { pathname } = useLocation();
 
-  // Set when the visitor's system asks for less animation. Drop the
-  // movement for them, keep the fade.
+  // Set when the OS asks for less motion; drop movement but keep the fade.
   const reduceMotion = useReducedMotion();
 
   useArrowNavigation();
+  useSwipeNavigation();
 
   // Changing route is not a page load, so the scroll position sticks.
   useEffect(() => {
@@ -38,12 +39,12 @@ export function Layout() {
       <main id="main" className="mx-auto max-w-5xl px-6">
         {/* LazyMotion and m load only the features used, not all of Motion. */}
         <LazyMotion features={domAnimation}>
-          {/* New key on each route remounts this, which replays the fade. */}
+          {/* New key per route remounts this, replaying the fade between pages. */}
           <m.div
             key={pathname}
-            initial={{ opacity: 0, y: reduceMotion ? 0 : 8 }}
+            initial={{ opacity: 0, y: reduceMotion ? 0 : 14 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.3, ease: 'easeOut' }}
+            transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
           >
             <Outlet />
             <PageNav />
