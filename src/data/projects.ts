@@ -210,7 +210,7 @@ export const projects: Project[] = [
       'Resource caching via a service worker for faster loads',
     ],
     repoUrl: 'https://github.com/SZStanton/E-Commerce',
-    liveUrl: 'https://szstanton.github.io/E-Commerce/',
+    liveUrl: 'https://szstanton.github.io/e-commerce/',
   },
   {
     id: 'chefs-favorites',
@@ -232,6 +232,6 @@ export const projects: Project[] = [
       { text: 'Show the full recipe and ingredient list for each suggestion' },
     ],
     repoUrl: 'https://github.com/SZStanton/Chefs-Favorites',
-    liveUrl: 'https://szstanton.github.io/Chefs-Favorites/',
+    liveUrl: 'https://szstanton.github.io/chefs-favorites/',
   },
 ];
