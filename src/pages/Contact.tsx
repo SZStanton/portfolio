@@ -68,8 +68,7 @@ export function Contact() {
       });
 
       if (!response.ok) {
-        // Logged rather than shown, so the real reason is available in
-        // the browser console without putting it in front of a visitor.
+        // Logged, not shown, so the real reason stays in the console, off the visitor's screen.
         console.error(
           'Contact form failed',
           response.status,
@@ -154,8 +153,7 @@ export function Contact() {
             )}
           </div>
 
-          {/* Honeypot. Off screen rather than display:none, which bots skip.
-              tabIndex -1 and aria-hidden keep it away from real users. */}
+          {/* Honeypot, off-screen not display:none, which bots skip; hidden from real users too. */}
           <input
             {...register('website')}
             type="text"
@@ -194,8 +192,7 @@ export function Contact() {
 
           <ul className="mt-5 space-y-3">
             {elsewhere.map(({ href, label, value, Icon, copyable }) => (
-              // The copy button sits beside the link rather than inside it,
-              // since a button nested in a link is invalid and unclickable.
+              // Copy button sits beside the link, since nesting a button in it is invalid.
               <li
                 key={label}
                 className="flex items-center gap-1 rounded-lg border border-line bg-surface-raised pr-2 shadow-card transition-colors hover:border-accent-soft active:border-accent"

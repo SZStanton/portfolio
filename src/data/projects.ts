@@ -7,8 +7,8 @@ import todoDark from '../assets/images/to-do-tasks/dashboard-dark.jpg';
 import todoLight from '../assets/images/to-do-tasks/dashboard-light.jpg';
 import type { Project } from '../types';
 
-// Typing the array is what turns a missing or misspelled field into a build
-// error. Order here is the order they appear on the page.
+// Typed, so a missing or misspelled field fails the build.
+// Order here is the order projects appear on the page.
 export const projects: Project[] = [
   {
     id: 'to-do-tasks',
@@ -109,8 +109,7 @@ export const projects: Project[] = [
     description:
       'A React app for creating and tracking personal and professional events, from meetings and appointments to social plans. Built to get comfortable with shared state across a whole app using Context API, with no backend involved.',
     kind: 'front-end',
-    // Moved out of featured: no screenshot yet, so it looked thin
-    // beside the three that have one.
+    // Moved out of featured: no screenshot yet, so it looked thin beside the rest.
     group: 'other',
     capstone: true,
     stack: ['React', 'Vite', 'Context API', 'Bootstrap'],

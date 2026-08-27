@@ -1,7 +1,6 @@
 import type { SkillGroup } from '../types';
 
-// Groupings follow the CV so the two match. `tech` points at data/tech.ts
-// for the logo, and is left off for anything without one.
+// Groupings follow the CV; `tech` points at data/tech.ts and is left off without a logo.
 export const skillGroups: SkillGroup[] = [
   {
     title: 'Languages',

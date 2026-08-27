@@ -3,8 +3,7 @@ import { Link } from 'react-router';
 
 type Variant = 'primary' | 'secondary';
 
-// The outline is always there but transparent, so hover only animates its
-// colour. Adding it on hover instead made it fade in from the text colour.
+// Outline stays transparent until hover, so only its colour animates in.
 const base =
   'group inline-flex items-center justify-center gap-2 rounded-sm px-7 py-3.5 font-display text-sm font-semibold uppercase tracking-[0.15em] outline outline-1 outline-offset-[3px] outline-transparent transition-all duration-200 hover:-translate-y-0.5 hover:outline-accent/60 active:translate-y-0 disabled:pointer-events-none disabled:opacity-50';
 

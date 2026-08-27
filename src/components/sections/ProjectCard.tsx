@@ -9,8 +9,7 @@ import type { Project, ProjectKind } from '../../types';
 import { Lightbox } from '../ui/Lightbox';
 import { TechIcon } from '../ui/TechIcon';
 
-// Record means every kind has to have a label, so adding one to the
-// type without labelling it fails the build.
+// Record requires a label per kind, so an unlabelled one fails the build.
 const kindLabels: Record<ProjectKind, string> = {
   'full-stack': 'Full Stack',
   'front-end': 'Front End',
@@ -61,12 +60,7 @@ function Links({ project }: { project: Project }) {
   );
 }
 
-/*
- * A background image rather than an <img> on purpose. Each project has a
- * light and a dark shot, and a browser only downloads the background whose
- * rule actually applies, so the other theme's file is never fetched.
- * Two <img> tags with one hidden would download both.
- */
+// Background image, not <img>, so only the active theme's file downloads.
 function Screenshot({
   project,
   onOpen,
@@ -88,17 +82,9 @@ function Screenshot({
           '--shot-ratio': String(project.screenshot.ratio),
         } as CSSProperties
       }
-      /* Stacked, the box takes the image's own ratio, so cover has
-         nothing to crop and the whole screenshot shows. Beside the text
-         the height is set by the card instead, so cover crops sideways
-         and the mask fades that edge to make the cut look deliberate.
-
-         Hovering the panel itself, not the card, expands it across the
-         whole card and lifts it above the text. The fade is dropped at
-         that point, since there is no cropped edge left to disguise.
-
-         Covering the Code and Live Demo links is intended: move off the
-         image and they come back. The lightbox carries a live link too. */
+      /* Stacked: the box takes the image's ratio, so cover crops nothing.
+         Beside the text: cover crops to the card height, masked at the edge.
+         Hover: expands over the full card on purpose, covering the links. */
       className="aspect-[var(--shot-ratio)] w-full shrink-0 overflow-hidden bg-[image:var(--shot-light)] bg-cover bg-left-top bg-no-repeat [mask-image:linear-gradient(to_bottom,black_80%,transparent)] dark:bg-[image:var(--shot-dark)] lg:absolute lg:inset-y-0 lg:left-0 lg:aspect-auto lg:w-[42%] lg:transition-[width] lg:duration-700 lg:ease-out lg:[mask-image:linear-gradient(to_right,black_80%,transparent)] lg:hover:z-20 lg:hover:w-full lg:hover:[mask-image:none]"
     />
   );
@@ -106,8 +92,7 @@ function Screenshot({
 
 // The four capstones. Everything in the data gets shown.
 export function FeaturedProjectCard({ project }: { project: Project }) {
-  // Which shot to enlarge. Read at click time rather than tracked, since
-  // the theme cannot change between the click and the box opening.
+  // Chosen at click time, since the theme cannot change before the box opens.
   const [enlarged, setEnlarged] = useState<string | null>(null);
 
   const openLightbox = () => {
@@ -127,9 +112,7 @@ export function FeaturedProjectCard({ project }: { project: Project }) {
           <Screenshot project={project} onOpen={openLightbox} />
         )}
 
-        {/* Margin holds the text clear of the absolutely placed panel, so
-            the panel can widen over it without moving anything. relative
-            keeps the text above the panel, which slides in behind it. */}
+        {/* Margin clears the panel; relative keeps the text above it as it widens. */}
         <div
           className={`relative flex flex-1 flex-col p-6 sm:p-7 ${
             project.screenshot ? 'lg:ml-[42%] lg:p-8' : ''
@@ -171,8 +154,7 @@ export function FeaturedProjectCard({ project }: { project: Project }) {
             </p>
           )}
 
-          {/* Always open. As a collapsible it changed the card height,
-              which resized the screenshot panel beside it. */}
+          {/* Always open: a collapsible resized the card and the panel beside it. */}
           {project.futureImprovements && (
             <div className="mt-5">
               <p className="font-display text-xs font-semibold uppercase tracking-[0.15em] text-heading">

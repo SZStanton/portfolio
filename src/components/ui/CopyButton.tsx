@@ -8,13 +8,11 @@ type Props = {
 
 type State = 'idle' | 'copied' | 'failed';
 
-// Copies a value and confirms it briefly. Saves anyone the select-and-copy
-// dance, which is friction on the one action the page is asking for.
+// Copies a value and confirms it briefly, skipping the select-and-copy dance.
 export function CopyButton({ value, label }: Props) {
   const [state, setState] = useState<State>('idle');
 
-  // Clears the confirmation, and cancels itself if the component goes
-  // away first so it cannot set state on something unmounted.
+  // Clears the confirmation; cancels first if the component unmounts.
   useEffect(() => {
     if (state === 'idle') return;
     const timer = setTimeout(() => setState('idle'), 2000);
@@ -26,11 +24,7 @@ export function CopyButton({ value, label }: Props) {
       await navigator.clipboard.writeText(value);
       setState('copied');
     } catch {
-      /*
-       * Refused, usually an insecure context or a denied permission.
-       * Say so rather than doing nothing, otherwise the visitor pastes
-       * whatever was on the clipboard before and thinks it worked.
-       */
+      // Reported rather than ignored, so a stale clipboard paste isn't mistaken for success.
       setState('failed');
     }
   };

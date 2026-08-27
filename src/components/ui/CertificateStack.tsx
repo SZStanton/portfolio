@@ -13,14 +13,13 @@ type Props = {
   onOpen: (image: Certificate) => void;
 };
 
-// Two standard boxes, one per orientation, so nothing is letterboxed
-// into a shape that does not suit it. No padding, so the picture fills
-// the frame, and no overflow clip, so it can grow past it on hover.
+// One box shape per orientation, so nothing is letterboxed into the wrong one.
+// No padding, so the picture fills the frame; no clip, so it grows past it on hover.
 const box =
   'group relative block rounded-md border border-line bg-surface-raised shadow-card transition-colors duration-300 hover:z-10 hover:border-accent-soft active:z-10 active:border-accent';
 
 export function CertificateStack({ images, onOpen }: Props) {
-  // Which one is on top. The first in the list starts in front.
+  // Which certificate is on top; the first in the list starts in front.
   const [index, setIndex] = useState(0);
   const current = images[index];
   const size = current.portrait ? 'h-52 w-40' : 'h-36 w-52';
@@ -28,8 +27,7 @@ export function CertificateStack({ images, onOpen }: Props) {
   return (
     <div className="flex flex-col items-start gap-2 md:items-end">
       <div className="relative">
-        {/* Sits behind and slightly rotated, so a stack of two reads as
-            a stack rather than as one thumbnail. */}
+        {/* Sits behind, slightly rotated, so two read as a stack, not one thumbnail. */}
         {images.length > 1 && (
           <span
             aria-hidden="true"
@@ -57,8 +55,7 @@ export function CertificateStack({ images, onOpen }: Props) {
 
       {/* Gold diamonds to switch, one per certificate. */}
       {images.length > 1 && (
-        // Negative margin keeps the padded hit areas from pushing the
-        // diamonds apart visually.
+        // Negative margin stops the padded hit areas pushing the diamonds apart.
         <div className="-m-2 flex items-center">
           {images.map((image, i) => (
             <button

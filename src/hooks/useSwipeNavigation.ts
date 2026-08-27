@@ -2,17 +2,12 @@ import { useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router';
 import { pages } from '../data/navigation';
 
-/*
- * Swiping left and right changes page on touch devices, which have no
- * pointer and so never see the edge arrows.
- */
+// Swipes change page on touch devices, which have no pointer for the arrows.
 
-// How far a finger has to travel before it counts. Long on purpose, so a
-// small drag while reading does not throw you onto another page.
+// Distance a finger must travel before it counts; long enough that reading-drift will not navigate.
 const DISTANCE = 90;
 
-// Horizontal has to clearly beat vertical, otherwise a slightly slanted
-// scroll would navigate.
+// Horizontal must clearly beat vertical, or a slanted scroll would navigate.
 const DIRECTION_RATIO = 1.6;
 
 export function useSwipeNavigation() {
@@ -36,7 +31,7 @@ export function useSwipeNavigation() {
       if (!tracking) return;
       tracking = false;
 
-      // The lightbox locks body scroll while open, so the swipe is its own.
+      // The lightbox locks body scroll while open, so swipes are ignored then.
       if (document.body.style.overflow === 'hidden') return;
 
       const touch = event.changedTouches[0];
@@ -54,7 +49,7 @@ export function useSwipeNavigation() {
       if (next) navigate(next.to);
     }
 
-    // passive, since this never blocks the scroll it is measuring.
+    // passive, since this handler never blocks the scroll it reads.
     window.addEventListener('touchstart', onStart, { passive: true });
     window.addEventListener('touchend', onEnd, { passive: true });
     return () => {

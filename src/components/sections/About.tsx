@@ -1,6 +1,5 @@
 import { useState } from 'react';
-// Imported rather than linked from public, so Vite fingerprints them for
-// caching and a missing file fails the build instead of 404ing quietly.
+// Imported, not in public, so Vite fingerprints them and a missing file fails the build.
 import fullStackBootcamp from '../../assets/images/full-stack-bootcamp.jpg';
 import medscheme from '../../assets/images/medscheme.jpeg';
 import pythonDeveloper from '../../assets/images/python-developer.jpg';
@@ -19,7 +18,6 @@ const facts = [
 ];
 
 // The route from admin into development, most recent first.
-// Images live in public/, so they are referenced from the site root.
 const timeline = [
   {
     period: 'Now',
@@ -92,8 +90,7 @@ export function About() {
   const [open, setOpen] = useState<Certificate | null>(null);
 
   return (
-    // scroll-mt keeps the heading clear of the sticky header when
-    // the hero button jumps down to here.
+    // scroll-mt keeps the heading clear of the sticky header when jumped to.
     <section id="about" className="scroll-mt-20 border-t border-line py-24">
       <SectionLabel>About</SectionLabel>
 

@@ -27,8 +27,7 @@ export function Lightbox({ src, alt, onClose, liveUrl }: Props) {
   }, [onClose]);
 
   return (
-    // The backdrop closes it. The image below stops the click bubbling
-    // up, so clicking the image itself does not.
+    // Backdrop click closes it; the image stops that click bubbling up.
     <div
       role="dialog"
       aria-modal="true"
@@ -46,8 +45,7 @@ export function Lightbox({ src, alt, onClose, liveUrl }: Props) {
         <LuX className="size-6" />
       </button>
 
-      {/* Wrapper stops the click bubbling, so clicking the image or the
-          button does not close the box, but the backdrop still does. */}
+      {/* Wrapper stops the click bubbling, so the image or button won't close it. */}
       <div
         onClick={event => event.stopPropagation()}
         className="flex max-h-[86vh] flex-col items-center gap-4"

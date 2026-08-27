@@ -1,7 +1,6 @@
 @import 'tailwindcss';
 
-/* Switch dark: styles on a `dark` class on <html>, instead of the OS setting.
-   This is what lets the navbar button control the theme. */
+/* dark: styles key off a class on <html>, not the OS setting, so the toggle controls it. */
 @custom-variant dark (&:where(.dark, .dark *));
 
 /* ---------------------------------------------------------------
@@ -18,8 +17,8 @@
    danger         form errors and anything that went wrong
    success        form sent, and anything that worked
 
-   surface-gradient sits on top of surface: a faint gold glow at the top
-   of the page over a soft vertical shift. Subtle on purpose.
+   surface-gradient layers over surface: a faint gold glow with a soft
+   vertical shift.
    --------------------------------------------------------------- */
 
 :root {
@@ -30,19 +29,16 @@
   --heading: #1c1b1a;
   --body: #55534e;
   --hover: #eceae5;
-  /* Deeper bronze than the dark theme uses. A bright gold on this
-     background looks washed out and fails contrast. */
+  /* Deeper bronze than dark mode; a bright gold here looks washed out. */
   --accent: #ae8513;
   --accent-soft: #d8b564;
   --danger: #a8321f;
   --success: #2f6b3f;
-  /* Light mode gets depth from shadow, since a raised surface cannot be
-     much lighter than an almost-white page. */
+  /* Light mode gets depth from shadow; a raised surface can't get much lighter than the page. */
   --card-shadow:
     0 1px 2px rgb(28 27 26 / 0.05), 0 10px 24px -14px rgb(28 27 26 / 0.22);
-  /* Three layers, front to back: gold glow at the top, a soft shadow
-     rising from the bottom, then the base shift. Both effects are kept
-     near their own edge so the middle of the page stays clean white. */
+  /* Three layers: top glow, bottom shadow, base shift; both kept near their
+     own edge so the middle stays clean. */
   --surface-gradient:
     radial-gradient(
       900px 260px at 50% -8%,
@@ -53,8 +49,7 @@
     linear-gradient(180deg, #fefefd 0%, #fdfdfb 84%, #f2f0ea 100%);
 }
 
-/* Same names, different values. Nothing using them needs to know
-   which theme is active. */
+/* Same names, different values; nothing using them needs to know which theme is active. */
 .dark {
   /* Dark: near-black neutral greys, deliberately with no blue in them. */
   --surface: #101011;
@@ -63,14 +58,12 @@
   --heading: #f4f4f5;
   --body: #a8a8ad;
   --hover: #222226;
-  /* Gold reads brightest against near-black, so this is the classic
-     deco pairing and can afford to be lighter than the light theme. */
+  /* Gold reads brightest against near-black, so it can afford to be lighter here. */
   --accent: #d4af37;
   --accent-soft: #6b5720;
   --danger: #e5705c;
   --success: #6dbd85;
-  /* Dark mode already separates by being lighter, so shadow would just
-     turn into a dark smudge. */
+  /* Dark mode separates surfaces by being lighter; shadow would just smudge. */
   --card-shadow: none;
   --surface-gradient:
     radial-gradient(
@@ -81,10 +74,8 @@
     linear-gradient(180deg, #141416 0%, #0c0c0d 100%);
 }
 
-/* Hands the palette to Tailwind as ordinary utility classes:
-   bg-surface, border-line, text-heading, and so on. Because they read from
-   the variables above, they swap themselves when dark mode turns on, so
-   there's no need to write dark: on every element. */
+/* Exposes the palette as Tailwind utilities (bg-surface, text-heading, ...)
+   that swap with the theme. */
 @theme inline {
   --color-surface: var(--surface);
   --color-surface-raised: var(--surface-raised);
@@ -100,8 +91,7 @@
   /* Gives a shadow-card utility that changes with the theme. */
   --shadow-card: var(--card-shadow);
 
-  /* Josefin is the 1920s geometric face for headings. Manrope is also
-     geometric, so the two share a skeleton instead of clashing. */
+  /* Josefin is a 1920s geometric face; Manrope is geometric too, so they don't clash. */
   --font-display: 'Josefin Sans Variable', system-ui, sans-serif;
   --font-sans: 'Manrope Variable', system-ui, sans-serif;
   --font-mono: ui-monospace, Consolas, monospace;
@@ -114,11 +104,9 @@
 
   body {
     @apply bg-surface text-body antialiased;
-    /* Slightly above the 16px default. Easier to read, and it lifts
-       everything that does not set its own size. */
+    /* Slightly above the 16px default, for readability and to lift unsized text. */
     font-size: 1.0625rem;
-    /* fixed so the glow stays put at the top of the window instead of
-       scrolling away with the content. */
+    /* fixed keeps the glow pinned to the window top instead of scrolling with content. */
     background-image: var(--surface-gradient);
     background-attachment: fixed;
   }
@@ -131,14 +119,12 @@
     letter-spacing: -0.005em;
   }
 
-  /* Gold focus ring everywhere, on keyboard navigation only.
-     On theme as well as being the accessibility default. */
+  /* Gold focus ring on keyboard navigation only; on theme and accessible by default. */
   :focus-visible {
     @apply outline-2 outline-offset-2 outline-accent;
   }
 
-  /* Added for one frame while the theme swaps, so nothing animates
-     between the two palettes. See hooks/useTheme.ts. */
+  /* Added for one frame during a theme swap; see hooks/useTheme.ts. */
   .no-transitions,
   .no-transitions *,
   .no-transitions *::before,

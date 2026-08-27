@@ -12,8 +12,7 @@ createRoot(document.getElementById('root')!).render(
   <StrictMode>
     {/* Outside the router, so it still catches a crash in routing itself. */}
     <ErrorBoundary>
-      {/* Has to wrap the whole app, since anything using routing
-          needs to sit inside it. */}
+      {/* Wraps the whole app, since anything using routing must sit inside it. */}
       <BrowserRouter>
         <App />
       </BrowserRouter>

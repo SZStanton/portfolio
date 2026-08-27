@@ -5,11 +5,7 @@ import { ButtonAnchor, ButtonLink } from '../ui/Button';
 import { ScrollCue } from '../ui/ScrollCue';
 import { TechIcon } from '../ui/TechIcon';
 
-/*
- * Flip to true once the real cut-out photo replaces assets/images/photo.jpg.
- * The two column layout below only appears when this is on, so the hero
- * stays as it was until the picture is ready.
- */
+// Flip true once the real cut-out photo replaces assets/images/photo.jpg.
 const SHOW_PHOTO = false;
 
 // Names key into data/tech.ts, where the logos and colours live.
@@ -26,12 +22,10 @@ export function Hero() {
   return (
     <section
       id="home"
-      // svh over vh because mobile toolbars change the visible height.
-      // The 5rem leaves room for the navbar.
+      // svh, not vh, since mobile toolbars change the visible height; 5rem clears the navbar.
       className="relative flex min-h-[calc(100svh-5rem)] flex-col justify-center py-20"
     >
-      {/* Text and photo sit side by side from the large breakpoint up, and
-          stack below it. Without the photo it stays a single column. */}
+      {/* Side by side from lg up, stacked below it; single column without the photo. */}
       <div
         className={
           SHOW_PHOTO
@@ -50,8 +44,7 @@ export function Hero() {
             Open to Junior Developer Roles
           </p>
 
-          {/* Drops a step at large sizes when the photo takes half the row,
-              so the name does not break awkwardly. */}
+          {/* Drops a step at lg when the photo takes half the row, to avoid an awkward break. */}
           <h1
             className={`mt-6 text-5xl font-semibold tracking-tight text-heading ${
               SHOW_PHOTO ? 'sm:text-6xl' : 'sm:text-7xl'
@@ -60,8 +53,7 @@ export function Hero() {
             Sebastian Stanton
           </h1>
 
-          {/* Tech names lifted to heading colour so a skim picks up the stack.
-              The {' '} are real spaces, which JSX would otherwise drop at line ends. */}
+          {/* Tech names lifted to heading colour so a skim picks up the stack; {' '} keeps real spaces JSX would drop. */}
           <p className="mt-6 max-w-2xl text-xl leading-relaxed sm:text-2xl">
             Junior Full-Stack Developer building with{' '}
             <span className="text-heading">React</span>,{' '}
@@ -80,7 +72,7 @@ export function Hero() {
             <ButtonLink to="/contact" variant="secondary">
               Get in touch
             </ButtonLink>
-            {/* The built file name is fingerprinted, so download names it. */}
+            {/* The built file is fingerprinted, so `download` gives it a proper name. */}
             <ButtonAnchor
               href={cv}
               variant="secondary"
@@ -95,8 +87,7 @@ export function Hero() {
         {SHOW_PHOTO && <HeroPhoto />}
       </div>
 
-      {/* Muted until hovered, when the brand colour comes up. Keeps the
-          hero calm while still rewarding a bit of curiosity. */}
+      {/* Muted until hovered, when the brand colour appears; keeps the hero calm. */}
       <ul className="mt-16 flex flex-wrap items-center gap-x-7 gap-y-4">
         {techs.map(name => (
           <li key={name} title={name}>
@@ -109,8 +100,7 @@ export function Hero() {
         ))}
       </ul>
 
-      {/* Sits at the foot of the first screen and clears out as soon as
-          the page moves, since by then it has done its job. */}
+      {/* Sits at the foot of the first screen and clears as soon as the page moves. */}
       <ScrollCue
         href="#about"
         label="About Me"
@@ -120,14 +110,8 @@ export function Hero() {
   );
 }
 
-/*
- * Built for a cut-out photo with no background of its own.
- *
- * The gold glow behind gives the figure something to sit on, since a
- * floating cut-out with nothing behind it looks like a mistake. Sizing is
- * driven by the column width, so it scales with the browser rather than
- * being pinned to fixed pixels.
- */
+// Built for a cut-out photo; the gold glow gives it something to sit on.
+// Sized by the column width, not fixed pixels, so it scales with the browser.
 function HeroPhoto() {
   return (
     <div className="relative mx-auto w-full max-w-xs sm:max-w-sm lg:mx-0">
@@ -140,8 +124,7 @@ function HeroPhoto() {
         src={photo}
         // Decorative here: the name beside it already says who this is.
         alt=""
-        // object-bottom so the figure stands on the base of the box as it
-        // scales, rather than drifting up and cropping at the feet.
+        // object-bottom keeps the figure grounded as it scales, instead of drifting up.
         className="h-auto w-full object-contain object-bottom"
       />
     </div>
