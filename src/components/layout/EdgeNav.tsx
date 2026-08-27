@@ -50,8 +50,11 @@ function Arrow({ page, side, visible }: ArrowProps) {
     <Link
       to={page.to}
       aria-label={`Go to ${page.label}`}
-      // Hidden on small screens, where there is no pointer to track.
-      className={`fixed top-1/2 z-40 hidden -translate-y-1/2 flex-col items-center gap-1 px-4 py-28 text-accent transition-all duration-300 md:flex ${
+      /* Hidden on small screens, where there is no pointer to track.
+         Fixed width so the chevron sits in the same place whatever the
+         label says. Without it the box is as wide as the word, and the
+         centred icon shifts between Home and Projects. */
+      className={`fixed top-1/2 z-40 hidden w-32 -translate-y-1/2 flex-col items-center gap-1 px-2 py-44 text-accent transition-all duration-300 md:flex ${
         side === 'left' ? 'left-1' : 'right-1'
       } ${
         visible
@@ -60,7 +63,7 @@ function Arrow({ page, side, visible }: ArrowProps) {
       }`}
     >
       <Icon className="size-6" />
-      <span className="font-display text-[0.625rem] font-semibold uppercase tracking-[0.2em]">
+      <span className="whitespace-nowrap font-display text-[0.625rem] font-semibold uppercase tracking-[0.2em]">
         {page.label}
       </span>
     </Link>

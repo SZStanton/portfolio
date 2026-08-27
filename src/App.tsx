@@ -1,6 +1,7 @@
 import { lazy, Suspense } from 'react';
 import { Route, Routes } from 'react-router';
 import { Analytics } from '@vercel/analytics/react';
+import { SpeedInsights } from '@vercel/speed-insights/react';
 import { Layout } from './components/layout/Layout';
 import { PageLoader } from './components/ui/PageLoader';
 import { Home } from './pages/Home';
@@ -37,7 +38,10 @@ function App() {
           </Route>
         </Routes>
       </Suspense>
+      {/* Both report from /_vercel/, which vercel.json excludes from the
+          SPA rewrite. Without that exclusion they silently collect nothing. */}
       <Analytics />
+      <SpeedInsights />
     </>
   );
 }

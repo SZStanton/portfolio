@@ -38,12 +38,13 @@ export function Layout() {
       <main id="main" className="mx-auto max-w-5xl px-6">
         {/* LazyMotion and m load only the features used, not all of Motion. */}
         <LazyMotion features={domAnimation}>
-          {/* New key on each route remounts this, which replays the fade. */}
+          {/* New key on each route remounts this, which replays the fade.
+              Slower and softer than a plain swap, so pages ease in. */}
           <m.div
             key={pathname}
-            initial={{ opacity: 0, y: reduceMotion ? 0 : 8 }}
+            initial={{ opacity: 0, y: reduceMotion ? 0 : 14 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.3, ease: 'easeOut' }}
+            transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
           >
             <Outlet />
             <PageNav />
