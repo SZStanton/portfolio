@@ -10,7 +10,9 @@ import {
   LuMapPin,
 } from 'react-icons/lu';
 import { Button } from '../components/ui/Button';
+import { CopyButton } from '../components/ui/CopyButton';
 import { SectionLabel } from '../components/ui/SectionLabel';
+import { useDocumentTitle } from '../hooks/useDocumentTitle';
 import { contactSchema, type ContactFormValues } from '../lib/schemas';
 
 const EMAIL = 'ssebastianbusiness@gmail.com';
@@ -19,7 +21,14 @@ const EMAIL = 'ssebastianbusiness@gmail.com';
 type Status = 'idle' | 'sending' | 'sent' | 'error';
 
 const elsewhere = [
-  { href: `mailto:${EMAIL}`, label: 'Email', value: EMAIL, Icon: LuMail },
+  // Only the email gets a copy button; the others are for clicking.
+  {
+    href: `mailto:${EMAIL}`,
+    label: 'Email',
+    value: EMAIL,
+    Icon: LuMail,
+    copyable: true,
+  },
   {
     href: 'https://www.linkedin.com/in/sebastian-stanton-5464b0139',
     label: 'LinkedIn',
@@ -35,6 +44,7 @@ const elsewhere = [
 ];
 
 export function Contact() {
+  useDocumentTitle('Contact');
   const [status, setStatus] = useState<Status>('idle');
 
   const {
@@ -183,14 +193,19 @@ export function Contact() {
           </h2>
 
           <ul className="mt-5 space-y-3">
-            {elsewhere.map(({ href, label, value, Icon }) => (
-              <li key={label}>
+            {elsewhere.map(({ href, label, value, Icon, copyable }) => (
+              // The copy button sits beside the link rather than inside it,
+              // since a button nested in a link is invalid and unclickable.
+              <li
+                key={label}
+                className="flex items-center gap-1 rounded-lg border border-line bg-surface-raised pr-2 shadow-card transition-colors hover:border-accent-soft active:border-accent"
+              >
                 <a
                   href={href}
                   // mailto should not open a tab, the others should.
                   target={href.startsWith('mailto:') ? undefined : '_blank'}
                   rel="noreferrer"
-                  className="flex items-center gap-3 rounded-lg border border-line bg-surface-raised p-3 shadow-card transition-colors hover:border-accent-soft active:border-accent"
+                  className="flex min-w-0 flex-1 items-center gap-3 p-3"
                 >
                   <Icon className="size-4 shrink-0 text-accent" />
                   <span className="min-w-0">
@@ -202,6 +217,7 @@ export function Contact() {
                     </span>
                   </span>
                 </a>
+                {copyable && <CopyButton value={value} label={label} />}
               </li>
             ))}
           </ul>
