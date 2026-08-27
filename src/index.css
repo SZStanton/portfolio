@@ -102,13 +102,28 @@
     scroll-behavior: smooth;
   }
 
+  /* Anchor jumps follow the same preference the page transitions already do. */
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+  }
+
   body {
     @apply bg-surface text-body antialiased;
     /* Slightly above the 16px default, for readability and to lift unsized text. */
     font-size: 1.0625rem;
-    /* fixed keeps the glow pinned to the window top instead of scrolling with content. */
+  }
+
+  /* Holds the gradient still on its own composited layer. Replaces
+     background-attachment: fixed, which repainted on every scroll frame. */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    z-index: -1;
     background-image: var(--surface-gradient);
-    background-attachment: fixed;
+    pointer-events: none;
   }
 
   /* Josefin runs small and light, so headings get a touch more weight. */

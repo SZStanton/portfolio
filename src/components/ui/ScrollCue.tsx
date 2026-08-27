@@ -14,20 +14,31 @@ export function ScrollCue({ href, label, fadeAt = 160, className }: Props) {
   const [faded, setFaded] = useState(false);
 
   useEffect(() => {
+    let frame = 0;
+
     // Measured off its own position, not page scroll, so every cue fades the same way.
-    const update = () => {
+    const measure = () => {
+      frame = 0;
       const top = ref.current?.getBoundingClientRect().top;
       if (top === undefined) return;
       setFaded(top < window.innerHeight - fadeAt);
     };
 
+    // Scroll fires far more often than the screen redraws and measuring forces a
+    // layout, so it waits for the next frame and drops the events in between.
+    const onScroll = () => {
+      if (frame) return;
+      frame = requestAnimationFrame(measure);
+    };
+
     // passive tells the browser this handler never blocks the scroll.
-    window.addEventListener('scroll', update, { passive: true });
-    window.addEventListener('resize', update);
-    update();
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', onScroll);
+    measure();
     return () => {
-      window.removeEventListener('scroll', update);
-      window.removeEventListener('resize', update);
+      window.removeEventListener('scroll', onScroll);
+      window.removeEventListener('resize', onScroll);
+      if (frame) cancelAnimationFrame(frame);
     };
   }, [fadeAt]);
 
