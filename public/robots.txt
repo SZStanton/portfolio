@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://szstanton.vercel.app/sitemap.xml
