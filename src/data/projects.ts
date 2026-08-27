@@ -1,4 +1,10 @@
 // All project content lives here, separate from the components that show it.
+import itunesDark from '../assets/images/itunes/results-dark.png';
+import itunesLight from '../assets/images/itunes/results-light.png';
+import jobsDark from '../assets/images/jobs-app/dashboard-dark.png';
+import jobsLight from '../assets/images/jobs-app/dashboard-light.png';
+import todoDark from '../assets/images/to-do-tasks/dashboard-dark.jpg';
+import todoLight from '../assets/images/to-do-tasks/dashboard-light.jpg';
 import type { Project } from '../types';
 
 // Typing the array is what turns a missing or misspelled field into a build
@@ -30,12 +36,15 @@ export const projects: Project[] = [
       'Responsive interface',
     ],
     futureImprovements: [
-      'Dark mode toggle',
-      'Due dates and reminders',
-      'Task categories and tags',
-      'Drag-and-drop reordering',
+      { text: 'Dark mode toggle', done: true },
+      { text: 'Drag-and-drop reordering', done: true },
+      { text: 'Due dates and reminders' },
+      { text: 'Task categories and tags' },
     ],
     repoUrl: 'https://github.com/SZStanton/To-Do-Tasks',
+    liveUrl: 'https://to-do-tasks-szstanton.vercel.app/',
+    screenshot: { light: todoLight, dark: todoDark },
+    apiUrl: 'https://to-do-tasks-api.onrender.com',
   },
   {
     id: 'itunes-search',
@@ -53,17 +62,19 @@ export const projects: Project[] = [
       'Paginated search results',
     ],
     futureImprovements: [
-      'Dark mode toggle',
-      'Persist favourites across sessions',
-      'Sort results by release date or name',
+      { text: 'Dark mode toggle', done: true },
+      { text: 'Persist favourites across sessions', done: true },
+      { text: 'Sort results by release date or name', done: true },
     ],
     repoUrl: 'https://github.com/SZStanton/iTunes-Search',
-    knownIssue:
-      'The favourites list lives in the session only, so it resets on refresh. Persisting it to a database is the natural next step.',
+    liveUrl: 'https://itunes-search-szstanton.vercel.app/',
+    // knownIssue removed: favourites now persist, so it was out of date.
+    screenshot: { light: itunesLight, dark: itunesDark },
+    apiUrl: 'https://itunes-search-api-xojd.onrender.com',
   },
   {
     id: 'jobs-app',
-    title: 'Jobs-To-Do-List',
+    title: 'Jobs To-Do List',
     description:
       'A job-tracking tool for logging, filtering and updating maintenance jobs. Started life as a front-end-only project and was later extended into a full-stack app with a proper database behind it.',
     kind: 'full-stack',
@@ -78,13 +89,16 @@ export const projects: Project[] = [
       'Full create, read, update and delete support',
     ],
     futureImprovements: [
-      'Dark mode toggle',
-      'Assign jobs to team members',
-      'Due dates and overdue alerts',
-      'Keyword search',
-      'CSV export',
+      { text: 'Dark mode toggle', done: true },
+      { text: 'Due dates and overdue alerts', done: true },
+      { text: 'Keyword search', done: true },
+      { text: 'Assign jobs to team members' },
+      { text: 'CSV export' },
     ],
     repoUrl: 'https://github.com/SZStanton/Jobs-App',
+    liveUrl: 'https://jobs-app-szstanton.vercel.app/',
+    screenshot: { light: jobsLight, dark: jobsDark },
+    apiUrl: 'https://jobs-app-api-ivt0.onrender.com',
   },
   {
     id: 'event-planner',
@@ -92,7 +106,9 @@ export const projects: Project[] = [
     description:
       'A React app for creating and tracking personal and professional events, from meetings and appointments to social plans. Built to get comfortable with shared state across a whole app using Context API, with no backend involved.',
     kind: 'front-end',
-    group: 'featured',
+    // Moved out of featured: no screenshot yet, so it looked thin
+    // beside the three that have one.
+    group: 'other',
     capstone: true,
     stack: ['React', 'Vite', 'Context API', 'Bootstrap'],
     features: [
@@ -104,11 +120,11 @@ export const projects: Project[] = [
       'Help page with usage instructions, and a responsive layout',
     ],
     futureImprovements: [
-      'Dark mode toggle',
-      'Swap localStorage for a real backend and database',
-      'Event reminders and notifications',
-      'Calendar view',
-      'Support for recurring events',
+      { text: 'Dark mode toggle' },
+      { text: 'Swap localStorage for a real backend and database' },
+      { text: 'Event reminders and notifications' },
+      { text: 'Calendar view' },
+      { text: 'Support for recurring events' },
     ],
     repoUrl: 'https://github.com/SZStanton/Event-Planner',
   },
@@ -129,9 +145,9 @@ export const projects: Project[] = [
       'Menu-driven interface with nested submenus',
     ],
     futureImprovements: [
-      'Export reports to CSV',
-      'Monthly spending summaries and charts',
-      'Recurring expense tracking',
+      { text: 'Export reports to CSV' },
+      { text: 'Monthly spending summaries and charts' },
+      { text: 'Recurring expense tracking' },
     ],
     repoUrl: 'https://github.com/SZStanton/Expense-Tracker',
   },
@@ -166,11 +182,11 @@ export const projects: Project[] = [
       'Form validation with Formik',
     ],
     futureImprovements: [
-      'Dark mode toggle',
-      'Working login and registration with real authentication',
-      'Cart that persists between sessions',
-      'Checkout flow',
-      'Product search and filtering',
+      { text: 'Dark mode toggle' },
+      { text: 'Working login and registration with real authentication' },
+      { text: 'Cart that persists between sessions' },
+      { text: 'Checkout flow' },
+      { text: 'Product search and filtering' },
     ],
     repoUrl: 'https://github.com/SZStanton/The-Cart',
     knownIssue:
@@ -209,9 +225,9 @@ export const projects: Project[] = [
       'Styled interface built without a framework',
     ],
     futureImprovements: [
-      'Filter suggestions by cuisine or dietary preference',
-      'Save favourite dishes',
-      'Show the full recipe and ingredient list for each suggestion',
+      { text: 'Filter suggestions by cuisine or dietary preference' },
+      { text: 'Save favourite dishes' },
+      { text: 'Show the full recipe and ingredient list for each suggestion' },
     ],
     repoUrl: 'https://github.com/SZStanton/Chefs-Favorites',
     liveUrl: 'https://szstanton.github.io/Chefs-Favorites/',

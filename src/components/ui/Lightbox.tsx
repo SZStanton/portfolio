@@ -1,13 +1,15 @@
 import { useEffect } from 'react';
-import { LuX } from 'react-icons/lu';
+import { LuExternalLink, LuX } from 'react-icons/lu';
 
 type Props = {
   src: string;
   alt: string;
   onClose: () => void;
+  // Set for project screenshots, so the demo is one click from the image.
+  liveUrl?: string;
 };
 
-export function Lightbox({ src, alt, onClose }: Props) {
+export function Lightbox({ src, alt, onClose, liveUrl }: Props) {
   useEffect(() => {
     const onKey = (event: KeyboardEvent) => {
       if (event.key === 'Escape') onClose();
@@ -44,13 +46,31 @@ export function Lightbox({ src, alt, onClose }: Props) {
         <LuX className="size-6" />
       </button>
 
-      <img
-        src={src}
-        alt={alt}
-        draggable={false}
+      {/* Wrapper stops the click bubbling, so clicking the image or the
+          button does not close the box, but the backdrop still does. */}
+      <div
         onClick={event => event.stopPropagation()}
-        className="max-h-[76vh] max-w-[86%] rounded-sm object-contain shadow-2xl"
-      />
+        className="flex max-h-[86vh] flex-col items-center gap-4"
+      >
+        <img
+          src={src}
+          alt={alt}
+          draggable={false}
+          className="max-h-[76vh] max-w-full rounded-sm object-contain shadow-2xl"
+        />
+
+        {liveUrl && (
+          <a
+            href={liveUrl}
+            target="_blank"
+            rel="noreferrer"
+            className="inline-flex items-center gap-2 rounded-sm border border-accent/60 px-6 py-3 font-display text-sm font-semibold uppercase tracking-[0.15em] text-accent transition-colors hover:bg-accent hover:text-surface"
+          >
+            <LuExternalLink className="size-4" />
+            Visit live site
+          </a>
+        )}
+      </div>
     </div>
   );
 }
