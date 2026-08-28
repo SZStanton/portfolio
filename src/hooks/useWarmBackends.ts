@@ -15,10 +15,10 @@ export function useWarmBackends() {
     for (const project of projects) {
       if (!project.apiUrl) continue;
 
-      // no-cors, since the API disallows this origin; the opaque response still wakes it.
-      fetch(project.apiUrl, { mode: 'no-cors', cache: 'no-store' }).catch(
-        () => {},
-      );
+      // sendBeacon rather than fetch: these APIs have no route at their root, so a
+      // fetch logged a red 404 in everyone's console. A beacon ignores the response
+      // entirely and logs nothing, and waking the container is all we're after.
+      navigator.sendBeacon(project.apiUrl);
     }
   }, []);
 }
