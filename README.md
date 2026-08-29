@@ -3,7 +3,7 @@
 Personal portfolio for **Sebastian Stanton**, a junior full-stack developer based in Cape Town.
 Built with React, TypeScript, Tailwind CSS and a Vercel serverless function.
 
-**Live at [szstanton.vercel.app](https://szstanton.vercel.app)**
+**Live at [szstanton.com](https://szstanton.com)**
 
 ![The portfolio home page in dark mode](public/og-image.jpg)
 
@@ -94,5 +94,5 @@ api/
 
 ## Contact
 
-Via the [contact form](https://szstanton.vercel.app/contact), or on
+Via the [contact form](https://szstanton.com/contact), or on
 [LinkedIn](https://www.linkedin.com/in/sebastian-stanton-5464b0139).
