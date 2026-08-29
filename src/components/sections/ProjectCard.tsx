@@ -170,7 +170,9 @@ export function FeaturedProjectCard({ project }: { project: Project }) {
                     )}
                     {/* text-muted rather than opacity, which dimmed it below a
                         readable contrast against the card. */}
-                    <span className={item.done ? 'text-muted line-through' : ''}>
+                    <span
+                      className={item.done ? 'text-muted line-through' : ''}
+                    >
                       {item.text}
                     </span>
                   </li>
