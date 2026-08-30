@@ -28,9 +28,8 @@
   --line: #dcd9d1;
   --heading: #1c1b1a;
   --body: #55534e;
-  /* Dimmer than body for text that's been de-emphasised, but still readable.
-     Kept above 4.5:1 on both surface and surface-raised, so it isn't just body
-     text with the opacity turned down. */
+  /* For text that's been played down. Still readable on both surfaces, which
+     body text with the opacity turned down was not. */
   --muted: #6f6d68;
   --hover: #eceae5;
   /* Deeper bronze than dark mode; a bright gold here looks washed out. */
@@ -115,8 +114,10 @@
     }
   }
 
+  /* No background here; index.html already paints one on <html>. A second one
+     on body would cover the gradient sitting just below it. */
   body {
-    @apply bg-surface text-body antialiased;
+    @apply text-body antialiased;
     /* Slightly above the 16px default, for readability and to lift unsized text. */
     font-size: 1.0625rem;
   }

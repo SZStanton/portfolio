@@ -168,8 +168,7 @@ export function FeaturedProjectCard({ project }: { project: Project }) {
                     ) : (
                       <span className="mt-2 size-1.5 shrink-0 rotate-45 border border-accent/70" />
                     )}
-                    {/* text-muted rather than opacity, which dimmed it below a
-                        readable contrast against the card. */}
+                    {/* A dimmer colour, not opacity, which made it too faint to read. */}
                     <span
                       className={item.done ? 'text-muted line-through' : ''}
                     >
