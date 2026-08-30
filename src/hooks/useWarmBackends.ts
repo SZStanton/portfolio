@@ -13,12 +13,14 @@ export function useWarmBackends() {
     lastWarmed = Date.now();
 
     for (const project of projects) {
-      if (!project.apiUrl) continue;
+      if (!project.healthUrl) continue;
 
-      // sendBeacon rather than fetch: these APIs have no route at their root, so a
-      // fetch logged a red 404 in everyone's console. A beacon ignores the response
-      // entirely and logs nothing, and waking the container is all we're after.
-      navigator.sendBeacon(project.apiUrl);
+      // no-cors, since these APIs don't allow this origin; the opaque response
+      // still wakes them. Anything but a 200 back shows as a red error in the
+      // visitor's console, which is why these point at health routes.
+      fetch(project.healthUrl, { mode: 'no-cors', cache: 'no-store' }).catch(
+        () => {},
+      );
     }
   }, []);
 }

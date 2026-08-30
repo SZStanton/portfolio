@@ -31,7 +31,8 @@ export type Project = {
   screenshot?: { light: string; dark: string; ratio: number };
 
   // Render free tier sleeps when idle; pinged on the Projects page to wake it.
-  apiUrl?: string;
+  // Must be a route that returns 200, or the ping shows as an error in the console.
+  healthUrl?: string;
 };
 
 // Left off means comfortable with it; a union so 'exploring' can be added later.

@@ -45,7 +45,7 @@ export const projects: Project[] = [
     liveUrl: 'https://to-do-tasks-szstanton.vercel.app/',
     // 1366x1049
     screenshot: { light: todoLight, dark: todoDark, ratio: 1.302 },
-    apiUrl: 'https://to-do-tasks-api.onrender.com',
+    healthUrl: 'https://api.to-do-tasks.szstanton.com/health',
   },
   {
     id: 'itunes-search',
@@ -72,7 +72,7 @@ export const projects: Project[] = [
     // knownIssue removed: favourites now persist, so it was out of date.
     // 1440x900
     screenshot: { light: itunesLight, dark: itunesDark, ratio: 1.6 },
-    apiUrl: 'https://itunes-search-api-xojd.onrender.com',
+    healthUrl: 'https://api.itunes-search.szstanton.com/api/health',
   },
   {
     id: 'jobs-app',
@@ -101,7 +101,7 @@ export const projects: Project[] = [
     liveUrl: 'https://jobs-app-szstanton.vercel.app/',
     // 1280x1026
     screenshot: { light: jobsLight, dark: jobsDark, ratio: 1.248 },
-    apiUrl: 'https://jobs-app-api-ivt0.onrender.com',
+    healthUrl: 'https://jobs-app-api-ivt0.onrender.com/health',
   },
   {
     id: 'event-planner',
