@@ -26,7 +26,7 @@ const timeline = [
     period: 'Aug 2026 to Present',
     title: 'Independent Developer',
     detail:
-      'Since July 2026, I have been building full time, developing and maintaining projects primarily with JavaScript, React, Node.js, Express, MongoDB and Bootstrap. I am currently expanding my skills by learning TypeScript and Tailwind CSS, and am using them on this portfolio. My featured projects are deployed using Vercel, Render and MongoDB Atlas.',
+      "Since August 2026, I've been building full time, developing and maintaining projects primarily with JavaScript, React, Node.js, Express, MongoDB and Bootstrap. I am currently expanding my skills by learning TypeScript and Tailwind CSS, and am using them on this portfolio. My featured projects are deployed using Vercel, Render and MongoDB Atlas.",
     images: [],
   },
   {
