@@ -12,7 +12,10 @@ import { SectionLabel } from '../ui/SectionLabel';
 
 // Quick facts, kept beside the prose so the section scans as well as it reads.
 const facts = [
-  { value: '9 Years', label: 'in fast-paced, high-accuracy admin roles' },
+  {
+    value: '9 Years',
+    label: 'in fast-paced, high-accuracy, customer-first roles',
+  },
   { value: '2', label: 'HyperionDev bootcamps completed' },
   { value: 'Cape Town', label: 'South Africa' },
 ];
@@ -20,17 +23,17 @@ const facts = [
 // The route from admin into development, most recent first.
 const timeline = [
   {
-    period: 'Now',
-    title: 'Building and Still Learning',
+    period: 'Jul 2026 to Present',
+    title: 'Independent Developer',
     detail:
-      'TypeScript, Tailwind and Docker, picked up on this site and on my own projects.',
+      'Since July 2026, I have been building full time, developing and maintaining projects primarily with JavaScript, React, Node.js, Express, MongoDB and Bootstrap. I am currently expanding my skills by learning TypeScript and Tailwind CSS, and am using them on this portfolio. My featured projects are deployed using Vercel, Render and MongoDB Atlas.',
     images: [],
   },
   {
-    period: 'Mar to Jul 2026',
+    period: 'Mar 2026 to Jul 2026',
     title: 'Full Stack Web Developer Bootcamp',
     detail:
-      'HyperionDev. JavaScript, React, Node, Express, MongoDB and JWT authentication, across four capstone projects.',
+      'HyperionDev. Studied JavaScript, React, Node.js, Express, MongoDB, automated testing and JWT authentication across four capstone projects and several smaller projects while working full time. Built full-stack applications using REST APIs, React Hooks, routing, form validation, responsive design and accessible interfaces',
     images: [
       {
         src: fullStackBootcamp,
@@ -40,10 +43,10 @@ const timeline = [
     ],
   },
   {
-    period: 'Dec 2023 to Jun 2024',
+    period: 'Dec 2023 to May 2024',
     title: 'Software Engineering Bootcamp',
     detail:
-      'HyperionDev. Python, SQL and SQLite, object-oriented programming, Git and Agile.',
+      'HyperionDev. Python, SQL and SQLite, object-oriented programming, Git and Agile, with Sphinx for documentation. This was where I developed a stronger foundation in programming and software engineering principles.',
     images: [
       {
         src: softwareEngineeringBootcamp,
@@ -52,11 +55,11 @@ const timeline = [
     ],
   },
   {
-    period: 'May to Dec 2023',
+    period: 'May 2023 to Dec 2023',
     title: 'Started Writing Code',
     detail:
-      'Python courses and HTML/CSS with Javascript web development through Sololearn, in my own time alongside full-time work.',
-    // Web development sits in front, python behind it.
+      'Completed Python courses and studied HTML, CSS and JavaScript through Sololearn in my own time alongside full-time work. I started with Python before moving towards JavaScript because building for the browser felt more visual, immediate and interactive, which suited my artistic side.',
+    // Web development sits in front, Python behind it.
     images: [
       {
         src: webDevelopment,
@@ -74,7 +77,7 @@ const timeline = [
     period: 'Aug 2017 to Jul 2026',
     title: 'Medical Aid Administration',
     detail:
-      'Claims assessment, membership administration, then digital live chat at Medscheme. Founding agent on Bonitas’ first live chat system.',
+      'Nine years in medical aid administration, progressing from call agent to back-office support and then digital live chat, where I began learning coding in my free time. I was a founding agent on Bonitas’ first live chat system, where I developed the message templates and process standards the team went on to adopt. I also helped identify problems with the system and worked with the development team and management to find solutions.',
     images: [
       {
         src: medscheme,

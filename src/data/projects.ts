@@ -42,7 +42,7 @@ export const projects: Project[] = [
       { text: 'Task categories and tags' },
     ],
     repoUrl: 'https://github.com/SZStanton/To-Do-Tasks',
-    liveUrl: 'https://to-do-tasks-szstanton.vercel.app/',
+    liveUrl: 'https://to-do-tasks.szstanton.com/',
     // 1366x1049
     screenshot: { light: todoLight, dark: todoDark, ratio: 1.302 },
     healthUrl: 'https://api.to-do-tasks.szstanton.com/health',
@@ -68,7 +68,7 @@ export const projects: Project[] = [
       { text: 'Sort results by release date or name', done: true },
     ],
     repoUrl: 'https://github.com/SZStanton/iTunes-Search',
-    liveUrl: 'https://itunes-search-szstanton.vercel.app/',
+    liveUrl: 'https://itunes-search.szstanton.com/',
     // knownIssue removed: favourites now persist, so it was out of date.
     // 1440x900
     screenshot: { light: itunesLight, dark: itunesDark, ratio: 1.6 },
@@ -98,7 +98,7 @@ export const projects: Project[] = [
       { text: 'CSV export' },
     ],
     repoUrl: 'https://github.com/SZStanton/Jobs-App',
-    liveUrl: 'https://jobs-app-szstanton.vercel.app/',
+    liveUrl: 'https://jobs-app.szstanton.com/',
     // 1280x1026
     screenshot: { light: jobsLight, dark: jobsDark, ratio: 1.248 },
     healthUrl: 'https://jobs-app-api-ivt0.onrender.com/health',
@@ -191,6 +191,7 @@ export const projects: Project[] = [
       { text: 'Product search and filtering' },
     ],
     repoUrl: 'https://github.com/SZStanton/The-Cart',
+    liveUrl: 'https://the-cart-six.vercel.app/',
     knownIssue:
       'The login and register forms are interface only, so they do not actually authenticate anyone yet. Wiring up real authentication is the main thing this one still needs.',
   },
