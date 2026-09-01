@@ -21,6 +21,7 @@ export const skillGroups: SkillGroup[] = [
       { name: 'Bootstrap', tech: 'Bootstrap' },
       { name: 'Responsive and accessible design' },
       { name: 'Tailwind CSS', tech: 'Tailwind CSS', status: 'learning' },
+      { name: 'Next.js', tech: 'Next.js', status: 'learning' },
     ],
   },
   {
@@ -53,7 +54,6 @@ export const skillGroups: SkillGroup[] = [
       { name: 'JSON and Web Storage APIs' },
       { name: 'Async/await and promises' },
       { name: 'Automated testing' },
-      { name: 'Docker', tech: 'Docker', status: 'learning' },
     ],
   },
 ];

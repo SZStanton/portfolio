@@ -3,7 +3,6 @@ import {
   SiAxios,
   SiBootstrap,
   SiCss,
-  SiDocker,
   SiExpress,
   SiFormik,
   SiGit,
@@ -13,6 +12,7 @@ import {
   SiJsonwebtokens,
   SiMongodb,
   SiMongoose,
+  SiNextdotjs,
   SiNodedotjs,
   SiPostgresql,
   SiPython,
@@ -61,8 +61,9 @@ export const techStyles: Record<string, TechStyle> = {
     color: '#38bdf8',
     colorLight: '#097faa',
   },
-  Docker: { Icon: SiDocker, color: '#3ba3f0', colorLight: '#0d74c9' },
   Git: { Icon: SiGit, color: '#f05032', colorLight: '#c73110' },
   GitHub: { Icon: SiGithub, color: '#e6e6e6', colorLight: '#1f1f22' },
   PostgreSQL: { Icon: SiPostgresql, color: '#5fa8dc', colorLight: '#15618f' },
+  // Near-black brand, so it flips light/dark the way Express and GitHub do.
+  'Next.js': { Icon: SiNextdotjs, color: '#e6e6e6', colorLight: '#1f1f22' },
 };

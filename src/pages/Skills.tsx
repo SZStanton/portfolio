@@ -32,16 +32,18 @@ export function Skills() {
               {group.skills.map(skill => (
                 <li
                   key={skill.name}
+                  // group: lets the "learning" tag react to hover/active on the whole pill.
                   // active: covers a finger held down; select-none stops it selecting text.
-                  className="flex select-none items-center gap-2 rounded-full border border-line bg-surface-raised px-3.5 py-1.5 text-[0.9375rem] transition-colors [-webkit-touch-callout:none] hover:border-accent-soft active:border-accent"
+                  className="group flex select-none items-center gap-2 rounded-full border border-line bg-surface-raised px-3.5 py-1.5 text-[0.9375rem] transition-colors [-webkit-touch-callout:none] hover:border-accent-soft active:border-accent"
                 >
                   {skill.tech && (
                     <TechIcon tech={skill.tech} className="size-4" />
                   )}
                   {skill.name}
                   {skill.status === 'learning' && (
-                    // Deliberately quiet. This is a footnote, not a headline.
-                    <span className="text-xs uppercase tracking-wider opacity-50">
+                    // Deliberately quiet at rest, this is a footnote not a headline,
+                    // but it lights up gold on hover to reward the closer look.
+                    <span className="text-xs uppercase tracking-wider opacity-50 transition-colors group-hover:text-accent group-hover:opacity-100 group-active:text-accent group-active:opacity-100">
                       learning
                     </span>
                   )}
