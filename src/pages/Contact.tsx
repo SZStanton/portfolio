@@ -15,7 +15,7 @@ import { SectionLabel } from '../components/ui/SectionLabel';
 import { useDocumentTitle } from '../hooks/useDocumentTitle';
 import { contactSchema, type ContactFormValues } from '../lib/schemas';
 
-const EMAIL = 'ssebastianbusiness@gmail.com';
+const EMAIL = 'szstantondev@gmail.com';
 
 // Tracks what the form is doing, so the button and messages can respond.
 type Status = 'idle' | 'sending' | 'sent' | 'error';
@@ -30,9 +30,9 @@ const elsewhere = [
     copyable: true,
   },
   {
-    href: 'https://www.linkedin.com/in/sebastian-stanton-5464b0139',
+    href: 'https://www.linkedin.com/in/szstanton',
     label: 'LinkedIn',
-    value: 'sebastian-stanton',
+    value: 'szstanton',
     Icon: LuLinkedin,
   },
   {

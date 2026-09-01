@@ -1,6 +1,6 @@
 import { LuGithub, LuLinkedin, LuMail } from 'react-icons/lu';
 
-const EMAIL = 'ssebastianbusiness@gmail.com';
+const EMAIL = 'szstantondev@gmail.com';
 
 // Icon is capitalised so it can be used as <Icon /> further down.
 const socials = [
@@ -10,7 +10,7 @@ const socials = [
     Icon: LuGithub,
   },
   {
-    href: 'https://www.linkedin.com/in/sebastian-stanton-5464b0139',
+    href: 'https://www.linkedin.com/in/szstanton',
     label: 'LinkedIn profile',
     Icon: LuLinkedin,
   },
