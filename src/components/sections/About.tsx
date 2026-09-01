@@ -26,14 +26,14 @@ const timeline = [
     period: 'Aug 2026 to Present',
     title: 'Independent Developer',
     detail:
-      "Since August 2026, I've been building full time, developing and maintaining projects primarily with JavaScript, React, Node.js, Express, MongoDB and Bootstrap. I am currently expanding my skills by learning TypeScript and Tailwind CSS, and am using them on this portfolio. My featured projects are deployed using Vercel, Render and MongoDB Atlas.",
+      "Since August 2026, I've been building full time, developing and maintaining projects primarily with JavaScript, React, Node.js, Express, MongoDB and Bootstrap. I am expanding my skills by learning TypeScript and Tailwind CSS, and am using them on this portfolio. My featured projects are deployed using Vercel, Render and MongoDB Atlas.",
     images: [],
   },
   {
     period: 'Mar 2026 to Jul 2026',
     title: 'Full Stack Web Developer Bootcamp',
     detail:
-      'HyperionDev. Studied JavaScript, React, Node.js, Express, MongoDB, automated testing and JWT authentication across four capstone projects and several smaller projects while working full time. Built full-stack applications using REST APIs, React Hooks, routing, form validation, responsive design and accessible interfaces',
+      'HyperionDev. Studied JavaScript, React, Node.js, Express, MongoDB, automated testing and JWT authentication across four capstone projects and several smaller projects while working full time. Built full-stack applications using REST APIs, React Hooks, routing, form validation, responsive design and accessible interfaces.',
     images: [
       {
         src: fullStackBootcamp,
@@ -113,7 +113,7 @@ export function About() {
           <p>
             The thread running through all of it was improving the process
             rather than just working inside it. I was one of the founding agents
-            for Bonitas' first live chat system and wrote message templates and
+            for Bonitas’ first live chat system and wrote message templates and
             standards that were adopted across the team, authored a training
             guide still used to onboard new agents, and helped build a shared
             process-reference tool used company-wide.
