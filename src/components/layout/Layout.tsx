@@ -1,12 +1,8 @@
-import { domAnimation, LazyMotion, m, useReducedMotion } from 'motion/react';
+import { m, useReducedMotion } from 'motion/react';
 import { useEffect } from 'react';
 import { Outlet, useLocation } from 'react-router';
-import { useArrowNavigation } from '../../hooks/useArrowNavigation';
-import { useSwipeNavigation } from '../../hooks/useSwipeNavigation';
-import { EdgeNav } from './EdgeNav';
 import { Footer } from './Footer';
 import { Navbar } from './Navbar';
-import { PageNav } from './PageNav';
 
 // Wraps every page, so the navbar and footer are written once.
 export function Layout() {
@@ -15,12 +11,9 @@ export function Layout() {
   // Set when the OS asks for less motion; drop movement but keep the fade.
   const reduceMotion = useReducedMotion();
 
-  useArrowNavigation();
-  useSwipeNavigation();
-
   // Changing route is not a page load, so the scroll position sticks.
   useEffect(() => {
-    window.scrollTo(0, 0);
+    window.scrollTo({ top: 0, behavior: 'instant' });
   }, [pathname]);
 
   return (
@@ -34,22 +27,17 @@ export function Layout() {
       </a>
 
       <Navbar />
-      <EdgeNav />
 
-      <main id="main" className="mx-auto max-w-5xl px-6">
-        {/* LazyMotion and m load only the features used, not all of Motion. */}
-        <LazyMotion features={domAnimation}>
-          {/* New key per route remounts this, replaying the fade between pages. */}
-          <m.div
-            key={pathname}
-            initial={{ opacity: 0, y: reduceMotion ? 0 : 14 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
-          >
-            <Outlet />
-            <PageNav />
-          </m.div>
-        </LazyMotion>
+      <main id="main" className="w-full">
+        {/* New key per route remounts this, replaying the fade between pages. */}
+        <m.div
+          key={pathname}
+          initial={{ opacity: 0, y: reduceMotion ? 0 : 14 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
+        >
+          <Outlet />
+        </m.div>
       </main>
 
       <Footer />

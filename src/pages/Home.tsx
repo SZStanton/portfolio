@@ -1,9 +1,14 @@
+import { FanDivider } from '../components/deco/FanDivider';
 import { About } from '../components/sections/About';
+import { Contact } from '../components/sections/Contact';
 import { Hero } from '../components/sections/Hero';
+import { MoreProjects } from '../components/sections/MoreProjects';
+import { Toolkit } from '../components/sections/Toolkit';
+import { Work } from '../components/sections/Work';
 import { BackToTop } from '../components/ui/BackToTop';
 import { useDocumentTitle } from '../hooks/useDocumentTitle';
 
-// About sits on the landing page, so a one-screen visitor still learns who this is.
+// The whole site in one scroll, work first so the evidence lands before the story.
 export function Home() {
   // No argument, so the home page keeps the full site title.
   useDocumentTitle();
@@ -11,7 +16,12 @@ export function Home() {
   return (
     <>
       <Hero />
+      <Work />
+      <FanDivider className="container-page" />
+      <MoreProjects />
       <About />
+      <Toolkit />
+      <Contact />
       <BackToTop />
     </>
   );

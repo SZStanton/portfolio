@@ -1,13 +1,43 @@
+import { useEffect, useRef, useState } from 'react';
 import { LuMoon, LuSun } from 'react-icons/lu';
-import { NavLink } from 'react-router';
-import { pages } from '../../data/navigation';
+import { navSections, sectionIds } from '../../data/navigation';
+import { useScrollSpy } from '../../hooks/useScrollSpy';
 import { useTheme } from '../../hooks/useTheme';
+
+// Past this, a smooth scroll is long enough to be a wait rather than a transition.
+const FAR = 2.5;
 
 export function Navbar() {
   const { theme, toggleTheme } = useTheme();
+  const spyId = useScrollSpy(sectionIds);
 
-  // NavLink flags the current page with a gold underline; others sit a step below.
-  const linkClass = ({ isActive }: { isActive: boolean }) =>
+  // Clicking pins the underline to where you are going, so it does not slide
+  // through every section on the way down.
+  const [lockedId, setLockedId] = useState('');
+  const unlock = useRef<number | undefined>(undefined);
+  const activeId = lockedId || spyId;
+
+  useEffect(() => () => window.clearTimeout(unlock.current), []);
+
+  const handleClick = (id: string) => (event: React.MouseEvent) => {
+    setLockedId(id);
+    window.clearTimeout(unlock.current);
+    unlock.current = window.setTimeout(() => setLockedId(''), 800);
+
+    const target = document.getElementById(id);
+    if (!target) return;
+
+    // Very long jumps skip the animation, which would otherwise be a second of blur.
+    const distance = Math.abs(target.getBoundingClientRect().top);
+    if (distance > FAR * window.innerHeight) {
+      event.preventDefault();
+      target.scrollIntoView({ behavior: 'instant' });
+      window.history.pushState(null, '', `#${id}`);
+    }
+  };
+
+  // Marks the section you are in with a gold underline; others sit a step below.
+  const linkClass = (isActive: boolean) =>
     [
       // Josefin runs light, so caps need a heavier weight to hold up.
       // Smaller type and padding below sm, so labels and the toggle fit a 320px phone.
@@ -26,12 +56,19 @@ export function Navbar() {
       <div className="relative flex h-14 items-stretch pr-14 sm:h-16 sm:pr-16">
         <nav aria-label="Main" className="mx-auto flex items-stretch">
           <ul className="flex items-stretch">
-            {pages.map(link => (
-              <li key={link.to}>
-                {/* `end` stops "/" counting as active on every other page. */}
-                <NavLink to={link.to} end className={linkClass}>
-                  {link.label}
-                </NavLink>
+            {navSections.map(section => (
+              <li key={section.id}>
+                <a
+                  href={`#${section.id}`}
+                  onClick={handleClick(section.id)}
+                  // location, not page: this is a position within one document.
+                  aria-current={
+                    activeId === section.id ? 'location' : undefined
+                  }
+                  className={linkClass(activeId === section.id)}
+                >
+                  {section.label}
+                </a>
               </li>
             ))}
           </ul>
