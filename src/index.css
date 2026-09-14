@@ -35,6 +35,9 @@
   /* Deeper bronze than dark mode; a bright gold here looks washed out. */
   --accent: #ae8513;
   --accent-soft: #d8b564;
+  /* Background geometry. Bronze needs more opacity here than gold does on black. */
+  --deco-ink: var(--accent);
+  --deco-opacity: 0.13;
   --danger: #a8321f;
   --success: #2f6b3f;
   /* Light mode gets depth from shadow; a raised surface can't get much lighter than the page. */
@@ -65,6 +68,8 @@
   /* Gold reads brightest against near-black, so it can afford to be lighter here. */
   --accent: #d4af37;
   --accent-soft: #6b5720;
+  --deco-ink: var(--accent);
+  --deco-opacity: 0.08;
   --danger: #e5705c;
   --success: #6dbd85;
   /* Dark mode separates surfaces by being lighter; shadow would just smudge. */
@@ -90,6 +95,7 @@
   --color-hover: var(--hover);
   --color-accent: var(--accent);
   --color-accent-soft: var(--accent-soft);
+  --color-deco-ink: var(--deco-ink);
   --color-danger: var(--danger);
   --color-success: var(--success);
 
@@ -102,6 +108,39 @@
   --font-mono: ui-monospace, Consolas, monospace;
 }
 
+/* Page width lives here rather than on <main>, so a section can break out of it
+   when it needs to run full bleed behind the deco. */
+@utility container-page {
+  @apply mx-auto w-full max-w-5xl px-6;
+}
+
+/* Deco's thin double rule: two hairlines with a 2px gap between them. */
+@utility rule-double {
+  height: 4px;
+  border-top: 1px solid var(--accent-soft);
+  border-bottom: 1px solid var(--accent-soft);
+}
+
+/* Ambient deco motion. Transform and opacity only, so it stays on the compositor. */
+@keyframes deco-sway {
+  from {
+    transform: rotate(-3deg);
+  }
+  to {
+    transform: rotate(3deg);
+  }
+}
+
+@keyframes deco-breathe {
+  0%,
+  100% {
+    opacity: 0.55;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
 @layer base {
   html {
     scroll-behavior: smooth;
@@ -111,6 +150,15 @@
   @media (prefers-reduced-motion: reduce) {
     html {
       scroll-behavior: auto;
+    }
+
+    /* Stop ambient animation, but leave transitions alone. A hover colour fade is
+       not a motion hazard, and killing those makes the whole page feel broken. */
+    *:not(.motion-essential),
+    *:not(.motion-essential)::before,
+    *:not(.motion-essential)::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
     }
   }
 
