@@ -4,16 +4,4 @@
     <loc>https://szstanton.com/</loc>
     <priority>1.0</priority>
   </url>
-  <url>
-    <loc>https://szstanton.com/skills</loc>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://szstanton.com/projects</loc>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://szstanton.com/contact</loc>
-    <priority>0.6</priority>
-  </url>
 </urlset>

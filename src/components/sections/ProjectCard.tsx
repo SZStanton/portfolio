@@ -5,6 +5,7 @@ import {
   LuGithub,
   LuTriangleAlert,
 } from 'react-icons/lu';
+import { useNearViewport } from '../../hooks/useNearViewport';
 import type { Project, ProjectKind } from '../../types';
 import { Lightbox } from '../ui/Lightbox';
 import { TechIcon } from '../ui/TechIcon';
@@ -68,24 +69,31 @@ function Screenshot({
   project: Project;
   onOpen: () => void;
 }) {
+  // A CSS background never lazy-loads, so the urls are withheld until the card
+  // is nearly on screen. bg-hover fills the box meanwhile so nothing flashes.
+  const [ref, near] = useNearViewport<HTMLButtonElement>('600px');
+
   if (!project.screenshot) return null;
 
   return (
     <button
+      ref={ref}
       type="button"
       onClick={onOpen}
       aria-label={`View a larger screenshot of ${project.title}`}
       style={
         {
-          '--shot-light': `url(${project.screenshot.light})`,
-          '--shot-dark': `url(${project.screenshot.dark})`,
+          ...(near && {
+            '--shot-light': `url(${project.screenshot.light})`,
+            '--shot-dark': `url(${project.screenshot.dark})`,
+          }),
           '--shot-ratio': String(project.screenshot.ratio),
         } as CSSProperties
       }
       /* Stacked: the box takes the image's ratio, so cover crops nothing.
          Beside the text: cover crops to the card height, masked at the edge.
          Hover: expands over the full card on purpose, covering the links. */
-      className="aspect-[var(--shot-ratio)] w-full shrink-0 overflow-hidden bg-[image:var(--shot-light)] bg-cover bg-left-top bg-no-repeat [mask-image:linear-gradient(to_bottom,black_80%,transparent)] dark:bg-[image:var(--shot-dark)] lg:absolute lg:inset-y-0 lg:left-0 lg:aspect-auto lg:w-[42%] lg:transition-[width] lg:duration-700 lg:ease-out lg:[mask-image:linear-gradient(to_right,black_80%,transparent)] lg:hover:z-20 lg:hover:w-full lg:hover:[mask-image:none]"
+      className="aspect-[var(--shot-ratio)] w-full shrink-0 overflow-hidden bg-hover bg-[image:var(--shot-light)] bg-cover bg-left-top bg-no-repeat [mask-image:linear-gradient(to_bottom,black_80%,transparent)] dark:bg-[image:var(--shot-dark)] lg:absolute lg:inset-y-0 lg:left-0 lg:aspect-auto lg:w-[42%] lg:transition-[width] lg:duration-700 lg:ease-out lg:[mask-image:linear-gradient(to_right,black_80%,transparent)] lg:hover:z-20 lg:hover:w-full lg:hover:[mask-image:none]"
     />
   );
 }

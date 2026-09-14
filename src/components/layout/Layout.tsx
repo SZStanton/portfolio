@@ -1,6 +1,6 @@
 import { m, useReducedMotion } from 'motion/react';
-import { useEffect } from 'react';
 import { Outlet, useLocation } from 'react-router';
+import { useHashTarget } from '../../hooks/useHashTarget';
 import { Footer } from './Footer';
 import { Navbar } from './Navbar';
 
@@ -11,10 +11,8 @@ export function Layout() {
   // Set when the OS asks for less motion; drop movement but keep the fade.
   const reduceMotion = useReducedMotion();
 
-  // Changing route is not a page load, so the scroll position sticks.
-  useEffect(() => {
-    window.scrollTo({ top: 0, behavior: 'instant' });
-  }, [pathname]);
+  // Handles landing position and focus for both route changes and hash jumps.
+  useHashTarget();
 
   return (
     <>

@@ -5,6 +5,16 @@
       "source": "/projects",
       "destination": "/#work",
       "permanent": true
+    },
+    {
+      "source": "/skills",
+      "destination": "/#toolkit",
+      "permanent": true
+    },
+    {
+      "source": "/contact",
+      "destination": "/#contact",
+      "permanent": true
     }
   ],
   "rewrites": [
