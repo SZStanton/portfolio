@@ -11,7 +11,8 @@ Built with React, TypeScript, Tailwind CSS and a Vercel serverless function.
 
 ## About
 
-A multi-page portfolio built from scratch rather than from a template. The visual direction is
+A portfolio built from scratch rather than from a template: one scrolling page for the
+recruiter's read-through, with a real route per project for anyone who wants the detail. The visual direction is
 restrained art deco: a neutral palette, gold used only as an accent, and a geometric display face
 paired with a readable body face.
 
@@ -20,11 +21,12 @@ exists to work those out in the open rather than because a portfolio strictly ne
 
 ## Features
 
-- **Four pages** with client-side routing, a 404, and a previous/next pager
+- **One scrolling page** with a scroll spy driving the nav, plus case-study routes and a 404
 - **Light and dark themes**, remembered between visits and applied before first paint so there is no flash
 - **Contact form** with shared validation rules, a honeypot, rate limiting and sender domain checks
-- **Route-based code splitting**, so the contact form's validation libraries never load on the home page
-- **Four ways to change page**: the nav, the pager, arrow keys, and arrows that appear near the screen edges
+- **Deferred loading**, so the contact form's validation libraries and the project screenshots
+  only arrive as you approach them
+- **Animated art deco background**, drawn as SVG geometry and paused for reduced-motion users
 - **Certificates** in the experience timeline, opening full size in a lightbox
 - **Accessibility**: skip link, keyboard navigation, focus rings, `aria-live` form status, reduced-motion support
 
@@ -83,7 +85,7 @@ src/
 │   ├── layout/      Navbar, Footer, PageNav, Layout
 │   ├── sections/    Hero, About, ProjectCard
 │   └── ui/          Button, TechIcon, Lightbox, and friends
-├── pages/           One file per route
+├── pages/           One file per route: home, case study, 404
 ├── data/            Projects, skills, navigation, tech colours
 ├── hooks/           Theme, arrow-key navigation
 ├── lib/             Zod schemas
@@ -94,5 +96,5 @@ api/
 
 ## Contact
 
-Via the [contact form](https://szstanton.com/contact), or on
+Via the [contact form](https://szstanton.com/#contact), or on
 [LinkedIn](https://www.linkedin.com/in/sebastian-stanton-5464b0139).

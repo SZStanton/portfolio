@@ -4,7 +4,7 @@ import { Contact } from '../components/sections/Contact';
 import { Hero } from '../components/sections/Hero';
 import { MoreProjects } from '../components/sections/MoreProjects';
 import { Toolkit } from '../components/sections/Toolkit';
-import { Work } from '../components/sections/Work';
+import { Projects } from '../components/sections/Projects';
 import { BackToTop } from '../components/ui/BackToTop';
 import { useDocumentTitle } from '../hooks/useDocumentTitle';
 
@@ -16,7 +16,7 @@ export function Home() {
   return (
     <>
       <Hero />
-      <Work />
+      <Projects />
       <FanDivider className="container-page" />
       <MoreProjects />
       <About />

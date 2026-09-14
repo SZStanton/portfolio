@@ -7,7 +7,7 @@ import { FeaturedProjectCard } from './ProjectCard';
 // Filtered once at module scope rather than on every render.
 const featured = projects.filter(project => project.group === 'featured');
 
-export function Work() {
+export function Projects() {
   // Only wake the Render backends once someone scrolls this far, not on every visit.
   const [ref, near] = useNearViewport<HTMLElement>('600px');
   useWarmBackends(near);
@@ -15,15 +15,15 @@ export function Work() {
   return (
     <section
       ref={ref}
-      id="work"
-      aria-labelledby="work-heading"
+      id="projects"
+      aria-labelledby="projects-heading"
       className="container-page scroll-mt-20 pt-16"
     >
       <SectionHeader
         number="01"
         eyebrow="Selected Work"
         title="Full-stack apps, built and deployed."
-        headingId="work-heading"
+        headingId="projects-heading"
       />
 
       <p className="mt-6 max-w-2xl text-xl leading-relaxed">

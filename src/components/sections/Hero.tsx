@@ -71,7 +71,7 @@ export function Hero() {
             <p className="mt-3 text-sm">Cape Town, South Africa</p>
 
             <div className="mt-10 flex flex-wrap items-center gap-3">
-              <ButtonAnchor href="#work">
+              <ButtonAnchor href="#projects">
                 View my work
                 {/* group is on the button, so the arrow moves on any hover of it. */}
                 <LuArrowRight className="size-4 transition-transform group-hover:translate-x-1" />
@@ -110,7 +110,7 @@ export function Hero() {
 
       {/* Sits at the foot of the first screen and clears as soon as the page moves. */}
       <ScrollCue
-        href="#work"
+        href="#projects"
         label="Selected Work"
         className="absolute inset-x-0 bottom-2 mx-auto w-fit"
       />

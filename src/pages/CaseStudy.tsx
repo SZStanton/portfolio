@@ -54,11 +54,11 @@ export function CaseStudy() {
   return (
     <article className="container-page pb-24 pt-16">
       <Link
-        to="/#work"
+        to="/#projects"
         className="group inline-flex items-center gap-2 text-sm transition-colors hover:text-accent active:text-accent"
       >
         <LuArrowLeft className="size-4 transition-transform group-hover:-translate-x-1" />
-        Back to work
+        Back to projects
       </Link>
 
       <div className="mt-8">

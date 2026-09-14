@@ -3,7 +3,7 @@
   "redirects": [
     {
       "source": "/projects",
-      "destination": "/#work",
+      "destination": "/#projects",
       "permanent": true
     },
     {

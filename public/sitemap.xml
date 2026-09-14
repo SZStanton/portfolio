@@ -4,4 +4,16 @@
     <loc>https://szstanton.com/</loc>
     <priority>1.0</priority>
   </url>
+  <url>
+    <loc>https://szstanton.com/projects/to-do-tasks</loc>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://szstanton.com/projects/itunes-search</loc>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://szstanton.com/projects/jobs-app</loc>
+    <priority>0.8</priority>
+  </url>
 </urlset>

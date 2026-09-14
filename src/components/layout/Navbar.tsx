@@ -1,7 +1,8 @@
+import { track } from '@vercel/analytics/react';
 import { useEffect, useRef, useState } from 'react';
 import { LuMoon, LuSun } from 'react-icons/lu';
-import { Link, useLocation } from 'react-router';
-import { navSections, sectionIds } from '../../data/navigation';
+import { Link, useLocation, useNavigate } from 'react-router';
+import { navIdFor, navSections, spyElementIds } from '../../data/navigation';
 import { useScrollSpy } from '../../hooks/useScrollSpy';
 import { useTheme } from '../../hooks/useTheme';
 
@@ -11,9 +12,12 @@ const FAR = 2.5;
 export function Navbar() {
   const { theme, toggleTheme } = useTheme();
   const { pathname } = useLocation();
+  const navigate = useNavigate();
   // Off the home page those sections do not exist, so the links have to route back.
   const onHome = pathname === '/';
-  const spyId = useScrollSpy(sectionIds);
+  const spyElementId = useScrollSpy(spyElementIds);
+  // More Projects has no nav entry of its own, so it lights Projects instead.
+  const spyId = navIdFor(spyElementId);
 
   // Clicking pins the underline to where you are going, so it does not slide
   // through every section on the way down.
@@ -22,6 +26,15 @@ export function Navbar() {
   const activeId = lockedId || spyId;
 
   useEffect(() => () => window.clearTimeout(unlock.current), []);
+
+  // Sections used to be pages, so Analytics counted them for free. Hash changes
+  // are not pageviews, so each one is reported once per visit instead.
+  const reported = useRef(new Set<string>());
+  useEffect(() => {
+    if (!spyElementId || reported.current.has(spyElementId)) return;
+    reported.current.add(spyElementId);
+    track('section', { id: spyElementId });
+  }, [spyElementId]);
 
   const handleClick = (id: string) => (event: React.MouseEvent) => {
     if (!onHome) return;
@@ -38,7 +51,9 @@ export function Navbar() {
     if (distance > FAR * window.innerHeight) {
       event.preventDefault();
       target.scrollIntoView({ behavior: 'instant' });
-      window.history.pushState(null, '', `#${id}`);
+      // navigate, not history.pushState: the router has to see the hash change or
+      // the effect that moves focus into the section never runs.
+      navigate(`#${id}`);
     }
   };
 
