@@ -32,8 +32,10 @@ export const projects: Project[] = [
       'Registration and login with hashed passwords',
       'JWT authentication with protected routes',
       'Create, edit, complete and delete tasks',
+      'Drag-and-drop reordering, also operable from the keyboard',
+      'Recycle bin, restorable for 24 hours',
       'Filter by All / Active / Completed, with a task counter',
-      'Responsive interface',
+      'One-click demo account, and rate-limited auth routes',
     ],
     futureImprovements: [
       { text: 'Dark mode toggle', done: true },
@@ -46,6 +48,41 @@ export const projects: Project[] = [
     // 1366x1049
     screenshot: { light: todoLight, dark: todoDark, ratio: 1.302 },
     healthUrl: 'https://api.to-do-tasks.szstanton.com/health',
+    caseStudy: {
+      tagline: 'Every account sees only its own list, and the app proves it.',
+      problem: [
+        'A task manager is only worth using if the tasks are genuinely private. That means real accounts, and it means every route has to be guarded rather than just the login screen.',
+        'It also means being able to show it. Anyone can hide a button in the interface; the question worth answering is what happens when someone calls the API directly.',
+      ],
+      approach: [
+        'React 19 and Vite on the front, Express 5 and Mongoose 9 behind it, with MongoDB Atlas for storage. JWT for sessions, bcrypt for hashing, and Zod validating on both sides of the wire.',
+        'Tasks are scoped to the account inside the query itself rather than filtered in the browser, so a guarded route is the only way to reach them.',
+        '112 tests run from a clean clone with no database and no credentials, alongside a separate route-level sweep against a throwaway test database.',
+      ],
+      decisions: [
+        {
+          title: 'Everything that expires is a TTL index, not a scheduled job',
+          body: 'Deleting is a soft delete: deletedAt is set and expiresAt is pulled in to 24 hours, so the index Mongo already maintains does the purging. Accounts and their tasks go the same way after 60 days of inactivity. There is no cron to run and nothing to go stale.',
+        },
+        {
+          title: 'Dragging is disabled while a filter is active',
+          body: 'Reordering a list that is hiding half its items produces an order nobody can see. Cutting the scope was more honest than shipping the feature everywhere and letting it confuse people.',
+        },
+        {
+          title: 'The validation rules exist twice on purpose',
+          body: 'The client mirrors the server Zod schemas, and a cross-check runs every field against every awkward value asserting both produce identical messages. It is the most valuable test in the suite, because it is the one thing stopping the two copies drifting apart.',
+        },
+        {
+          title: 'Login has no length rules, unlike registration',
+          body: 'Enforcing them on login would leak the password policy to anyone probing the endpoint, and lock out accounts created under older rules. Passwords are capped at 72 characters because that is bcrypt ceiling, past which it silently truncates.',
+        },
+      ],
+      learned: [
+        'Node 25 on Windows could not resolve mongodb+srv:// at all. dns.getServers() returned 127.0.0.1 instead of the real resolvers, so every SRV lookup failed while Windows itself resolved the same host fine. It looks exactly like a bad connection string or a blocked Atlas address and is neither. Dropping to Node 24 LTS fixed it.',
+        'name and username started out sharing one builder, which is why the old signup form looked like it asked the same question twice. They do different jobs: one is a display name that keeps spaces and capitals, the other is a sign-in handle lowercased on save.',
+        'The /health route is mounted above the CORS middleware deliberately, because a wake-up ping arrives from an origin that is not on the allowlist and still needs to get a 200 back.',
+      ],
+    },
   },
   {
     id: 'itunes-search',
@@ -55,12 +92,24 @@ export const projects: Project[] = [
     kind: 'full-stack',
     group: 'featured',
     capstone: true,
-    stack: ['React', 'Node.js', 'Express', 'JWT', 'Bootstrap', 'Vite'],
+    stack: [
+      'React',
+      'Vite',
+      'Tailwind CSS',
+      'Node.js',
+      'Express',
+      'MongoDB',
+      'Mongoose',
+      'JWT',
+      'Zod',
+    ],
     features: [
       'Keyword search against the iTunes API',
-      'Filter by media type: music, movies, podcasts, audiobooks, TV, ebooks and more',
-      'Add and remove favourites',
-      'Paginated search results',
+      'Filter across eight media types: music, album, music video, podcast, audiobook, TV, software and ebook',
+      'Favourites and search history saved to the account',
+      'Artwork viewer tinted from the cover art',
+      'Paging by button, arrow key, screen edge or swipe',
+      'One-click demo account',
     ],
     futureImprovements: [
       { text: 'Dark mode toggle', done: true },
@@ -73,6 +122,39 @@ export const projects: Project[] = [
     // 1440x900
     screenshot: { light: itunesLight, dark: itunesDark, ratio: 1.6 },
     healthUrl: 'https://api.itunes-search.szstanton.com/api/health',
+    caseStudy: {
+      tagline:
+        'Eight media types, and an API that stays quiet about the two it cannot serve.',
+      problem: [
+        "Apple's iTunes Search API is public and free, which makes it a good place to practise working against someone else's service. It is also thin on documentation where it matters, and it does not tell you when it has nothing to give you.",
+        "The first version was session-only. Favourites vanished on refresh, which meant the app could show you things but could not remember anything about you. Fixing that meant accounts, and accounts meant a real backend rather than a search box sitting in front of someone else's API.",
+      ],
+      approach: [
+        'Rebuilt in Aug 2026 from a session-only Bootstrap app into a full-stack one. React, Vite and Tailwind v4 on the front, Express and Mongoose behind it, MongoDB Atlas for storage and JWT for sessions.',
+        'The Zod schemas are shared by both sides rather than written twice, so the client and the API cannot drift apart about what a valid request looks like.',
+        'Favourites and search history save against the account, so they survive a refresh, a new tab or a different device.',
+        '294 tests run from a clean clone, alongside a route-level sweep against a separate test database.',
+      ],
+      decisions: [
+        {
+          title: 'Movie and Short Film were removed rather than fixed',
+          body: 'Apple returns nothing for either in any storefront, so they were dead controls dressed up as features. Album and Music Video replaced them, both checked against real responses first. A filter that silently returns nothing is worse than one filter fewer.',
+        },
+        {
+          title: 'Paging works four ways because results are for browsing',
+          body: 'Buttons, arrow keys, a click at the screen edge, or a swipe on touch. Search results are something you move through rather than read once, so the interaction should suit whatever device is in front of you.',
+        },
+        {
+          title: 'The artwork viewer takes its colour from the artwork',
+          body: 'Rather than a fixed backdrop, the surround is tinted from the cover it is showing, so the image sits in something that belongs to it instead of in a generic box.',
+        },
+      ],
+      learned: [
+        'The design pass taught me more than the API did. Replacing flat Bootstrap with a real elevation and lighting system, gradients, shading, glass and a tinted shadow ladder across both themes, is what stopped it looking like a tutorial.',
+        'It is the one project with analytics and Core Web Vitals actually wired up, which is the difference between believing something works and being able to check.',
+        'Checking a third-party API response before building an interface on top of it, rather than trusting the documented list, would have saved building two filters twice.',
+      ],
+    },
   },
   {
     id: 'jobs-app',
@@ -94,14 +176,43 @@ export const projects: Project[] = [
       { text: 'Dark mode toggle', done: true },
       { text: 'Due dates and overdue alerts', done: true },
       { text: 'Keyword search', done: true },
-      { text: 'Assign jobs to team members' },
-      { text: 'CSV export' },
     ],
     repoUrl: 'https://github.com/SZStanton/Jobs-App',
     liveUrl: 'https://jobs-app.szstanton.com/',
     // 1280x1026
     screenshot: { light: jobsLight, dark: jobsDark, ratio: 1.248 },
     healthUrl: 'https://jobs-app-api-ivt0.onrender.com/health',
+    caseStudy: {
+      tagline: 'The work that is late tells you so.',
+      problem: [
+        'A maintenance list is only useful if it says what is overdue without being asked. The interesting part is not storing jobs, it is making sure what is on screen is actually true.',
+        'The first version worked on my machine and could not be deployed. The API URL was hardcoded, the validation rules existed only in the browser, and delete was protected in the interface but not on the server.',
+      ],
+      approach: [
+        'Rebuilt in Aug 2026: React 19 and Vite on the front, Express 5 and Mongoose 9 behind it, MongoDB Atlas for storage, and validation enforced on the server rather than just in the form.',
+        'Jobs carry a description, location, priority and an optional due date. Filtering by status and searching description and location happen together rather than as separate modes.',
+        '69 tests run from a clean clone with no database and no credentials, plus a route-level sweep of around 50 checks against a separate test database.',
+      ],
+      decisions: [
+        {
+          title: 'Overdue is computed, not stored',
+          body: 'It is worked out per render from the due date, so there is no scheduled task and no stored flag that can quietly go stale. It is also the short answer to how you avoid needing a cron job for something like this.',
+        },
+        {
+          title: 'Batch update acts only on what is on screen',
+          body: 'A job hidden by a filter or a search keeps its tick, but is left out of the request and gets the tick back when it reappears. This one reached main three times by three different routes before it earned its own regression tests.',
+        },
+        {
+          title: 'The API has no custom domain, on purpose',
+          body: 'Render free tier allows two and both were spent on the other projects. Nothing depends on it: the portfolio reaches this API on its onrender.com address and gets the same 200 back.',
+        },
+      ],
+      learned: [
+        'The test suite is pinned to a timezone behind UTC. The due-date logic reads as correct at UTC+2 whether or not the code is right, so running the tests in local time would let them pass against broken code. Testing something you cannot see sometimes means deliberately standing somewhere awkward.',
+        'The batch-selection bug is the one I learned most from. It came back three times by three different routes, which is what finally convinced me the fix belonged in a test rather than in remembering to be careful.',
+        'Team assignment and CSV export were both cut deliberately. Assignment needs accounts, which is a different project, and neither was worth shipping half-finished.',
+      ],
+    },
   },
   {
     id: 'event-planner',
@@ -236,3 +347,7 @@ export const projects: Project[] = [
     liveUrl: 'https://szstanton.github.io/chefs-favorites/',
   },
 ];
+
+// Anything with a written case study gets a page and joins the pager. Adding one
+// is a data change; no component holds a list of which projects have pages.
+export const caseStudies = projects.filter(project => project.caseStudy);

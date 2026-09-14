@@ -1,32 +1,50 @@
 import { useEffect, useRef } from 'react';
 import { useLocation } from 'react-router';
 
+// Give up rather than poll forever if the target never turns up.
+const MAX_FRAMES = 30;
+
 // Owns where the page lands after a route change, and moves the keyboard with it.
 export function useHashTarget() {
   const { pathname, hash } = useLocation();
-  const lastPath = useRef<string | null>(null);
+  // The last location this handled, so a re-render cannot make it act twice.
+  const handled = useRef('');
 
-  // Only fires on arriving at a route. In-page hash clicks scroll themselves, and
-  // scrolling again here would cancel the browser's smooth scroll.
   useEffect(() => {
-    const arrived = lastPath.current !== pathname;
-    lastPath.current = pathname;
-    if (!arrived) return;
+    const here = pathname + hash;
+    if (handled.current === here) return;
+
+    const cameFrom = handled.current.split('#')[0];
+    handled.current = here;
+
+    // An in-page hash click, which the browser scrolls itself. Scrolling again
+    // here would cancel its smooth scroll halfway.
+    if (cameFrom === pathname) return;
 
     if (!hash) {
       window.scrollTo({ top: 0, behavior: 'instant' });
       return;
     }
 
-    // Two frames, so a freshly mounted route has laid out before we look for the target.
-    let frame = requestAnimationFrame(() => {
-      frame = requestAnimationFrame(() => {
-        document
-          .getElementById(hash.slice(1))
-          ?.scrollIntoView({ behavior: 'instant' });
-      });
-    });
+    const land = () => {
+      const target = document.getElementById(hash.slice(1));
+      if (!target) return false;
+      target.scrollIntoView({ behavior: 'instant' });
+      return true;
+    };
 
+    // Usually the target is already there, so do not wait a frame for nothing.
+    if (land()) return;
+
+    // Otherwise the new route has not painted yet, so try again each frame.
+    let frame = 0;
+    let tries = 0;
+    const retry = () => {
+      if (land()) return;
+      if (tries++ < MAX_FRAMES) frame = requestAnimationFrame(retry);
+    };
+
+    frame = requestAnimationFrame(retry);
     return () => cancelAnimationFrame(frame);
   }, [pathname, hash]);
 

@@ -1,7 +1,9 @@
 import { useState, type CSSProperties } from 'react';
+import { Link } from 'react-router';
 import {
   LuCheck,
   LuExternalLink,
+  LuArrowRight,
   LuGithub,
   LuTriangleAlert,
 } from 'react-icons/lu';
@@ -17,7 +19,7 @@ const kindLabels: Record<ProjectKind, string> = {
   database: 'Database',
 };
 
-function StackTags({ stack }: { stack: string[] }) {
+export function StackTags({ stack }: { stack: string[] }) {
   return (
     <ul className="flex flex-wrap gap-2">
       {stack.map(tech => (
@@ -34,7 +36,7 @@ function StackTags({ stack }: { stack: string[] }) {
   );
 }
 
-function Links({ project }: { project: Project }) {
+export function Links({ project }: { project: Project }) {
   return (
     <div className="flex flex-wrap items-center gap-4 text-sm">
       <a
@@ -56,6 +58,15 @@ function Links({ project }: { project: Project }) {
           <LuExternalLink className="size-4" />
           Live Demo
         </a>
+      )}
+      {project.caseStudy && (
+        <Link
+          to={`/projects/${project.id}`}
+          className="group inline-flex items-center gap-2 transition-colors hover:text-accent active:text-accent"
+        >
+          Case study
+          <LuArrowRight className="size-4 transition-transform group-hover:translate-x-1" />
+        </Link>
       )}
     </div>
   );
@@ -98,7 +109,7 @@ function Screenshot({
   );
 }
 
-// The four capstones. Everything in the data gets shown.
+// The featured projects. Everything in the data gets shown.
 export function FeaturedProjectCard({ project }: { project: Project }) {
   // Chosen at click time, since the theme cannot change before the box opens.
   const [enlarged, setEnlarged] = useState<string | null>(null);

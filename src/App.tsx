@@ -8,6 +8,9 @@ import { PageLoader } from './components/ui/PageLoader';
 import { Home } from './pages/Home';
 
 // Home loads up front; the rest loads on visit, keeping validation libs off it.
+const CaseStudy = lazy(() =>
+  import('./pages/CaseStudy').then(m => ({ default: m.CaseStudy })),
+);
 const NotFound = lazy(() =>
   import('./pages/NotFound').then(m => ({ default: m.NotFound })),
 );
@@ -16,8 +19,13 @@ const NotFound = lazy(() =>
 function RoutedSpeedInsights() {
   const { pathname } = useLocation();
 
-  // One scrolling page plus the 404, so the only real route left is "/".
-  const route = pathname === '/' ? '/' : '/*';
+  // The pattern, not the path, so three case studies share one bucket.
+  const route =
+    pathname === '/'
+      ? '/'
+      : pathname.startsWith('/projects/')
+        ? '/projects/:id'
+        : '/*';
 
   return <SpeedInsights route={route} />;
 }
@@ -32,6 +40,7 @@ function App() {
           <Routes>
             <Route element={<Layout />}>
               <Route path="/" element={<Home />} />
+              <Route path="/projects/:id" element={<CaseStudy />} />
               {/* The * catches anything that matched nothing above. */}
               <Route path="*" element={<NotFound />} />
             </Route>

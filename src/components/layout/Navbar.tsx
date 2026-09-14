@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { LuMoon, LuSun } from 'react-icons/lu';
+import { Link, useLocation } from 'react-router';
 import { navSections, sectionIds } from '../../data/navigation';
 import { useScrollSpy } from '../../hooks/useScrollSpy';
 import { useTheme } from '../../hooks/useTheme';
@@ -9,6 +10,9 @@ const FAR = 2.5;
 
 export function Navbar() {
   const { theme, toggleTheme } = useTheme();
+  const { pathname } = useLocation();
+  // Off the home page those sections do not exist, so the links have to route back.
+  const onHome = pathname === '/';
   const spyId = useScrollSpy(sectionIds);
 
   // Clicking pins the underline to where you are going, so it does not slide
@@ -20,6 +24,8 @@ export function Navbar() {
   useEffect(() => () => window.clearTimeout(unlock.current), []);
 
   const handleClick = (id: string) => (event: React.MouseEvent) => {
+    if (!onHome) return;
+
     setLockedId(id);
     window.clearTimeout(unlock.current);
     unlock.current = window.setTimeout(() => setLockedId(''), 800);
@@ -58,17 +64,23 @@ export function Navbar() {
           <ul className="flex items-stretch">
             {navSections.map(section => (
               <li key={section.id}>
-                <a
-                  href={`#${section.id}`}
-                  onClick={handleClick(section.id)}
-                  // location, not page: this is a position within one document.
-                  aria-current={
-                    activeId === section.id ? 'location' : undefined
-                  }
-                  className={linkClass(activeId === section.id)}
-                >
-                  {section.label}
-                </a>
+                {onHome ? (
+                  <a
+                    href={`#${section.id}`}
+                    onClick={handleClick(section.id)}
+                    // location, not page: this is a position within one document.
+                    aria-current={
+                      activeId === section.id ? 'location' : undefined
+                    }
+                    className={linkClass(activeId === section.id)}
+                  >
+                    {section.label}
+                  </a>
+                ) : (
+                  <Link to={`/#${section.id}`} className={linkClass(false)}>
+                    {section.label}
+                  </Link>
+                )}
               </li>
             ))}
           </ul>
