@@ -9,7 +9,7 @@ export function MoreProjects() {
     <section
       id="more-projects"
       aria-labelledby="more-projects-heading"
-      className="container-page scroll-mt-20"
+      className="container-page"
     >
       <SectionHeader
         number="02"

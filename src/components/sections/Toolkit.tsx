@@ -7,7 +7,7 @@ export function Toolkit() {
     <section
       id="toolkit"
       aria-labelledby="toolkit-heading"
-      className="container-page scroll-mt-20 pt-24"
+      className="container-page pt-24"
     >
       <SectionHeader
         number="04"

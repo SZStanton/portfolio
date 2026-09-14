@@ -1,6 +1,8 @@
 import { lazy, Suspense } from 'react';
+import { useLocation } from 'react-router';
 import { LuGithub, LuLinkedin, LuMail, LuMapPin } from 'react-icons/lu';
 import { useNearViewport } from '../../hooks/useNearViewport';
+import { EMAIL, GITHUB_URL, LINKEDIN_URL } from '../../data/contact';
 import { CopyButton } from '../ui/CopyButton';
 import { SectionHeader } from '../ui/SectionHeader';
 import { ContactFormSkeleton } from './ContactFormSkeleton';
@@ -8,12 +10,6 @@ import { ContactFormSkeleton } from './ContactFormSkeleton';
 const ContactForm = lazy(() =>
   import('./ContactForm').then(m => ({ default: m.ContactForm })),
 );
-
-const EMAIL = 'szstantondev@gmail.com';
-
-// Someone landing straight on #contact needs the form immediately, not on scroll.
-const DEEP_LINKED =
-  typeof window !== 'undefined' && window.location.hash === '#contact';
 
 const elsewhere = [
   // Only the email gets a copy button; the others are for clicking.
@@ -25,13 +21,13 @@ const elsewhere = [
     copyable: true,
   },
   {
-    href: 'https://www.linkedin.com/in/szstanton',
+    href: LINKEDIN_URL,
     label: 'LinkedIn',
     value: 'szstanton',
     Icon: LuLinkedin,
   },
   {
-    href: 'https://github.com/SZStanton',
+    href: GITHUB_URL,
     label: 'GitHub',
     value: 'SZStanton',
     Icon: LuGithub,
@@ -40,14 +36,16 @@ const elsewhere = [
 
 export function Contact() {
   // Pulls the form chunk in while the reader is still a section or two above it.
-  const [ref, near] = useNearViewport<HTMLElement>('600px');
+  const [ref, near] = useNearViewport<HTMLElement>();
+  // Landing straight on #contact needs the form now, not once it scrolls into view.
+  const deepLinked = useLocation().hash === '#contact';
 
   return (
     <section
       ref={ref}
       id="contact"
       aria-labelledby="contact-heading"
-      className="container-page scroll-mt-20 pb-32 pt-24"
+      className="container-page pb-32 pt-24"
     >
       <SectionHeader
         number="05"
@@ -62,7 +60,7 @@ export function Contact() {
       </p>
 
       <div className="mt-12 grid gap-12 md:grid-cols-5">
-        {near || DEEP_LINKED ? (
+        {near || deepLinked ? (
           <Suspense fallback={<ContactFormSkeleton />}>
             <ContactForm />
           </Suspense>

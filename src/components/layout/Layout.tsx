@@ -1,5 +1,6 @@
 import { m, useReducedMotion } from 'motion/react';
 import { Outlet, useLocation } from 'react-router';
+import { DURATION, EASE } from '../../lib/motion';
 import { useHashTarget } from '../../hooks/useHashTarget';
 import { Footer } from './Footer';
 import { Navbar } from './Navbar';
@@ -32,7 +33,7 @@ export function Layout() {
           key={pathname}
           initial={{ opacity: 0, y: reduceMotion ? 0 : 14 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
+          transition={{ duration: DURATION.base, ease: EASE }}
         >
           <Outlet />
         </m.div>

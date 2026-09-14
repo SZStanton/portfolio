@@ -25,7 +25,7 @@ export function Hero() {
     <section
       id="home"
       // svh, not vh, since mobile toolbars change the visible height; 5rem clears the navbar.
-      className="relative isolate flex min-h-[calc(100svh-5rem)] flex-col justify-center overflow-x-clip py-20"
+      className="relative isolate flex min-h-[calc(100svh-var(--nav-offset))] flex-col justify-center overflow-x-clip py-20"
     >
       <DecoLayer>
         <Sunburst />

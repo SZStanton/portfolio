@@ -7,6 +7,10 @@ export function useProjectArrowKeys(index: number) {
   const navigate = useNavigate();
 
   useEffect(() => {
+    // -1 means the url matched nothing, so this is the 404 and there is no
+    // neighbour to move to. Without this, index + 1 lands on the first study.
+    if (index < 0) return;
+
     const onKeyDown = (event: KeyboardEvent) => {
       if (event.key !== 'ArrowLeft' && event.key !== 'ArrowRight') return;
 

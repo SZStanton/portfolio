@@ -6,7 +6,7 @@ const SUPPORTED =
 
 // Flips true once when the element gets close, and stays true. Used to hold back
 // work until it is nearly needed: screenshots, the contact form, backend warm-ups.
-export function useNearViewport<T extends HTMLElement>(rootMargin = '400px') {
+export function useNearViewport<T extends HTMLElement>(rootMargin = '600px') {
   const ref = useRef<T>(null);
   const [near, setNear] = useState(!SUPPORTED);
 

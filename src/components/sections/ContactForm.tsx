@@ -2,13 +2,12 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { LuCircleAlert, LuCircleCheck } from 'react-icons/lu';
+import { EMAIL } from '../../data/contact';
 import { contactSchema, type ContactFormValues } from '../../lib/schemas';
 import { Button } from '../ui/Button';
 
 // Everything form-shaped lives here, so React Hook Form and Zod stay out of the
 // initial bundle and only load once someone scrolls near the bottom of the page.
-
-const EMAIL = 'szstantondev@gmail.com';
 
 // Tracks what the form is doing, so the button and messages can respond.
 type Status = 'idle' | 'sending' | 'sent' | 'error';

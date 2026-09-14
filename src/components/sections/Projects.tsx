@@ -9,7 +9,7 @@ const featured = projects.filter(project => project.group === 'featured');
 
 export function Projects() {
   // Only wake the Render backends once someone scrolls this far, not on every visit.
-  const [ref, near] = useNearViewport<HTMLElement>('600px');
+  const [ref, near] = useNearViewport<HTMLElement>();
   useWarmBackends(near);
 
   return (
@@ -17,7 +17,7 @@ export function Projects() {
       ref={ref}
       id="projects"
       aria-labelledby="projects-heading"
-      className="container-page scroll-mt-20 pt-16"
+      className="container-page pt-16"
     >
       <SectionHeader
         number="01"

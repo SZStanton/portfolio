@@ -38,6 +38,8 @@
   /* Background geometry. Bronze needs more opacity here than gold does on black. */
   --deco-ink: var(--accent);
   --deco-opacity: 0.13;
+  /* Generous on the h-14/h-16 navbar, so an anchor never lands tight under it. */
+  --nav-offset: 5rem;
   --danger: #a8321f;
   --success: #2f6b3f;
   /* Light mode gets depth from shadow; a raised surface can't get much lighter than the page. */
@@ -144,6 +146,9 @@
 @layer base {
   html {
     scroll-behavior: smooth;
+    /* Clears the sticky navbar on every scroll into view, so sections do not each
+       carry their own scroll-mt and focus never lands underneath the header. */
+    scroll-padding-top: var(--nav-offset);
   }
 
   /* Anchor jumps follow the same preference the page transitions already do. */

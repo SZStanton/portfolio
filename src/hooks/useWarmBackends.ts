@@ -24,9 +24,11 @@ export function useWarmBackends(enabled: boolean) {
     if (connection?.saveData) return;
     if (document.visibilityState === 'hidden') return;
 
-    lastWarmed = Date.now();
-
     const warm = () => {
+      // Stamped here, not when this was scheduled. Leaving early used to mark the
+      // backends warm without sending anything, which then blocked the next try.
+      lastWarmed = Date.now();
+
       for (const project of projects) {
         if (!project.healthUrl) continue;
 

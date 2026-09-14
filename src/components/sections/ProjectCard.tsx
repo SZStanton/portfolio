@@ -82,7 +82,7 @@ function Screenshot({
 }) {
   // A CSS background never lazy-loads, so the urls are withheld until the card
   // is nearly on screen. bg-hover fills the box meanwhile so nothing flashes.
-  const [ref, near] = useNearViewport<HTMLButtonElement>('600px');
+  const [ref, near] = useNearViewport<HTMLButtonElement>();
 
   if (!project.screenshot) return null;
 

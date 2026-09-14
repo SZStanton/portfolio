@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useLayoutEffect, useRef } from 'react';
 import { useLocation } from 'react-router';
 
 // Give up rather than poll forever if the target never turns up.
@@ -7,15 +7,13 @@ const MAX_FRAMES = 30;
 // Owns where the page lands after a route change, and moves the keyboard with it.
 export function useHashTarget() {
   const { pathname, hash } = useLocation();
-  // The last location this handled, so a re-render cannot make it act twice.
-  const handled = useRef('');
+  const previousPath = useRef<string | null>(null);
 
-  useEffect(() => {
-    const here = pathname + hash;
-    if (handled.current === here) return;
-
-    const cameFrom = handled.current.split('#')[0];
-    handled.current = here;
+  // Layout, not plain effect: this runs before paint, so a deep link never shows
+  // a frame at the top of the page before jumping to the section.
+  useLayoutEffect(() => {
+    const cameFrom = previousPath.current;
+    previousPath.current = pathname;
 
     // An in-page hash click, which the browser scrolls itself. Scrolling again
     // here would cancel its smooth scroll halfway.

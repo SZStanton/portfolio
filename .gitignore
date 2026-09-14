@@ -35,3 +35,6 @@ pnpm-debug.log*
 CLAUDE.md
 .claude/
 reference/
+
+# Playwright MCP scratch output
+.playwright-mcp/

@@ -97,7 +97,7 @@ export function About() {
     <section
       id="about"
       aria-labelledby="about-heading"
-      className="container-page scroll-mt-20 pt-24"
+      className="container-page pt-24"
     >
       <SectionHeader
         number="03"
@@ -156,7 +156,7 @@ export function About() {
         className="mx-auto mt-16 w-fit"
       />
 
-      <div id="experience" className="mt-16 scroll-mt-20">
+      <div id="experience" className="mt-16">
         <h3 className="flex items-center gap-3 text-sm font-semibold uppercase tracking-[0.15em] text-heading">
           Experience
           <span className="h-px flex-1 bg-gradient-to-r from-accent-soft to-transparent" />

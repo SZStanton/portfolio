@@ -82,13 +82,14 @@ needs `vercel dev`.
 src/
 ├── assets/          Certificates, photo, CV. Imported, so they get hashed
 ├── components/
-│   ├── layout/      Navbar, Footer, PageNav, Layout
-│   ├── sections/    Hero, About, ProjectCard
+│   ├── layout/      Navbar, Footer, Layout, ProjectPager
+│   ├── sections/    The home page in order: Hero, Projects, About, Toolkit, Contact
+│   ├── deco/        Art deco background geometry, drawn as SVG
 │   └── ui/          Button, TechIcon, Lightbox, and friends
 ├── pages/           One file per route: home, case study, 404
 ├── data/            Projects, skills, navigation, tech colours
-├── hooks/           Theme, arrow-key navigation
-├── lib/             Zod schemas
+├── hooks/           Theme, scroll spy, hash landing, lazy loading, warm-ups
+├── lib/             Zod schemas, motion values, deco geometry
 └── types/           Shared types
 api/
 └── contact.ts       Serverless function, form to inbox
