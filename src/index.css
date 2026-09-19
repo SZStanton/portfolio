@@ -22,39 +22,51 @@
    --------------------------------------------------------------- */
 
 :root {
-  /* Light: warm off-white, so it reads as paper rather than a lightbox. */
-  --surface: #f7f6f3;
-  --surface-raised: #fdfdfc;
-  --line: #dcd9d1;
-  --heading: #1c1b1a;
-  --body: #55534e;
+  /* Light: ivory paper, charcoal ink, aged brass. The surfaces carry the warmth
+     and the text stays neutral, which stops the whole page going sepia. */
+  --surface: hsl(42 24% 96%);
+  --surface-raised: hsl(45 30% 99%);
+  --line: hsl(40 18% 80%);
+  --heading: hsl(30 12% 12%);
+  --body: hsl(32 8% 28%);
   /* For text that's been played down. Still readable on both surfaces, which
      body text with the opacity turned down was not. */
-  --muted: #6f6d68;
-  --hover: #eceae5;
-  /* Deeper bronze than dark mode; a bright gold here looks washed out. */
-  --accent: #ae8513;
-  --accent-soft: #d8b564;
-  /* Background geometry. Bronze needs more opacity here than gold does on black. */
-  --deco-ink: var(--accent);
-  --deco-opacity: 0.13;
+  --muted: hsl(35 7% 43%);
+  --hover: hsl(42 22% 91%);
+  /* Deep brass: saturation kept high so it reads as metal, lightness low so it
+     still carries against paper. Muting it instead turns it to mud. */
+  --accent: hsl(43 78% 28%);
+  /* Hairlines and borders, a clear step lighter but still saturated. */
+  --accent-soft: hsl(42 48% 45%);
+  /* Background geometry is the one place light mode does not follow the accent.
+     At this opacity the text gold turns grey, so the ink runs brighter instead. */
+  --deco-ink: hsl(41 66% 38%);
+  --deco-opacity: 0.16;
+  /* Gold-adjacent border, for the few places that earn a decorative edge rather
+     than a functional one. */
+  --line-accent: hsl(42 35% 72%);
   /* Generous on the h-14/h-16 navbar, so an anchor never lands tight under it. */
   --nav-offset: 5rem;
+  /* Only used while a card is lifted, so it can be heavier than --card-shadow. */
+  --lift-shadow: 0 18px 40px -22px rgb(28 27 26 / 0.45);
   --danger: #a8321f;
   --success: #2f6b3f;
-  /* Light mode gets depth from shadow; a raised surface can't get much lighter than the page. */
+  /* Light mode gets depth from shadow; a raised surface can't get much lighter
+     than the page. Three layers rather than two: contact, lift and the wide soft
+     one underneath, which is what reads as expensive rather than just raised. */
   --card-shadow:
-    0 1px 2px rgb(28 27 26 / 0.05), 0 10px 24px -14px rgb(28 27 26 / 0.22);
-  /* Three layers: top glow, bottom shadow, base shift; both kept near their
-     own edge so the middle stays clean. */
+    0 1px 2px hsl(30 20% 12% / 0.05), 0 8px 20px -10px hsl(30 20% 12% / 0.12),
+    0 22px 44px -24px hsl(30 20% 12% / 0.16);
+  /* Same two layers as dark: a gold glow at the top, and the paper settling to
+     one colour below it. No darker stop at the foot, which read as a smudge.
+     The glow is --accent-soft's colour, so the lab can rebuild this exactly. */
   --surface-gradient:
     radial-gradient(
-      900px 260px at 50% -8%,
-      rgb(174 133 19 / 0.1),
-      transparent 58%
+      900px 300px at 50% -6%,
+      hsl(42 48% 45% / 0.09),
+      transparent 60%
     ),
-    linear-gradient(0deg, rgb(28 27 26 / 0.12) 0%, transparent 10%),
-    linear-gradient(180deg, #fefefd 0%, #fdfdfb 84%, #f2f0ea 100%);
+    linear-gradient(180deg, hsl(42 24% 98%) 0%, hsl(42 24% 96%) 100%);
 }
 
 /* Same names, different values; nothing using them needs to know which theme is active. */
@@ -67,11 +79,16 @@
   --body: #a8a8ad;
   --muted: #8a8a8f;
   --hover: #222226;
+  /* The decorative edge, dim enough that a card outline still reads as a line
+     rather than as a gold frame. */
+  --line-accent: hsl(42 26% 28%);
   /* Gold reads brightest against near-black, so it can afford to be lighter here. */
   --accent: #d4af37;
   --accent-soft: #6b5720;
   --deco-ink: var(--accent);
-  --deco-opacity: 0.08;
+  --deco-opacity: 0.16;
+  /* Dark mode gets a gold bloom instead of a shadow, which would vanish. */
+  --lift-shadow: 0 18px 40px -24px rgb(212 175 55 / 0.35);
   --danger: #e5705c;
   --success: #6dbd85;
   /* Dark mode separates surfaces by being lighter; shadow would just smudge. */
@@ -88,6 +105,26 @@
 /* Exposes the palette as Tailwind utilities (bg-surface, text-heading, ...)
    that swap with the theme. */
 @theme inline {
+  /* Phones, where the five nav items have to share the row with the toggle. */
+  --breakpoint-xs: 27rem;
+  /* Where the hero puts the figure beside the copy. 960px is half of a 1920
+     monitor, which is where a browser parked on half the screen lands. */
+  --breakpoint-side: 60rem;
+
+  /* Type grows with the screen instead of staying at phone size on a 4k monitor.
+     Each one is clamp(smallest, grows with the viewport, largest), so the bottom
+     end is unchanged and only big screens see a difference. */
+  --text-xs: clamp(0.75rem, 0.72rem + 0.12vw, 0.85rem);
+  --text-sm: clamp(0.875rem, 0.84rem + 0.15vw, 1rem);
+  --text-base: clamp(1rem, 0.95rem + 0.2vw, 1.15rem);
+  --text-lg: clamp(1.125rem, 1.06rem + 0.26vw, 1.3rem);
+  --text-xl: clamp(1.25rem, 1.16rem + 0.36vw, 1.5rem);
+  --text-2xl: clamp(1.5rem, 1.37rem + 0.55vw, 1.95rem);
+  --text-3xl: clamp(1.875rem, 1.66rem + 0.9vw, 2.5rem);
+  --text-4xl: clamp(2.25rem, 1.95rem + 1.25vw, 3.1rem);
+  --text-5xl: clamp(3rem, 2.5rem + 2vw, 4.25rem);
+  --text-6xl: clamp(3.75rem, 3rem + 3vw, 5.5rem);
+  --text-7xl: clamp(4.5rem, 3.5rem + 4vw, 7rem);
   --color-surface: var(--surface);
   --color-surface-raised: var(--surface-raised);
   --color-line: var(--line);
@@ -98,6 +135,8 @@
   --color-accent: var(--accent);
   --color-accent-soft: var(--accent-soft);
   --color-deco-ink: var(--deco-ink);
+  --color-line-accent: var(--line-accent);
+  --shadow-lift: var(--lift-shadow);
   --color-danger: var(--danger);
   --color-success: var(--success);
 
@@ -112,8 +151,23 @@
 
 /* Page width lives here rather than on <main>, so a section can break out of it
    when it needs to run full bleed behind the deco. */
+/* The reading column widens on a big monitor rather than leaving half the screen
+   empty, but never past a comfortable line length. */
 @utility container-page {
-  @apply mx-auto w-full max-w-5xl px-6;
+  @apply mx-auto w-full px-6;
+  max-width: clamp(64rem, 58rem + 12vw, 88rem);
+}
+
+/* The width a section heading wraps at. It tracks the same curve as --text-5xl,
+   so the line breaks stay put instead of moving as the type scales. */
+@utility measure-heading {
+  max-width: clamp(44.4rem, 37rem + 29.6vw, 62.9rem);
+}
+
+/* The width a paragraph wraps at, a step wider than the old reading column.
+   Lands around 70 characters a line once the body type is at full size. */
+@utility measure-text {
+  max-width: 50rem;
 }
 
 /* Deco's thin double rule: two hairlines with a 2px gap between them. */
@@ -123,29 +177,12 @@
   border-bottom: 1px solid var(--accent-soft);
 }
 
-/* Ambient deco motion. Transform and opacity only, so it stays on the compositor. */
-@keyframes deco-sway {
-  from {
-    transform: rotate(-3deg);
-  }
-  to {
-    transform: rotate(3deg);
-  }
-}
-
-@keyframes deco-breathe {
-  0%,
-  100% {
-    opacity: 0.55;
-  }
-  50% {
-    opacity: 1;
-  }
-}
-
 @layer base {
   html {
     scroll-behavior: smooth;
+    /* Reserves the scrollbar's width at all times, so opening a modal that locks
+       scrolling does not shift the whole page sideways. */
+    scrollbar-gutter: stable;
     /* Clears the sticky navbar on every scroll into view, so sections do not each
        carry their own scroll-mt and focus never lands underneath the header. */
     scroll-padding-top: var(--nav-offset);
@@ -159,9 +196,9 @@
 
     /* Stop ambient animation, but leave transitions alone. A hover colour fade is
        not a motion hazard, and killing those makes the whole page feel broken. */
-    *:not(.motion-essential),
-    *:not(.motion-essential)::before,
-    *:not(.motion-essential)::after {
+    html:not([data-motion-force='true']) *:not(.motion-essential),
+    html:not([data-motion-force='true']) *:not(.motion-essential)::before,
+    html:not([data-motion-force='true']) *:not(.motion-essential)::after {
       animation-duration: 0.01ms !important;
       animation-iteration-count: 1 !important;
     }
@@ -197,6 +234,12 @@
   /* Gold focus ring on keyboard navigation only; on theme and accessible by default. */
   :focus-visible {
     @apply outline-2 outline-offset-2 outline-accent;
+  }
+
+  /* Landing on a section focuses it so a screen reader starts reading there. It is
+     taller than the screen, so a ring around it just draws two gold lines. */
+  [tabindex='-1']:focus-visible {
+    outline: none;
   }
 
   /* Added for one frame during a theme swap; see hooks/useTheme.ts. */
