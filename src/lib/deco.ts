@@ -71,3 +71,97 @@ export function fanPath({ cx, cy, count, rMin, rMax }: FanOptions): string {
 
   return arcs.join('');
 }
+
+// Table Mountain from the city bowl, left to right: Devil's Peak, the flat table,
+// Lion's Head, then Signal Hill running down to the sea. x and y both run 0 to 1.
+const CAPE_TOWN: [number, number][] = [
+  [0.0, 0.08],
+  [0.06, 0.16],
+  [0.13, 0.5],
+  [0.19, 0.78],
+  [0.24, 0.66],
+  [0.28, 0.5],
+  [0.33, 0.48],
+  [0.36, 0.86],
+  [0.39, 0.92],
+  [0.62, 0.92],
+  [0.65, 0.84],
+  [0.68, 0.52],
+  [0.72, 0.34],
+  [0.76, 0.32],
+  [0.81, 0.66],
+  [0.84, 0.74],
+  [0.87, 0.6],
+  [0.93, 0.3],
+  [1.0, 0.2],
+];
+
+// Height of the profile at x, straight line between the two control points either side.
+function profileAt(x: number): number {
+  for (let i = 1; i < CAPE_TOWN.length; i += 1) {
+    const [x0, y0] = CAPE_TOWN[i - 1];
+    const [x1, y1] = CAPE_TOWN[i];
+    if (x <= x1) return y0 + ((y1 - y0) * (x - x0)) / (x1 - x0);
+  }
+  return CAPE_TOWN[CAPE_TOWN.length - 1][1];
+}
+
+type SkylineOptions = {
+  width: number;
+  height: number;
+  // Tread height, as a fraction of the profile. Bigger steps read more ziggurat.
+  step?: number;
+  // How often the profile is sampled across the width.
+  samples?: number;
+};
+
+// The profile as a staircase rather than slopes, which is what turns a mountain
+// into deco. Returns one closed `d`, filled from the silhouette down to the base.
+export function skylinePath({
+  width,
+  height,
+  step = 0.07,
+  samples = 200,
+}: SkylineOptions): string {
+  // Flip to SVG coordinates, where y grows downwards.
+  const toY = (h: number) => (1 - Math.round(h / step) * step) * height;
+
+  let last = toY(profileAt(0));
+  const parts = [`M0 ${height}`, `L0 ${last.toFixed(2)}`];
+
+  for (let i = 1; i <= samples; i += 1) {
+    const x = (i / samples) * width;
+    const y = toY(profileAt(i / samples));
+    if (y === last) continue;
+
+    // Tread first, then riser, so every corner stays square.
+    parts.push(
+      `L${x.toFixed(2)} ${last.toFixed(2)}`,
+      `L${x.toFixed(2)} ${y.toFixed(2)}`,
+    );
+    last = y;
+  }
+
+  parts.push(`L${width} ${last.toFixed(2)}`, `L${width} ${height}`, 'Z');
+  return parts.join('');
+}
+
+type BracketOptions = {
+  size: number;
+  lines: number;
+  gap: number;
+};
+
+// Nested right angles for a corner, each arm shorter than the one outside it.
+export function cornerBracket({ size, lines, gap }: BracketOptions): string {
+  const arms: string[] = [];
+
+  for (let i = 0; i < lines; i += 1) {
+    const o = i * gap;
+    const arm = size - i * gap * 2.2;
+    if (arm <= o) break;
+    arms.push(`M${o} ${arm.toFixed(2)}L${o} ${o}L${arm.toFixed(2)} ${o}`);
+  }
+
+  return arms.join('');
+}
