@@ -59,7 +59,7 @@ export function ContactForm() {
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
-      className="space-y-6 md:col-span-3"
+      className="space-y-5 md:col-span-3"
       noValidate
     >
       <div>
@@ -108,7 +108,7 @@ export function ContactForm() {
         </label>
         <textarea
           id="message"
-          rows={6}
+          rows={4}
           {...register('message')}
           aria-invalid={errors.message ? true : undefined}
           aria-describedby={errors.message ? 'message-error' : undefined}

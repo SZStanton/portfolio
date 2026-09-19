@@ -1,4 +1,5 @@
 import { projects } from '../../data/projects';
+import { RevealGroup, RevealItem } from '../motion/Reveal';
 import { SectionHeader } from '../ui/SectionHeader';
 import { CompactProjectCard } from './ProjectCard';
 
@@ -14,15 +15,18 @@ export function MoreProjects() {
       <SectionHeader
         number="02"
         eyebrow="More Projects"
-        title="Earlier work and smaller builds."
+        title="Earlier & Smaller Projects"
         headingId="more-projects-heading"
       />
 
-      <div className="mt-10 grid gap-6 md:grid-cols-2">
+      {/* Cards cascade down the grid on the same gap the skills use. */}
+      <RevealGroup className="mt-10 grid gap-6 md:grid-cols-2" gap={0.13}>
         {other.map(project => (
-          <CompactProjectCard key={project.id} project={project} />
+          <RevealItem key={project.id}>
+            <CompactProjectCard project={project} />
+          </RevealItem>
         ))}
-      </div>
+      </RevealGroup>
     </section>
   );
 }

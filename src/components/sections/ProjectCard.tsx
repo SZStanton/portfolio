@@ -1,7 +1,6 @@
 import { useState, type CSSProperties } from 'react';
 import { Link } from 'react-router';
 import {
-  LuCheck,
   LuExternalLink,
   LuArrowRight,
   LuGithub,
@@ -103,8 +102,10 @@ function Screenshot({
       }
       /* Stacked: the box takes the image's ratio, so cover crops nothing.
          Beside the text: cover crops to the card height, masked at the edge.
-         Hover: expands over the full card on purpose, covering the links. */
-      className="aspect-[var(--shot-ratio)] w-full shrink-0 overflow-hidden bg-hover bg-[image:var(--shot-light)] bg-cover bg-left-top bg-no-repeat [mask-image:linear-gradient(to_bottom,black_80%,transparent)] dark:bg-[image:var(--shot-dark)] lg:absolute lg:inset-y-0 lg:left-0 lg:aspect-auto lg:w-[42%] lg:transition-[width] lg:duration-700 lg:ease-out lg:[mask-image:linear-gradient(to_right,black_80%,transparent)] lg:hover:z-20 lg:hover:w-full lg:hover:[mask-image:none]"
+         Hover: expands over the full card on purpose, covering the links.
+         z-20 is permanent, not on hover: it cannot be transitioned, so dropping
+         it on mouse-out let the text paint through the shrinking image. */
+      className="aspect-[var(--shot-ratio)] w-full shrink-0 overflow-hidden bg-hover bg-[image:var(--shot-light)] bg-cover bg-left-top bg-no-repeat [mask-image:linear-gradient(to_bottom,black_80%,transparent)] dark:bg-[image:var(--shot-dark)] lg:absolute lg:inset-y-0 lg:left-0 lg:z-20 lg:aspect-auto lg:w-[42%] lg:transition-[width] lg:duration-700 lg:ease-out lg:[mask-image:linear-gradient(to_right,black_80%,transparent)] lg:hover:w-full lg:hover:[mask-image:none]"
     />
   );
 }
@@ -121,7 +122,7 @@ export function FeaturedProjectCard({ project }: { project: Project }) {
   };
 
   return (
-    <article className="group relative flex flex-col overflow-hidden rounded-xl border border-line bg-surface-raised shadow-card transition-colors hover:border-accent-soft active:border-accent">
+    <article className="group relative flex flex-col overflow-hidden rounded-xl border border-line-accent bg-surface-raised shadow-card transition-[transform,border-color,box-shadow] duration-300 ease-out hover:-translate-y-1 hover:border-accent-soft hover:shadow-lift active:translate-y-0 active:border-accent">
       {/* Gold rule along the top, brighter on hover. */}
       <span className="h-0.5 w-full bg-gradient-to-r from-accent/60 via-accent/20 to-transparent transition-opacity group-hover:opacity-100 sm:opacity-70" />
 
@@ -141,14 +142,9 @@ export function FeaturedProjectCard({ project }: { project: Project }) {
             <span className="text-xs uppercase tracking-[0.15em]">
               {kindLabels[project.kind]}
             </span>
-            {project.capstone && (
-              <span className="rounded-full border border-accent-soft px-2.5 py-0.5 text-xs uppercase tracking-wider text-accent">
-                Capstone
-              </span>
-            )}
           </div>
 
-          <h3 className="mt-3 text-2xl font-semibold text-heading">
+          <h3 className="mt-3 text-2xl font-semibold text-heading transition-colors group-hover:text-accent">
             {project.title}
           </h3>
 
@@ -171,32 +167,6 @@ export function FeaturedProjectCard({ project }: { project: Project }) {
               <LuTriangleAlert className="mt-0.5 size-4 shrink-0 text-accent" />
               {project.knownIssue}
             </p>
-          )}
-
-          {/* Always open: a collapsible resized the card and the panel beside it. */}
-          {project.futureImprovements && (
-            <div className="mt-5">
-              <p className="font-display text-xs font-semibold uppercase tracking-[0.15em] text-heading">
-                Improvements
-              </p>
-              <ul className="mt-3 space-y-2 text-[0.9375rem]">
-                {project.futureImprovements.map(item => (
-                  <li key={item.text} className="flex gap-3">
-                    {item.done ? (
-                      <LuCheck className="mt-1 size-4 shrink-0 text-success" />
-                    ) : (
-                      <span className="mt-2 size-1.5 shrink-0 rotate-45 border border-accent/70" />
-                    )}
-                    {/* A dimmer colour, not opacity, which made it too faint to read. */}
-                    <span
-                      className={item.done ? 'text-muted line-through' : ''}
-                    >
-                      {item.text}
-                    </span>
-                  </li>
-                ))}
-              </ul>
-            </div>
           )}
 
           <div className="mt-6">
@@ -225,19 +195,14 @@ export function FeaturedProjectCard({ project }: { project: Project }) {
 // The rest. Same information, minus the feature lists.
 export function CompactProjectCard({ project }: { project: Project }) {
   return (
-    <article className="flex flex-col rounded-xl border border-line bg-surface-raised p-6 shadow-card transition-colors hover:border-accent-soft active:border-accent">
+    <article className="group flex flex-col rounded-xl border border-line bg-surface-raised p-6 shadow-card transition-[transform,border-color,box-shadow] duration-300 ease-out hover:-translate-y-1 hover:border-accent-soft hover:shadow-lift active:translate-y-0 active:border-accent">
       <div className="flex flex-wrap items-center gap-x-3 gap-y-2">
         <span className="font-display text-xs font-semibold uppercase tracking-[0.15em]">
           {kindLabels[project.kind]}
         </span>
-        {project.capstone && (
-          <span className="rounded-full border border-accent-soft px-2.5 py-0.5 font-display text-xs font-semibold uppercase tracking-wider text-accent">
-            Capstone
-          </span>
-        )}
       </div>
 
-      <h3 className="mt-3 text-xl font-semibold text-heading">
+      <h3 className="mt-3 text-xl font-semibold text-heading transition-colors group-hover:text-accent">
         {project.title}
       </h3>
 
