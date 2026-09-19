@@ -27,10 +27,12 @@ export function Hero() {
   const drift = useHeroParallax();
 
   return (
+    // A phone in desktop mode reports a ~980px wide viewport but keeps the screen's
+    // tall shape, so a full-height hero there is mostly empty. Capped against width.
     <section
       id="home"
       // svh, not vh, since mobile toolbars change the visible height; 5rem clears the navbar.
-      className="relative isolate flex min-h-[calc(100svh-var(--nav-offset))] flex-col justify-center overflow-clip pb-0 pt-10 [--figure:min(58vw,52svh)] sm:pt-20 side:py-20"
+      className="relative isolate flex min-h-[max(calc(100svh-var(--nav-offset)),36rem)] flex-col justify-center overflow-clip pb-0 pt-10 [--figure:min(58vw,52svh)] sm:pt-20 side:py-20"
     >
       <DecoLayer speed={70}>
         <Sunburst />
@@ -48,9 +50,9 @@ export function Hero() {
             fixed distance from the head below it. Side by side there is no figure
             underneath, so it goes back to sitting in the middle. */}
         <div className="mt-auto side:my-auto">
-          {/* Leaves the right of the row to the figure. 64% is what the three
-            buttons need to stay on one line at the narrow end. */}
-          <div className="side:max-w-[64%]">
+          {/* Leaves the right of the row to the figure, which needs more of it
+            at tablet width than it does once the row is wider. */}
+          <div className="side:max-w-[76%] wide:max-w-[64%]">
             <RevealGroup gap={0.08}>
               <RevealItem className="flex items-center gap-2 text-sm">
                 {/* Two stacked circles: the lower one pings outwards, the solid one stays. */}
@@ -65,13 +67,15 @@ export function Hero() {
               {/* Sized off the viewport rather than a step scale, so the name
                 stays on one line from 320px up. Narrower rule once the figure
                 takes the right of the row and the copy only has 64%. */}
-              <h1 className="mt-6 text-[clamp(1.75rem,calc(12vw-8px),5.5rem)] font-semibold tracking-tight text-heading side:text-[clamp(1.75rem,calc(48px+1.2vw),5.5rem)]">
+              <h1 className="mt-6 text-[clamp(1.75rem,calc(12vw-8px),4rem)] font-semibold tracking-tight text-heading wide:text-[clamp(1.75rem,calc(57px+0.73vw),5.5rem)]">
                 <RevealWords text="Sebastian Stanton" gap={0.09} />
               </h1>
 
               {/* Tech names lifted to heading colour so a skim picks up the stack; {' '} keeps real spaces JSX would drop. */}
-              <RevealItem className="mt-6 max-w-2xl text-xl leading-relaxed sm:text-2xl">
-                Junior Full-Stack Developer building with{' '}
+              <RevealItem className="mt-6 max-w-2xl text-xl leading-relaxed sm:text-2xl side:text-xl wide:text-2xl">
+                {/* Broken after 'with' so the stack always starts its own line. */}
+                Junior Full-Stack Developer building with
+                <br />
                 <span className="text-heading">React</span>,{' '}
                 <span className="text-heading">Node</span> and{' '}
                 <span className="text-heading">MongoDB</span>.
@@ -81,6 +85,8 @@ export function Hero() {
                 Cape Town, South Africa
               </RevealItem>
 
+              {/* Tighter buttons while the row is shared with the figure; the CV
+                one drops to a second line when even that does not fit. */}
               <RevealItem className="mt-10 flex flex-wrap items-center gap-2.5">
                 <ButtonAnchor href="#projects">
                   View my work
@@ -90,6 +96,8 @@ export function Hero() {
                 <ButtonAnchor href="#contact" variant="secondary">
                   Get in touch
                 </ButtonAnchor>
+                {/* Forces the wrap, so CV sits under View my work below laptop. */}
+                <div className="basis-full wide:hidden" />
                 {/* The built file is fingerprinted, so `download` gives it a proper name. */}
                 <ButtonAnchor
                   href={cv}
@@ -105,7 +113,7 @@ export function Hero() {
 
           {/* Muted until hovered, when the brand colour appears; keeps the hero calm. */}
           <RevealGroup
-            className="mt-8 flex flex-wrap items-center gap-x-7 gap-y-4 sm:mt-16"
+            className="mt-8 flex flex-wrap items-center gap-x-7 gap-y-4 sm:mt-16 side:mt-10 wide:mt-16"
             gap={0.05}
             as="ul"
           >
@@ -114,7 +122,7 @@ export function Hero() {
                 <TechIcon
                   tech={name}
                   label={name}
-                  className="size-7 opacity-70 transition-all duration-300 hover:scale-110 hover:opacity-100 active:scale-110 active:opacity-100"
+                  className="size-6 opacity-70 transition-all duration-300 hover:scale-110 hover:opacity-100 active:scale-110 active:opacity-100 wide:size-7"
                 />
               </RevealItem>
             ))}
@@ -145,7 +153,7 @@ function HeroBackdrop() {
           than being cut off by it. */}
       {/* 110% of the hero always clears the 6rem navbar gap, so that and 52vw
           are the two that bite. */}
-      <HeroPhoto className="absolute inset-y-0 right-[-4%] hidden bg-[length:auto_min(calc(100%-6rem),52vw)] bg-right-bottom side:block side:w-[62%]" />
+      <HeroPhoto className="absolute inset-y-0 right-[-4%] hidden bg-right-bottom side:block side:w-[62%] side:bg-[length:auto_min(calc(100%-6rem),44vw)] wide:bg-[length:auto_min(calc(100%-6rem),52vw)]" />
       {/* Below the side-by-side breakpoint the figure sits under the copy, sized
           off the width with a height cap for short windows. */}
       <HeroPhoto className="absolute inset-x-0 bottom-0 h-[var(--figure)] bg-contain bg-bottom side:hidden" />

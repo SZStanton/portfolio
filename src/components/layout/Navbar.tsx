@@ -47,7 +47,7 @@ export function Navbar() {
       // Josefin runs light, so caps need a heavier weight to hold up.
       // Smaller type and padding below sm: five items and the toggle only just
       // fit a 320px phone.
-      'relative flex h-full items-center justify-center px-1 font-display text-[0.625rem] font-semibold uppercase tracking-[0.03em] transition-colors xs:px-2 xs:text-[0.6875rem] xs:tracking-[0.08em] sm:px-6 sm:text-sm sm:tracking-[0.14em]',
+      'relative flex h-full items-center justify-center px-1 font-display text-[0.6875rem] font-semibold uppercase tracking-[0.01em] transition-colors xs:px-2 xs:text-[0.75rem] xs:tracking-[0.06em] sm:px-6 sm:text-sm sm:tracking-[0.14em]',
       'after:absolute after:inset-x-0 after:bottom-0 after:h-0.5 after:transition-colors',
       isActive
         ? 'text-heading after:bg-accent'

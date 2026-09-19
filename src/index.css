@@ -109,7 +109,9 @@
   --breakpoint-xs: 27rem;
   /* Where the hero puts the figure beside the copy. 960px is half of a 1920
      monitor, which is where a browser parked on half the screen lands. */
-  --breakpoint-side: 60rem;
+  /* Side by side starts at tablet width; the roomier type waits for wide. */
+  --breakpoint-side: 48rem;
+  --breakpoint-wide: 60rem;
 
   /* Type grows with the screen instead of staying at phone size on a 4k monitor.
      Each one is clamp(smallest, grows with the viewport, largest), so the bottom
