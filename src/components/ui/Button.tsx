@@ -5,11 +5,13 @@ type Variant = 'primary' | 'secondary';
 
 // Outline stays transparent until hover, so only its colour animates in.
 const base =
-  'group inline-flex items-center justify-center gap-2 rounded-sm px-7 py-3.5 font-display text-sm font-semibold uppercase tracking-[0.15em] outline outline-1 outline-offset-[3px] outline-transparent transition-all duration-200 hover:-translate-y-0.5 hover:outline-accent/60 active:translate-y-0 disabled:pointer-events-none disabled:opacity-50';
+  'group inline-flex items-center justify-center gap-2 rounded-sm px-6 py-3.5 font-display text-sm font-semibold uppercase tracking-[0.15em] outline outline-1 outline-offset-[3px] outline-transparent transition-all duration-200 hover:-translate-y-0.5 hover:outline-accent/60 active:translate-y-0 disabled:pointer-events-none disabled:opacity-50';
 
 const variants: Record<Variant, string> = {
   primary: 'bg-heading text-surface',
-  secondary: 'border border-line text-heading hover:border-accent-soft',
+  // Opaque, or hero deco shows straight through the button.
+  secondary:
+    'border border-line bg-surface text-heading hover:border-accent-soft',
 };
 
 function styles(variant: Variant, className?: string) {

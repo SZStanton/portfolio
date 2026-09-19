@@ -1,3 +1,5 @@
+import { RevealGroup, RevealItem } from '../motion/Reveal';
+import { RevealWords } from '../motion/RevealWords';
 import { SectionLabel } from './SectionLabel';
 
 type SectionHeaderProps = {
@@ -16,22 +18,27 @@ export function SectionHeader({
   headingId,
 }: SectionHeaderProps) {
   return (
-    <header>
-      <div className="flex items-baseline gap-3">
-        <span className="font-display text-xs font-semibold tracking-[0.2em] text-accent">
-          {number}
-        </span>
-        <SectionLabel>{eyebrow}</SectionLabel>
-      </div>
+    <RevealGroup gap={0.06}>
+      <header>
+        <RevealItem className="flex items-baseline gap-3">
+          <span className="font-display text-xs font-semibold tracking-[0.2em] text-accent">
+            {number}
+          </span>
+          <SectionLabel>{eyebrow}</SectionLabel>
+        </RevealItem>
 
-      <h2
-        id={headingId}
-        className="mt-3 max-w-3xl text-4xl font-semibold tracking-tight text-heading sm:text-5xl"
-      >
-        {title}
-      </h2>
+        <h2
+          id={headingId}
+          className="measure-heading mt-3 text-4xl font-semibold tracking-tight text-heading sm:text-5xl"
+        >
+          <RevealWords text={title} />
+        </h2>
 
-      <div className="rule-double mt-6 max-w-24" />
-    </header>
+        <RevealItem
+          className="rule-double measure-heading mt-5 origin-left"
+          move="draw"
+        />
+      </header>
+    </RevealGroup>
   );
 }
