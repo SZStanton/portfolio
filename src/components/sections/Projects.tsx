@@ -1,6 +1,7 @@
 import { projects } from '../../data/projects';
 import { useNearViewport } from '../../hooks/useNearViewport';
 import { useWarmBackends } from '../../hooks/useWarmBackends';
+import { Reveal } from '../motion/Reveal';
 import { SectionHeader } from '../ui/SectionHeader';
 import { FeaturedProjectCard } from './ProjectCard';
 
@@ -17,24 +18,30 @@ export function Projects() {
       ref={ref}
       id="projects"
       aria-labelledby="projects-heading"
-      className="container-page pt-16"
+      // Clipped, so nothing revealing itself can widen the page on a phone.
+      className="container-page overflow-x-clip pt-16"
     >
       <SectionHeader
         number="01"
-        eyebrow="Selected Work"
-        title="Full-stack apps, built and deployed."
+        eyebrow="Projects"
+        title="Featured Projects"
         headingId="projects-heading"
       />
 
-      <p className="mt-6 max-w-2xl text-xl leading-relaxed">
-        Each of these runs on its own domain with its own API and database.
-        Where something is unfinished or does not work yet, it says so.
-      </p>
+      <Reveal className="mt-6">
+        <p className="measure-text text-xl leading-relaxed">
+          Each of these is live, with its own domain, API and database.
+        </p>
+      </Reveal>
 
       {/* One per row, full width, so each gets room for its screenshot. */}
+      {/* A trigger per card, not one for the group: the group is taller than the
+          screen, so all three used to move while you were still on the first. */}
       <div className="mt-10 grid gap-6">
         {featured.map(project => (
-          <FeaturedProjectCard key={project.id} project={project} />
+          <Reveal key={project.id}>
+            <FeaturedProjectCard project={project} />
+          </Reveal>
         ))}
       </div>
     </section>

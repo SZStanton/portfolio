@@ -17,7 +17,6 @@ export const projects: Project[] = [
       'A full-stack MERN task manager with secure user accounts and private task storage. Each user gets their own task list, protected by JWT authentication and guarded API routes.',
     kind: 'full-stack',
     group: 'featured',
-    capstone: true,
     stack: [
       'React',
       'Node.js',
@@ -36,12 +35,6 @@ export const projects: Project[] = [
       'Recycle bin, restorable for 24 hours',
       'Filter by All / Active / Completed, with a task counter',
       'One-click demo account, and rate-limited auth routes',
-    ],
-    futureImprovements: [
-      { text: 'Dark mode toggle', done: true },
-      { text: 'Drag-and-drop reordering', done: true },
-      { text: 'Due dates and reminders' },
-      { text: 'Task categories and tags' },
     ],
     repoUrl: 'https://github.com/SZStanton/To-Do-Tasks',
     liveUrl: 'https://to-do-tasks.szstanton.com/',
@@ -91,7 +84,6 @@ export const projects: Project[] = [
       'A full-stack app for searching the iTunes Store through its public API, built as the capstone for a Full Stack with React and Express course.',
     kind: 'full-stack',
     group: 'featured',
-    capstone: true,
     stack: [
       'React',
       'Vite',
@@ -110,11 +102,6 @@ export const projects: Project[] = [
       'Artwork viewer tinted from the cover art',
       'Paging by button, arrow key, screen edge or swipe',
       'One-click demo account',
-    ],
-    futureImprovements: [
-      { text: 'Dark mode toggle', done: true },
-      { text: 'Persist favourites across sessions', done: true },
-      { text: 'Sort results by release date or name', done: true },
     ],
     repoUrl: 'https://github.com/SZStanton/iTunes-Search',
     liveUrl: 'https://itunes-search.szstanton.com/',
@@ -163,7 +150,6 @@ export const projects: Project[] = [
       'A job-tracking tool for logging, filtering and updating maintenance jobs. Started life as a front-end-only project and was later extended into a full-stack app with a proper database behind it.',
     kind: 'full-stack',
     group: 'featured',
-    capstone: true,
     stack: ['React', 'Axios', 'Node.js', 'Express', 'MongoDB', 'Mongoose'],
     features: [
       'Submit jobs with description, location and priority',
@@ -171,11 +157,6 @@ export const projects: Project[] = [
       'Batch-update several jobs at once',
       'Archive completed jobs',
       'Full create, read, update and delete support',
-    ],
-    futureImprovements: [
-      { text: 'Dark mode toggle', done: true },
-      { text: 'Due dates and overdue alerts', done: true },
-      { text: 'Keyword search', done: true },
     ],
     repoUrl: 'https://github.com/SZStanton/Jobs-App',
     liveUrl: 'https://jobs-app.szstanton.com/',
@@ -222,7 +203,6 @@ export const projects: Project[] = [
     kind: 'front-end',
     // Moved out of featured: no screenshot yet, so it looked thin beside the rest.
     group: 'other',
-    capstone: true,
     stack: ['React', 'Vite', 'Context API', 'Bootstrap'],
     features: [
       'Registration and login',
@@ -231,13 +211,6 @@ export const projects: Project[] = [
       'Event validation',
       'Saves to localStorage so data survives a refresh',
       'Help page with usage instructions, and a responsive layout',
-    ],
-    futureImprovements: [
-      { text: 'Dark mode toggle' },
-      { text: 'Swap localStorage for a real backend and database' },
-      { text: 'Event reminders and notifications' },
-      { text: 'Calendar view' },
-      { text: 'Support for recurring events' },
     ],
     repoUrl: 'https://github.com/SZStanton/Event-Planner',
   },
@@ -248,7 +221,6 @@ export const projects: Project[] = [
       'A command-line Python app for tracking income and expenses, setting budgets by category and measuring progress toward savings goals. Built to practise relational data modelling and SQL, the side of databases the MongoDB projects do not cover.',
     kind: 'database',
     group: 'other',
-    capstone: true,
     stack: ['Python', 'SQLite'],
     features: [
       'Add, update, delete and view income and expense records',
@@ -256,11 +228,6 @@ export const projects: Project[] = [
       'Budget tracking per category against actual spend',
       'Financial goals calculator',
       'Menu-driven interface with nested submenus',
-    ],
-    futureImprovements: [
-      { text: 'Export reports to CSV' },
-      { text: 'Monthly spending summaries and charts' },
-      { text: 'Recurring expense tracking' },
     ],
     repoUrl: 'https://github.com/SZStanton/Expense-Tracker',
   },
@@ -294,17 +261,8 @@ export const projects: Project[] = [
       'Routing across Home, Products and About pages',
       'Form validation with Formik',
     ],
-    futureImprovements: [
-      { text: 'Dark mode toggle' },
-      { text: 'Working login and registration with real authentication' },
-      { text: 'Cart that persists between sessions' },
-      { text: 'Checkout flow' },
-      { text: 'Product search and filtering' },
-    ],
     repoUrl: 'https://github.com/SZStanton/The-Cart',
     liveUrl: 'https://the-cart-six.vercel.app/',
-    knownIssue:
-      'The login and register forms are interface only, so they do not actually authenticate anyone yet. Wiring up real authentication is the main thing this one still needs.',
   },
   {
     id: 'e-commerce',
@@ -319,7 +277,6 @@ export const projects: Project[] = [
       'Product cart with totals calculated on the fly',
       'Font preference selection, remembered between visits',
       'One-click reset of every stored preference',
-      'Resource caching via a service worker for faster loads',
     ],
     repoUrl: 'https://github.com/SZStanton/E-Commerce',
     liveUrl: 'https://szstanton.github.io/e-commerce/',
@@ -337,11 +294,6 @@ export const projects: Project[] = [
       'Real recipe data pulled live from TheMealDB API',
       'Pending orders list with completion tracking',
       'Styled interface built without a framework',
-    ],
-    futureImprovements: [
-      { text: 'Filter suggestions by cuisine or dietary preference' },
-      { text: 'Save favourite dishes' },
-      { text: 'Show the full recipe and ingredient list for each suggestion' },
     ],
     repoUrl: 'https://github.com/SZStanton/Chefs-Favorites',
     liveUrl: 'https://szstanton.github.io/chefs-favorites/',

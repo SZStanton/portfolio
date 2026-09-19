@@ -1,5 +1,7 @@
 import { useEffect, useRef } from 'react';
+import { createPortal } from 'react-dom';
 import { LuExternalLink, LuX } from 'react-icons/lu';
+import { setScrollLocked } from '../../hooks/useSmoothScroll';
 
 type Props = {
   src: string;
@@ -50,20 +52,24 @@ export function Lightbox({ src, alt, onClose, liveUrl }: Props) {
     window.addEventListener('keydown', onKey);
 
     // Stop the page behind scrolling while this is open.
-    const previous = document.body.style.overflow;
-    document.body.style.overflow = 'hidden';
+    setScrollLocked(true);
+    // Lets anything behind know a modal is up, so hover effects and arrow keys hold off.
+    document.documentElement.dataset.modalOpen = 'true';
 
     // Move focus in, so the dialog is announced and Tab starts inside it.
     dialog.current?.querySelector('button')?.focus();
 
     return () => {
       window.removeEventListener('keydown', onKey);
-      document.body.style.overflow = previous;
+      setScrollLocked(false);
+      delete document.documentElement.dataset.modalOpen;
       opener?.focus();
     };
   }, [onClose]);
 
-  return (
+  // Rendered on body: a fixed element inside a transformed ancestor positions
+  // against that ancestor, and a hovered project card has a transform.
+  return createPortal(
     // Backdrop click closes it; the image stops that click bubbling up.
     <div
       ref={dialog}
@@ -72,7 +78,7 @@ export function Lightbox({ src, alt, onClose, liveUrl }: Props) {
       aria-label={alt}
       onClick={onClose}
       onContextMenu={event => event.preventDefault()}
-      className="fixed inset-0 z-[70] grid place-items-center bg-black/80 p-4 backdrop-blur-sm sm:p-10"
+      className="fixed inset-0 z-[70] grid place-items-center bg-black/90 p-4 sm:p-10"
     >
       <button
         type="button"
@@ -107,6 +113,7 @@ export function Lightbox({ src, alt, onClose, liveUrl }: Props) {
           </a>
         )}
       </div>
-    </div>
+    </div>,
+    document.body,
   );
 }

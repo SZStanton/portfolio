@@ -1,26 +1,23 @@
 import { track } from '@vercel/analytics/react';
 import { useEffect, useRef, useState } from 'react';
 import { LuMoon, LuSun } from 'react-icons/lu';
-import { Link, useLocation, useNavigate } from 'react-router';
+import { Link, useLocation } from 'react-router';
 import { navIdFor, navSections, spyElementIds } from '../../data/navigation';
 import { useScrollSpy } from '../../hooks/useScrollSpy';
 import { useTheme } from '../../hooks/useTheme';
-
-// Past this, a smooth scroll is long enough to be a wait rather than a transition.
-const FAR = 2.5;
+import { ScrollProgress } from './ScrollProgress';
 
 export function Navbar() {
   const { theme, toggleTheme } = useTheme();
   const { pathname } = useLocation();
-  const navigate = useNavigate();
   // Off the home page those sections do not exist, so the links have to route back.
   const onHome = pathname === '/';
   const spyElementId = useScrollSpy(spyElementIds);
   // More Projects has no nav entry of its own, so it lights Projects instead.
   const spyId = navIdFor(spyElementId);
 
-  // Clicking pins the underline to where you are going, so it does not slide
-  // through every section on the way down.
+  // Clicking pins the underline to the target, so it does not slide through
+  // every section on the way down.
   const [lockedId, setLockedId] = useState('');
   const unlock = useRef<number | undefined>(undefined);
   const activeId = lockedId || spyId;
@@ -36,33 +33,21 @@ export function Navbar() {
     track('section', { id: spyElementId });
   }, [spyElementId]);
 
-  const handleClick = (id: string) => (event: React.MouseEvent) => {
-    if (!onHome) return;
-
+  // Only the underline. useSmoothScroll's delegated handler owns the scroll, the
+  // hash and the focus move for every in-page link, this one included.
+  const handleClick = (id: string) => () => {
     setLockedId(id);
     window.clearTimeout(unlock.current);
     unlock.current = window.setTimeout(() => setLockedId(''), 800);
-
-    const target = document.getElementById(id);
-    if (!target) return;
-
-    // Very long jumps skip the animation, which would otherwise be a second of blur.
-    const distance = Math.abs(target.getBoundingClientRect().top);
-    if (distance > FAR * window.innerHeight) {
-      event.preventDefault();
-      target.scrollIntoView({ behavior: 'instant' });
-      // navigate, not history.pushState: the router has to see the hash change or
-      // the effect that moves focus into the section never runs.
-      navigate(`#${id}`);
-    }
   };
 
-  // Marks the section you are in with a gold underline; others sit a step below.
+  // Marks the current section with a gold underline; others sit a step below.
   const linkClass = (isActive: boolean) =>
     [
       // Josefin runs light, so caps need a heavier weight to hold up.
-      // Smaller type and padding below sm, so labels and the toggle fit a 320px phone.
-      'relative flex h-full items-center justify-center px-1.5 font-display text-[0.6875rem] font-semibold uppercase tracking-[0.08em] transition-colors sm:px-7 sm:text-sm sm:tracking-[0.14em]',
+      // Smaller type and padding below sm: five items and the toggle only just
+      // fit a 320px phone.
+      'relative flex h-full items-center justify-center px-1 font-display text-[0.625rem] font-semibold uppercase tracking-[0.03em] transition-colors xs:px-2 xs:text-[0.6875rem] xs:tracking-[0.08em] sm:px-6 sm:text-sm sm:tracking-[0.14em]',
       'after:absolute after:inset-x-0 after:bottom-0 after:h-0.5 after:transition-colors',
       isActive
         ? 'text-heading after:bg-accent'
@@ -119,6 +104,7 @@ export function Navbar() {
           )}
         </button>
       </div>
+      <ScrollProgress />
     </header>
   );
 }

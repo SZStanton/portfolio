@@ -3,7 +3,7 @@ import { About } from '../components/sections/About';
 import { Contact } from '../components/sections/Contact';
 import { Hero } from '../components/sections/Hero';
 import { MoreProjects } from '../components/sections/MoreProjects';
-import { Toolkit } from '../components/sections/Toolkit';
+import { Skills } from '../components/sections/Skills';
 import { Projects } from '../components/sections/Projects';
 import { BackToTop } from '../components/ui/BackToTop';
 import { useDocumentTitle } from '../hooks/useDocumentTitle';
@@ -20,7 +20,7 @@ export function Home() {
       <FanDivider className="container-page" />
       <MoreProjects />
       <About />
-      <Toolkit />
+      <Skills />
       <Contact />
       <BackToTop />
     </>

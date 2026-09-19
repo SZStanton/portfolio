@@ -32,9 +32,8 @@ export function useWarmBackends(enabled: boolean) {
       for (const project of projects) {
         if (!project.healthUrl) continue;
 
-        // no-cors, since these APIs don't allow this origin; the opaque response
-        // still wakes them. Anything but a 200 back shows as a red error in the
-        // visitor's console, which is why these point at health routes.
+        // no-cors, since these APIs don't allow this origin, and the opaque
+        // response still wakes them. Health routes only: a non-200 logs an error.
         fetch(project.healthUrl, { mode: 'no-cors', cache: 'no-store' }).catch(
           () => {},
         );
