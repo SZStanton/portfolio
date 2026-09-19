@@ -8,7 +8,7 @@ import webDevelopment from '../../assets/images/web-development.jpg';
 import { CertificateStack, type Certificate } from '../ui/CertificateStack';
 import { Lightbox } from '../ui/Lightbox';
 import { ScrollCue } from '../ui/ScrollCue';
-import { SectionLabel } from '../ui/SectionLabel';
+import { SectionHeader } from '../ui/SectionHeader';
 
 // Quick facts, kept beside the prose so the section scans as well as it reads.
 const facts = [
@@ -94,12 +94,17 @@ export function About() {
 
   return (
     // scroll-mt keeps the heading clear of the sticky header when jumped to.
-    <section id="about" className="scroll-mt-20 border-t border-line py-24">
-      <SectionLabel>About</SectionLabel>
-
-      <h2 className="mt-4 max-w-3xl text-4xl font-semibold tracking-tight text-heading sm:text-5xl">
-        From Medical Aid Administration to Full-Stack Development
-      </h2>
+    <section
+      id="about"
+      aria-labelledby="about-heading"
+      className="container-page pt-24"
+    >
+      <SectionHeader
+        number="03"
+        eyebrow="About"
+        title="From medical aid administration to full-stack development."
+        headingId="about-heading"
+      />
 
       {/* Prose takes two thirds, facts sit alongside from medium screens up. */}
       <div className="mt-10 grid gap-12 md:grid-cols-3">
@@ -151,7 +156,7 @@ export function About() {
         className="mx-auto mt-16 w-fit"
       />
 
-      <div id="experience" className="mt-16 scroll-mt-20">
+      <div id="experience" className="mt-16">
         <h3 className="flex items-center gap-3 text-sm font-semibold uppercase tracking-[0.15em] text-heading">
           Experience
           <span className="h-px flex-1 bg-gradient-to-r from-accent-soft to-transparent" />

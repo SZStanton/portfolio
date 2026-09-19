@@ -7,7 +7,7 @@ export function NotFound() {
   useDocumentTitle('Page not found');
 
   return (
-    <section className="flex min-h-[60svh] flex-col justify-center py-24">
+    <section className="container-page flex min-h-[60svh] flex-col justify-center py-24">
       <SectionLabel>404</SectionLabel>
       <h1 className="mt-4 text-4xl font-semibold tracking-tight text-heading sm:text-5xl">
         That page does not exist

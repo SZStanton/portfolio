@@ -1,7 +1,27 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
+  "redirects": [
+    {
+      "source": "/projects",
+      "destination": "/#projects",
+      "permanent": true
+    },
+    {
+      "source": "/skills",
+      "destination": "/#toolkit",
+      "permanent": true
+    },
+    {
+      "source": "/contact",
+      "destination": "/#contact",
+      "permanent": true
+    }
+  ],
   "rewrites": [
-    { "source": "/((?!api/|_vercel/).*)", "destination": "/index.html" }
+    {
+      "source": "/((?!api/|_vercel/).*)",
+      "destination": "/index.html"
+    }
   ],
   "headers": [
     {

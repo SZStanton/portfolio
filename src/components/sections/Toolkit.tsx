@@ -1,32 +1,34 @@
-import { SectionLabel } from '../components/ui/SectionLabel';
-import { TechIcon } from '../components/ui/TechIcon';
-import { skillGroups } from '../data/skills';
-import { useDocumentTitle } from '../hooks/useDocumentTitle';
+import { skillGroups } from '../../data/skills';
+import { SectionHeader } from '../ui/SectionHeader';
+import { TechIcon } from '../ui/TechIcon';
 
-export function Skills() {
-  useDocumentTitle('Skills');
-
+export function Toolkit() {
   return (
-    <section className="pb-24 pt-16">
-      <SectionLabel>Skills</SectionLabel>
+    <section
+      id="toolkit"
+      aria-labelledby="toolkit-heading"
+      className="container-page pt-24"
+    >
+      <SectionHeader
+        number="04"
+        eyebrow="Toolkit"
+        title="What I build with."
+        headingId="toolkit-heading"
+      />
 
-      <h1 className="mt-4 max-w-3xl text-4xl font-semibold tracking-tight text-heading sm:text-5xl">
-        What I Build With
-      </h1>
-
-      <p className="mt-5 max-w-2xl text-xl leading-relaxed">
+      <p className="mt-6 max-w-2xl text-xl leading-relaxed">
         The MERN stack is where I am most at home, on top of Python and SQL from
         an earlier bootcamp. Anything marked as learning is something I am
         working on right now, including on this site.
       </p>
 
-      <div className="mt-9 space-y-7">
+      <div className="mt-10 space-y-7">
         {skillGroups.map(group => (
           <div key={group.title}>
-            <h2 className="flex items-center gap-3 text-sm font-semibold uppercase tracking-[0.15em] text-heading">
+            <h3 className="flex items-center gap-3 text-sm font-semibold uppercase tracking-[0.15em] text-heading">
               {group.title}
               <span className="h-px flex-1 bg-gradient-to-r from-accent-soft to-transparent" />
-            </h2>
+            </h3>
 
             <ul className="mt-3.5 flex flex-wrap gap-2">
               {group.skills.map(skill => (
@@ -41,8 +43,7 @@ export function Skills() {
                   )}
                   {skill.name}
                   {skill.status === 'learning' && (
-                    // Deliberately quiet at rest, this is a footnote not a headline,
-                    // but it lights up gold on hover to reward the closer look.
+                    // Quiet at rest, but lights up gold on hover to reward the closer look.
                     <span className="text-xs uppercase tracking-wider opacity-50 transition-colors group-hover:text-accent group-hover:opacity-100 group-active:text-accent group-active:opacity-100">
                       learning
                     </span>

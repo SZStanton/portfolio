@@ -1,8 +1,34 @@
-// The one place pages are listed; navbar, footer and pager all read from here.
-// Order matters: it decides what previous and next mean.
-export const pages = [
-  { to: '/', label: 'Home' },
-  { to: '/skills', label: 'Skills' },
-  { to: '/projects', label: 'Projects' },
-  { to: '/contact', label: 'Contact' },
+export type Section = {
+  id: string;
+  label: string;
+  // Sections that sit under this nav item without being one themselves. Without
+  // this the highlight would drop out over any stretch the nav has no entry for.
+  also?: string[];
+};
+
+// What the navbar links to, in the order it appears down the page. The hero is
+// deliberately absent: scrolling up is free and BackToTop already covers it.
+export const navSections: Section[] = [
+  { id: 'projects', label: 'Projects', also: ['more-projects'] },
+  { id: 'about', label: 'About' },
+  { id: 'toolkit', label: 'Toolkit' },
+  { id: 'contact', label: 'Contact' },
 ];
+
+// Everything the scroll spy watches, in document order. Module level so the
+// observer is not rebuilt on every render.
+export const spyElementIds = navSections.flatMap(section => [
+  section.id,
+  ...(section.also ?? []),
+]);
+
+const navIdByElement = new Map(
+  navSections.flatMap(section =>
+    [section.id, ...(section.also ?? [])].map(id => [id, section.id] as const),
+  ),
+);
+
+// Which nav item a watched section belongs to.
+export function navIdFor(elementId: string) {
+  return navIdByElement.get(elementId) ?? '';
+}

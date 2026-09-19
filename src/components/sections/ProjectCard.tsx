@@ -1,10 +1,13 @@
 import { useState, type CSSProperties } from 'react';
+import { Link } from 'react-router';
 import {
   LuCheck,
   LuExternalLink,
+  LuArrowRight,
   LuGithub,
   LuTriangleAlert,
 } from 'react-icons/lu';
+import { useNearViewport } from '../../hooks/useNearViewport';
 import type { Project, ProjectKind } from '../../types';
 import { Lightbox } from '../ui/Lightbox';
 import { TechIcon } from '../ui/TechIcon';
@@ -16,7 +19,7 @@ const kindLabels: Record<ProjectKind, string> = {
   database: 'Database',
 };
 
-function StackTags({ stack }: { stack: string[] }) {
+export function StackTags({ stack }: { stack: string[] }) {
   return (
     <ul className="flex flex-wrap gap-2">
       {stack.map(tech => (
@@ -33,7 +36,7 @@ function StackTags({ stack }: { stack: string[] }) {
   );
 }
 
-function Links({ project }: { project: Project }) {
+export function Links({ project }: { project: Project }) {
   return (
     <div className="flex flex-wrap items-center gap-4 text-sm">
       <a
@@ -56,6 +59,15 @@ function Links({ project }: { project: Project }) {
           Live Demo
         </a>
       )}
+      {project.caseStudy && (
+        <Link
+          to={`/projects/${project.id}`}
+          className="group inline-flex items-center gap-2 transition-colors hover:text-accent active:text-accent"
+        >
+          Case study
+          <LuArrowRight className="size-4 transition-transform group-hover:translate-x-1" />
+        </Link>
+      )}
     </div>
   );
 }
@@ -68,29 +80,36 @@ function Screenshot({
   project: Project;
   onOpen: () => void;
 }) {
+  // A CSS background never lazy-loads, so the urls are withheld until the card
+  // is nearly on screen. bg-hover fills the box meanwhile so nothing flashes.
+  const [ref, near] = useNearViewport<HTMLButtonElement>();
+
   if (!project.screenshot) return null;
 
   return (
     <button
+      ref={ref}
       type="button"
       onClick={onOpen}
       aria-label={`View a larger screenshot of ${project.title}`}
       style={
         {
-          '--shot-light': `url(${project.screenshot.light})`,
-          '--shot-dark': `url(${project.screenshot.dark})`,
+          ...(near && {
+            '--shot-light': `url(${project.screenshot.light})`,
+            '--shot-dark': `url(${project.screenshot.dark})`,
+          }),
           '--shot-ratio': String(project.screenshot.ratio),
         } as CSSProperties
       }
       /* Stacked: the box takes the image's ratio, so cover crops nothing.
          Beside the text: cover crops to the card height, masked at the edge.
          Hover: expands over the full card on purpose, covering the links. */
-      className="aspect-[var(--shot-ratio)] w-full shrink-0 overflow-hidden bg-[image:var(--shot-light)] bg-cover bg-left-top bg-no-repeat [mask-image:linear-gradient(to_bottom,black_80%,transparent)] dark:bg-[image:var(--shot-dark)] lg:absolute lg:inset-y-0 lg:left-0 lg:aspect-auto lg:w-[42%] lg:transition-[width] lg:duration-700 lg:ease-out lg:[mask-image:linear-gradient(to_right,black_80%,transparent)] lg:hover:z-20 lg:hover:w-full lg:hover:[mask-image:none]"
+      className="aspect-[var(--shot-ratio)] w-full shrink-0 overflow-hidden bg-hover bg-[image:var(--shot-light)] bg-cover bg-left-top bg-no-repeat [mask-image:linear-gradient(to_bottom,black_80%,transparent)] dark:bg-[image:var(--shot-dark)] lg:absolute lg:inset-y-0 lg:left-0 lg:aspect-auto lg:w-[42%] lg:transition-[width] lg:duration-700 lg:ease-out lg:[mask-image:linear-gradient(to_right,black_80%,transparent)] lg:hover:z-20 lg:hover:w-full lg:hover:[mask-image:none]"
     />
   );
 }
 
-// The four capstones. Everything in the data gets shown.
+// The featured projects. Everything in the data gets shown.
 export function FeaturedProjectCard({ project }: { project: Project }) {
   // Chosen at click time, since the theme cannot change before the box opens.
   const [enlarged, setEnlarged] = useState<string | null>(null);

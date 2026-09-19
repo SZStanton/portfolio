@@ -1,16 +1,15 @@
 import { LuGithub, LuLinkedin, LuMail } from 'react-icons/lu';
-
-const EMAIL = 'szstantondev@gmail.com';
+import { EMAIL, GITHUB_URL, LINKEDIN_URL } from '../../data/contact';
 
 // Icon is capitalised so it can be used as <Icon /> further down.
 const socials = [
   {
-    href: 'https://github.com/SZStanton',
+    href: GITHUB_URL,
     label: 'GitHub profile',
     Icon: LuGithub,
   },
   {
-    href: 'https://www.linkedin.com/in/szstanton',
+    href: LINKEDIN_URL,
     label: 'LinkedIn profile',
     Icon: LuLinkedin,
   },
