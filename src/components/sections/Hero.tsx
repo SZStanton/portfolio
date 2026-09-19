@@ -1,14 +1,17 @@
+import { m } from 'motion/react';
+import type { CSSProperties } from 'react';
 import { LuArrowRight, LuDownload } from 'react-icons/lu';
+import { useHeroParallax, useParallax } from '../../hooks/useParallax';
 import cv from '../../assets/docs/sebastian-stanton-cv.pdf';
-import photo from '../../assets/images/photo.jpg';
+import portraitDark from '../../assets/images/portrait-dark.webp';
+import portraitLight from '../../assets/images/portrait-light.webp';
 import { DecoLayer } from '../deco/DecoLayer';
+import { Skyline } from '../deco/Skyline';
 import { Sunburst } from '../deco/Sunburst';
+import { RevealGroup, RevealItem } from '../motion/Reveal';
+import { RevealWords } from '../motion/RevealWords';
 import { ButtonAnchor } from '../ui/Button';
-import { ScrollCue } from '../ui/ScrollCue';
 import { TechIcon } from '../ui/TechIcon';
-
-// Flip true once the real cut-out photo replaces assets/images/photo.jpg.
-const SHOW_PHOTO = false;
 
 // Names key into data/tech.ts, where the logos and colours live.
 const techs = [
@@ -21,122 +24,148 @@ const techs = [
 ];
 
 export function Hero() {
+  const drift = useHeroParallax();
+
   return (
     <section
       id="home"
       // svh, not vh, since mobile toolbars change the visible height; 5rem clears the navbar.
-      className="relative isolate flex min-h-[calc(100svh-var(--nav-offset))] flex-col justify-center overflow-x-clip py-20"
+      className="relative isolate flex min-h-[calc(100svh-var(--nav-offset))] flex-col justify-center overflow-clip pb-0 pt-10 [--figure:min(58vw,52svh)] sm:pt-20 side:py-20"
     >
-      <DecoLayer>
+      <DecoLayer speed={70}>
         <Sunburst />
       </DecoLayer>
 
-      <div className="container-page">
-        {/* Side by side from lg up, stacked below it; single column without the photo. */}
-        <div
-          className={
-            SHOW_PHOTO
-              ? 'grid items-center gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,24rem)] lg:gap-16'
-              : ''
-          }
-        >
-          <div>
-            <p className="flex items-center gap-2 text-sm">
-              {/* Two stacked circles: the lower one pings outwards, the solid one stays. */}
-              <span className="relative flex size-2">
-                {/* Decorative, so it stops for anyone asking for less motion. */}
-                <span className="absolute inline-flex size-full animate-ping rounded-full bg-accent opacity-60 motion-reduce:animate-none" />
-                <span className="relative inline-flex size-2 rounded-full bg-accent" />
-              </span>
-              Open to Junior Developer Roles
-            </p>
+      <HeroBackdrop />
 
-            {/* Drops a step at lg when the photo takes half the row, to avoid an awkward break. */}
-            <h1
-              className={`mt-6 text-5xl font-semibold tracking-tight text-heading ${
-                SHOW_PHOTO ? 'sm:text-6xl' : 'sm:text-7xl'
-              }`}
-            >
-              Sebastian Stanton
-            </h1>
+      <m.div
+        style={drift}
+        // The figure's band plus the smallest gap allowed above its head, since
+        // it no longer takes up room in the flow.
+        className="container-page relative z-10 flex flex-1 flex-col pb-[calc(var(--figure)+2rem)] side:pb-0"
+      >
+        {/* Stacked, spare height collects above the copy, so the tech row keeps a
+            fixed distance from the head below it. Side by side there is no figure
+            underneath, so it goes back to sitting in the middle. */}
+        <div className="mt-auto side:my-auto">
+          {/* Leaves the right of the row to the figure. 64% is what the three
+            buttons need to stay on one line at the narrow end. */}
+          <div className="side:max-w-[64%]">
+            <RevealGroup gap={0.08}>
+              <RevealItem className="flex items-center gap-2 text-sm">
+                {/* Two stacked circles: the lower one pings outwards, the solid one stays. */}
+                <span className="relative flex size-2">
+                  {/* Decorative, so it stops for anyone asking for less motion. */}
+                  <span className="absolute inline-flex size-full animate-ping rounded-full bg-accent opacity-60 motion-reduce:animate-none" />
+                  <span className="relative inline-flex size-2 rounded-full bg-accent" />
+                </span>
+                Open to Junior Developer Roles
+              </RevealItem>
 
-            {/* Tech names lifted to heading colour so a skim picks up the stack; {' '} keeps real spaces JSX would drop. */}
-            <p className="mt-6 max-w-2xl text-xl leading-relaxed sm:text-2xl">
-              Junior Full-Stack Developer building with{' '}
-              <span className="text-heading">React</span>,{' '}
-              <span className="text-heading">Node</span> and{' '}
-              <span className="text-heading">MongoDB</span>.
-            </p>
+              {/* Sized off the viewport rather than a step scale, so the name
+                stays on one line from 320px up. Narrower rule once the figure
+                takes the right of the row and the copy only has 64%. */}
+              <h1 className="mt-6 text-[clamp(1.75rem,calc(12vw-8px),5.5rem)] font-semibold tracking-tight text-heading side:text-[clamp(1.75rem,calc(48px+1.2vw),5.5rem)]">
+                <RevealWords text="Sebastian Stanton" gap={0.09} />
+              </h1>
 
-            <p className="mt-3 text-sm">Cape Town, South Africa</p>
+              {/* Tech names lifted to heading colour so a skim picks up the stack; {' '} keeps real spaces JSX would drop. */}
+              <RevealItem className="mt-6 max-w-2xl text-xl leading-relaxed sm:text-2xl">
+                Junior Full-Stack Developer building with{' '}
+                <span className="text-heading">React</span>,{' '}
+                <span className="text-heading">Node</span> and{' '}
+                <span className="text-heading">MongoDB</span>.
+              </RevealItem>
 
-            <div className="mt-10 flex flex-wrap items-center gap-3">
-              <ButtonAnchor href="#projects">
-                View my work
-                {/* group is on the button, so the arrow moves on any hover of it. */}
-                <LuArrowRight className="size-4 transition-transform group-hover:translate-x-1" />
-              </ButtonAnchor>
-              <ButtonAnchor href="#contact" variant="secondary">
-                Get in touch
-              </ButtonAnchor>
-              {/* The built file is fingerprinted, so `download` gives it a proper name. */}
-              <ButtonAnchor
-                href={cv}
-                variant="secondary"
-                download="sebastian-stanton-cv.pdf"
-              >
-                <LuDownload className="size-4" />
-                CV
-              </ButtonAnchor>
-            </div>
+              <RevealItem className="mt-3 text-sm">
+                Cape Town, South Africa
+              </RevealItem>
+
+              <RevealItem className="mt-10 flex flex-wrap items-center gap-2.5">
+                <ButtonAnchor href="#projects">
+                  View my work
+                  {/* group is on the button, so the arrow moves on any hover of it. */}
+                  <LuArrowRight className="size-4 transition-transform group-hover:translate-x-1" />
+                </ButtonAnchor>
+                <ButtonAnchor href="#contact" variant="secondary">
+                  Get in touch
+                </ButtonAnchor>
+                {/* The built file is fingerprinted, so `download` gives it a proper name. */}
+                <ButtonAnchor
+                  href={cv}
+                  variant="secondary"
+                  download="sebastian-stanton-cv.pdf"
+                >
+                  <LuDownload className="size-4" />
+                  CV
+                </ButtonAnchor>
+              </RevealItem>
+            </RevealGroup>
           </div>
 
-          {SHOW_PHOTO && <HeroPhoto />}
+          {/* Muted until hovered, when the brand colour appears; keeps the hero calm. */}
+          <RevealGroup
+            className="mt-8 flex flex-wrap items-center gap-x-7 gap-y-4 sm:mt-16"
+            gap={0.05}
+            as="ul"
+          >
+            {techs.map(name => (
+              <RevealItem as="li" key={name} title={name} move="pop">
+                <TechIcon
+                  tech={name}
+                  label={name}
+                  className="size-7 opacity-70 transition-all duration-300 hover:scale-110 hover:opacity-100 active:scale-110 active:opacity-100"
+                />
+              </RevealItem>
+            ))}
+          </RevealGroup>
         </div>
-
-        {/* Muted until hovered, when the brand colour appears; keeps the hero calm. */}
-        <ul className="mt-16 flex flex-wrap items-center gap-x-7 gap-y-4">
-          {techs.map(name => (
-            <li key={name} title={name}>
-              <TechIcon
-                tech={name}
-                label={name}
-                className="size-7 opacity-70 transition-all duration-300 hover:scale-110 hover:opacity-100 active:scale-110 active:opacity-100"
-              />
-            </li>
-          ))}
-        </ul>
-      </div>
-
-      {/* Sits at the foot of the first screen and clears as soon as the page moves. */}
-      <ScrollCue
-        href="#projects"
-        label="Selected Work"
-        className="absolute inset-x-0 bottom-2 mx-auto w-fit"
-      />
+      </m.div>
     </section>
   );
 }
 
-// Built for a cut-out photo; the gold glow gives it something to sit on.
-// Sized by the column width, not fixed pixels, so it scales with the browser.
-function HeroPhoto() {
+// The ridge and the figure share one transform, or the figure lifts off the
+// mountain on scroll. Outside DecoLayer, since the ridge paints at full strength.
+function HeroBackdrop() {
+  const { ref, style } = useParallax(14);
+
   return (
-    // isolate keeps the glow's negative z-index inside this box, instead of
-    // escaping to the root and painting behind the page gradient.
-    <div className="relative isolate mx-auto w-full max-w-xs sm:max-w-sm lg:mx-0">
-      {/* Sits behind the figure, hence the negative z and aria-hidden. */}
-      <div
-        aria-hidden="true"
-        className="absolute inset-0 -z-10 rounded-full bg-[radial-gradient(circle_at_50%_45%,var(--accent)_0%,transparent_65%)] opacity-20 blur-2xl"
-      />
-      <img
-        src={photo}
-        // Decorative here: the name beside it already says who this is.
-        alt=""
-        // object-bottom keeps the figure grounded as it scales, instead of drifting up.
-        className="h-auto w-full object-contain object-bottom"
-      />
-    </div>
+    <m.div
+      ref={ref}
+      aria-hidden="true"
+      style={style}
+      className="pointer-events-none absolute inset-0 -z-10 text-deco-ink"
+    >
+      {/* Wider than the phone screen and pulled left, so the ridge keeps its
+          proportions instead of being squashed into a zigzag. */}
+      <Skyline className="absolute inset-x-0 -bottom-12 ml-[-12%] h-56 w-[124%] xs:h-64 sm:ml-0 sm:h-[21rem] sm:w-full" />
+
+      {/* After the ridge, so the figure stands in front of the mountain rather
+          than being cut off by it. */}
+      {/* 110% of the hero always clears the 6rem navbar gap, so that and 52vw
+          are the two that bite. */}
+      <HeroPhoto className="absolute inset-y-0 right-[-4%] hidden bg-[length:auto_min(calc(100%-6rem),52vw)] bg-right-bottom side:block side:w-[62%]" />
+      {/* Below the side-by-side breakpoint the figure sits under the copy, sized
+          off the width with a height cap for short windows. */}
+      <HeroPhoto className="absolute inset-x-0 bottom-0 h-[var(--figure)] bg-contain bg-bottom side:hidden" />
+    </m.div>
+  );
+}
+
+// The cut-out portrait, one file per theme. A background image rather than two
+// <img> tags, so only the active theme's file downloads.
+function HeroPhoto({ className }: { className?: string }) {
+  return (
+    <div
+      aria-hidden="true"
+      style={
+        {
+          '--portrait-light': `url(${portraitLight})`,
+          '--portrait-dark': `url(${portraitDark})`,
+        } as CSSProperties
+      }
+      className={`pointer-events-none bg-[image:var(--portrait-light)] bg-no-repeat dark:bg-[image:var(--portrait-dark)] ${className ?? ''}`}
+    />
   );
 }
