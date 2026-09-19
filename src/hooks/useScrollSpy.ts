@@ -1,18 +1,16 @@
 import { useEffect, useState } from 'react';
 import { useLocation } from 'react-router';
 
-// A band under the sticky header. The top sits just above where an anchor jump
-// lands, so a section that has just been scrolled to is clearly inside it rather
-// than balanced exactly on the edge.
+// A band under the sticky header. Its top sits just above where an anchor jump
+// lands, so a section jumped to is clearly inside it rather than on the edge.
 const BAND = '-72px 0px -55% 0px';
 
 // Reports which section the reader is in. Given an explicit id list rather than
 // querying the DOM, so nested anchors like #experience can never win.
 export function useScrollSpy(ids: string[]) {
   const [activeId, setActiveId] = useState('');
-  // The navbar outlives every route, but the sections do not. Without this the
-  // observer would hold detached nodes after a trip through a case study, or
-  // never be built at all for anyone landing on one.
+  // The navbar outlives every route but the sections do not, so rebuild the
+  // observer on each one or it holds detached nodes.
   const { pathname } = useLocation();
 
   useEffect(() => {

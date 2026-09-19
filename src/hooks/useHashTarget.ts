@@ -1,5 +1,6 @@
 import { useEffect, useLayoutEffect, useRef } from 'react';
 import { useLocation } from 'react-router';
+import { jumpTo, jumpToTop } from './useSmoothScroll';
 
 // Give up rather than poll forever if the target never turns up.
 const MAX_FRAMES = 30;
@@ -20,14 +21,14 @@ export function useHashTarget() {
     if (cameFrom === pathname) return;
 
     if (!hash) {
-      window.scrollTo({ top: 0, behavior: 'instant' });
+      jumpToTop();
       return;
     }
 
     const land = () => {
       const target = document.getElementById(hash.slice(1));
       if (!target) return false;
-      target.scrollIntoView({ behavior: 'instant' });
+      jumpTo(target);
       return true;
     };
 
@@ -47,7 +48,7 @@ export function useHashTarget() {
   }, [pathname, hash]);
 
   // A hash jump scrolls but leaves focus behind, so Tab would carry on from the
-  // header rather than from inside the section you just asked for.
+  // header rather than from inside the section just asked for.
   useEffect(() => {
     if (!hash) return;
 

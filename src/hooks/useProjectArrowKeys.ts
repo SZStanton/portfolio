@@ -20,11 +20,10 @@ export function useProjectArrowKeys(index: number) {
       }
 
       // The lightbox locks scrolling while it is open, so it owns the keyboard.
-      if (document.body.style.overflow === 'hidden') return;
+      if (document.documentElement.dataset.modalOpen === 'true') return;
 
-      // Never steal arrow keys from something being typed in. The instanceof
-      // check matters: a keydown can target window or document, neither of
-      // which has closest().
+      // Never steal arrow keys from something being typed in. A keydown can
+      // target window or document, so check for an Element before closest().
       const target = event.target;
       if (
         target instanceof Element &&
