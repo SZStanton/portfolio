@@ -47,6 +47,8 @@
   --line-accent: hsl(42 35% 72%);
   /* Generous on the h-14/h-16 navbar, so an anchor never lands tight under it. */
   --nav-offset: 5rem;
+  /* The hero fills the window, with a floor so a short one is not stubby. */
+  --hero-min: max(calc(100svh - var(--nav-offset)), 36rem);
   /* Only used while a card is lifted, so it can be heavier than --card-shadow. */
   --lift-shadow: 0 18px 40px -22px rgb(28 27 26 / 0.45);
   --danger: #a8321f;
@@ -177,6 +179,18 @@
   height: 4px;
   border-top: 1px solid var(--accent-soft);
   border-bottom: 1px solid var(--accent-soft);
+}
+
+/* A phone in desktop mode reports a ~980px viewport but keeps the screen's shape,
+   so the window is twice as tall as it is wide and a full-height hero is mostly
+   empty. Desktop mode is always around 980 wide, so this starts at 60rem: any
+   lower and a tall window at tablet width gets caught too. */
+@media (max-aspect-ratio: 4/7) and (min-width: 60rem) {
+  :root {
+    /* 55vw is what a real laptop's hero works out to, so desktop mode gets the
+       same proportions rather than a tall band the phone then shrinks. */
+    --hero-min: 55vw;
+  }
 }
 
 @layer base {

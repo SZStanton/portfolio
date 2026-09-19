@@ -27,12 +27,10 @@ export function Hero() {
   const drift = useHeroParallax();
 
   return (
-    // A phone in desktop mode reports a ~980px wide viewport but keeps the screen's
-    // tall shape, so a full-height hero there is mostly empty. Capped against width.
     <section
       id="home"
       // svh, not vh, since mobile toolbars change the visible height; 5rem clears the navbar.
-      className="relative isolate flex min-h-[max(calc(100svh-var(--nav-offset)),36rem)] flex-col justify-center overflow-clip pb-0 pt-10 [--figure:min(58vw,52svh)] sm:pt-20 side:py-20"
+      className="relative isolate flex min-h-[var(--hero-min)] flex-col justify-center overflow-clip pb-0 pt-10 [--figure:min(58vw,52svh)] sm:pt-20 side:py-20"
     >
       <DecoLayer speed={70}>
         <Sunburst />
@@ -96,8 +94,9 @@ export function Hero() {
                 <ButtonAnchor href="#contact" variant="secondary">
                   Get in touch
                 </ButtonAnchor>
-                {/* Forces the wrap, so CV sits under View my work below laptop. */}
-                <div className="basis-full wide:hidden" />
+                {/* Forces the wrap, so CV sits under View my work below laptop.
+                  It rejoins the row at lg, where the figure has pulled clear. */}
+                <div className="basis-full lg:hidden" />
                 {/* The built file is fingerprinted, so `download` gives it a proper name. */}
                 <ButtonAnchor
                   href={cv}
@@ -153,7 +152,7 @@ function HeroBackdrop() {
           than being cut off by it. */}
       {/* 110% of the hero always clears the 6rem navbar gap, so that and 52vw
           are the two that bite. */}
-      <HeroPhoto className="absolute inset-y-0 right-[-4%] hidden bg-right-bottom side:block side:w-[62%] side:bg-[length:auto_min(calc(100%-6rem),44vw)] wide:bg-[length:auto_min(calc(100%-6rem),52vw)]" />
+      <HeroPhoto className="absolute inset-y-0 right-[-4%] hidden bg-right-bottom side:block side:w-[62%] side:bg-[length:auto_min(calc(100%-6rem),52vw)]" />
       {/* Below the side-by-side breakpoint the figure sits under the copy, sized
           off the width with a height cap for short windows. */}
       <HeroPhoto className="absolute inset-x-0 bottom-0 h-[var(--figure)] bg-contain bg-bottom side:hidden" />
