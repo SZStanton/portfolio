@@ -16,8 +16,7 @@ recruiter's read-through, with a real route per project for anyone who wants the
 restrained art deco: a neutral palette, gold used only as an accent, and a geometric display face
 paired with a readable body face.
 
-It is also the project I am using to learn TypeScript and Tailwind, so a fair amount of the code
-exists to work those out in the open rather than because a portfolio strictly needs it.
+It is also the project I am using to learn TypeScript and Tailwind.
 
 ## Features
 
@@ -83,7 +82,7 @@ src/
 ├── assets/          Certificates, photo, CV. Imported, so they get hashed
 ├── components/
 │   ├── layout/      Navbar, Footer, Layout, ProjectPager
-│   ├── sections/    The home page in order: Hero, Projects, About, Toolkit, Contact
+│   ├── sections/    The home page in order: Hero, Projects, About, Skills, Contact
 │   ├── deco/        Art deco background geometry, drawn as SVG
 │   └── ui/          Button, TechIcon, Lightbox, and friends
 ├── pages/           One file per route: home, case study, 404

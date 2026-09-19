@@ -6,12 +6,12 @@ export type Section = {
   also?: string[];
 };
 
-// What the navbar links to, in the order it appears down the page. The hero is
-// deliberately absent: scrolling up is free and BackToTop already covers it.
+// What the navbar links to, in the order it appears down the page.
 export const navSections: Section[] = [
+  { id: 'home', label: 'Home' },
   { id: 'projects', label: 'Projects', also: ['more-projects'] },
   { id: 'about', label: 'About' },
-  { id: 'toolkit', label: 'Toolkit' },
+  { id: 'skills', label: 'Skills' },
   { id: 'contact', label: 'Contact' },
 ];
 
