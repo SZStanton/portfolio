@@ -5,6 +5,7 @@ import medscheme from '../../assets/images/medscheme.jpeg';
 import pythonDeveloper from '../../assets/images/python-developer.jpg';
 import softwareEngineeringBootcamp from '../../assets/images/software-engineering-bootcamp.jpeg';
 import webDevelopment from '../../assets/images/web-development.jpg';
+import { Reveal, RevealGroup, RevealItem } from '../motion/Reveal';
 import { CertificateStack, type Certificate } from '../ui/CertificateStack';
 import { Lightbox } from '../ui/Lightbox';
 import { ScrollCue } from '../ui/ScrollCue';
@@ -94,107 +95,117 @@ export function About() {
 
   return (
     // scroll-mt keeps the heading clear of the sticky header when jumped to.
-    <section
-      id="about"
-      aria-labelledby="about-heading"
-      className="container-page pt-24"
-    >
-      <SectionHeader
-        number="03"
-        eyebrow="About"
-        title="From medical aid administration to full-stack development."
-        headingId="about-heading"
-      />
+    <section id="about" aria-labelledby="about-heading" className="pt-24">
+      <div className="container-page">
+        <SectionHeader
+          number="03"
+          eyebrow="About"
+          title={'From Medical Aid Backoffice\nto Full-Stack Developer'}
+          headingId="about-heading"
+        />
 
-      {/* Prose takes two thirds, facts sit alongside from medium screens up. */}
-      <div className="mt-10 grid gap-12 md:grid-cols-3">
-        <div className="space-y-5 text-xl leading-relaxed md:col-span-2">
-          <p>
-            I spent nine years at Medscheme in medical aid administration,
-            working across claims assessment, membership administration and,
-            most recently, digital live chat. It was detailed work under time
-            pressure, where being accurate mattered as much as being fast.
-          </p>
-          <p>
-            The thread running through all of it was improving the process
-            rather than just working inside it. I was one of the founding agents
-            for Bonitas’ first live chat system and wrote message templates and
-            standards that were adopted across the team, authored a training
-            guide still used to onboard new agents, and helped build a shared
-            process-reference tool used company-wide.
-          </p>
-          <p>
-            I moved into development through HyperionDev, first a Software
-            Engineering bootcamp covering Python, SQL and object-oriented
-            programming, then a Full Stack Web Developer bootcamp in JavaScript,
-            React, Node, Express and MongoDB. I am now looking for a junior or
-            graduate developer role, and still learning in the open: this site
-            is where I am picking up TypeScript and Tailwind.
-          </p>
+        {/* Prose takes two thirds, facts sit alongside from medium screens up. */}
+        <div className="mt-10 grid gap-12 md:grid-cols-3">
+          <div className="space-y-5 text-xl leading-relaxed md:col-span-2">
+            <p>
+              I spent nine years at Medscheme in medical aid administration,
+              working across claims assessment, membership administration and,
+              most recently, digital live chat. It was detailed work under time
+              pressure, where being accurate mattered as much as being fast.
+            </p>
+            <p>
+              The thread running through all of it was improving the process
+              rather than just working inside it. I was one of the founding
+              agents for Bonitas’ first live chat system and wrote message
+              templates and standards that were adopted across the team,
+              authored a training guide still used to onboard new agents, and
+              helped build a shared process-reference tool used company-wide.
+            </p>
+            <p>
+              I moved into development through HyperionDev, first a Software
+              Engineering bootcamp covering Python, SQL and object-oriented
+              programming, then a Full Stack Web Developer bootcamp in
+              JavaScript, React, Node, Express and MongoDB. I am now looking for
+              a junior or graduate developer role, and still learning in the
+              open: this site is where I am picking up TypeScript and Tailwind.
+            </p>
+          </div>
+
+          <RevealGroup className="space-y-6" gap={0.08} as="dl">
+            {facts.map(fact => (
+              <RevealItem
+                key={fact.value}
+                className="border-l-2 border-accent-soft pl-4"
+              >
+                <dt className="text-2xl font-semibold text-heading">
+                  {fact.value}
+                </dt>
+                <dd className="mt-1 text-sm">{fact.label}</dd>
+              </RevealItem>
+            ))}
+          </RevealGroup>
         </div>
 
-        <dl className="space-y-6">
-          {facts.map(fact => (
-            <div
-              key={fact.value}
-              className="border-l-2 border-accent-soft pl-4"
-            >
-              <dt className="text-2xl font-semibold text-heading">
-                {fact.value}
-              </dt>
-              <dd className="mt-1 text-sm">{fact.label}</dd>
-            </div>
-          ))}
-        </dl>
-      </div>
+        {/* Hangs on longer than the hero cue, since Experience is right below it. */}
+        <ScrollCue
+          href="#experience"
+          label="Experience"
+          fadeAt={280}
+          className="mx-auto mt-16 w-fit"
+        />
 
-      {/* Hangs on longer than the hero cue, since Experience is right below it. */}
-      <ScrollCue
-        href="#experience"
-        label="Experience"
-        fadeAt={280}
-        className="mx-auto mt-16 w-fit"
-      />
+        <div id="experience" className="mt-16">
+          <Reveal>
+            <h3 className="flex items-center gap-3 text-sm font-semibold uppercase tracking-[0.15em] text-heading">
+              Experience
+              <span className="h-px flex-1 bg-gradient-to-r from-accent-soft to-transparent" />
+            </h3>
+          </Reveal>
 
-      <div id="experience" className="mt-16">
-        <h3 className="flex items-center gap-3 text-sm font-semibold uppercase tracking-[0.15em] text-heading">
-          Experience
-          <span className="h-px flex-1 bg-gradient-to-r from-accent-soft to-transparent" />
-        </h3>
+          {/* Gold line down the left, with a diamond marking each step. */}
+          {/* Wider gap than the other groups, so each date lands on its own. */}
+          <RevealGroup
+            className="mt-8 space-y-6 border-l border-line pl-8"
+            gap={0.16}
+            as="ol"
+          >
+            {timeline.map(entry => (
+              // Text left, certificates right from medium screens up.
+              <RevealItem
+                as="li"
+                key={entry.title}
+                className="relative md:grid md:grid-cols-[minmax(0,1fr)_auto] md:items-start md:gap-8"
+              >
+                <span className="absolute -left-[2.3rem] top-1.5 size-2.5 rotate-45 border border-accent bg-surface" />
 
-        {/* Gold line down the left, with a diamond marking each step. */}
-        <ol className="mt-8 space-y-6 border-l border-line pl-8">
-          {timeline.map(entry => (
-            // Text left, certificates right from medium screens up.
-            <li
-              key={entry.title}
-              className="relative md:grid md:grid-cols-[minmax(0,1fr)_auto] md:items-start md:gap-8"
-            >
-              <span className="absolute -left-[2.3rem] top-1.5 size-2.5 rotate-45 border border-accent bg-surface" />
-
-              <div>
-                <p className="font-display text-xs font-semibold uppercase tracking-[0.15em] text-accent">
-                  {entry.period}
-                </p>
-                <p className="mt-1 text-lg font-medium text-heading">
-                  {entry.title}
-                </p>
-                <p className="mt-1 leading-relaxed">{entry.detail}</p>
-              </div>
-
-              {entry.images.length > 0 && (
-                <div className="mt-4 md:mt-0">
-                  <CertificateStack images={entry.images} onOpen={setOpen} />
+                <div>
+                  <p className="font-display text-xs font-semibold uppercase tracking-[0.15em] text-accent">
+                    {entry.period}
+                  </p>
+                  <p className="mt-1 text-lg font-medium text-heading">
+                    {entry.title}
+                  </p>
+                  <p className="mt-1 leading-relaxed">{entry.detail}</p>
                 </div>
-              )}
-            </li>
-          ))}
-        </ol>
-      </div>
 
-      {open && (
-        <Lightbox src={open.src} alt={open.alt} onClose={() => setOpen(null)} />
-      )}
+                {entry.images.length > 0 && (
+                  <div className="mt-4 md:mt-0">
+                    <CertificateStack images={entry.images} onOpen={setOpen} />
+                  </div>
+                )}
+              </RevealItem>
+            ))}
+          </RevealGroup>
+        </div>
+
+        {open && (
+          <Lightbox
+            src={open.src}
+            alt={open.alt}
+            onClose={() => setOpen(null)}
+          />
+        )}
+      </div>
     </section>
   );
 }

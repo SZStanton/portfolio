@@ -14,6 +14,7 @@ const CaseStudy = lazy(() =>
 const NotFound = lazy(() =>
   import('./pages/NotFound').then(m => ({ default: m.NotFound })),
 );
+
 // Speed Insights doesn't know about React Router, so this maps measurements to the correct route.
 // Keeping it separate means only this component re-renders when the route changes.
 function RoutedSpeedInsights() {
