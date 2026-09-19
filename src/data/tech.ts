@@ -1,4 +1,6 @@
 import type { IconType } from 'react-icons';
+// Lucide, because plain SQL is a language rather than a brand with a logo.
+import { LuDatabase } from 'react-icons/lu';
 import {
   SiAxios,
   SiBootstrap,
@@ -66,4 +68,6 @@ export const techStyles: Record<string, TechStyle> = {
   PostgreSQL: { Icon: SiPostgresql, color: '#5fa8dc', colorLight: '#15618f' },
   // Near-black brand, so it flips light/dark the way Express and GitHub do.
   'Next.js': { Icon: SiNextdotjs, color: '#e6e6e6', colorLight: '#1f1f22' },
+  // Teal keeps it apart from the two blue database logos beside it.
+  SQL: { Icon: LuDatabase, color: '#5fc2b0', colorLight: '#0f7d6c' },
 };
