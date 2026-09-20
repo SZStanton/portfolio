@@ -213,6 +213,7 @@ export const projects: Project[] = [
       'Help page with usage instructions, and a responsive layout',
     ],
     repoUrl: 'https://github.com/SZStanton/Event-Planner',
+    liveUrl: 'https://event-planner.szstanton.com/',
   },
   {
     id: 'expense-tracker',
